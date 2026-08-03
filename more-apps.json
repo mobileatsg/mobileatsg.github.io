@@ -62,7 +62,7 @@
       "blurb": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.",
       "category": "Games · Puzzle",
       "status": {
-        "ios": "InProcess",
+        "ios": "Published",
         "android": "Published"
       },
       "platforms": [
@@ -96,8 +96,8 @@
       "blurb": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.",
       "category": "Entertainment",
       "status": {
-        "ios": "InProcess",
-        "android": "InProcess"
+        "ios": "Published",
+        "android": "Published"
       },
       "platforms": [
         "ios",
