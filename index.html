@@ -566,8 +566,16 @@
       }
 
       function renderCatalog(catalog) {
+        // Website: all enabled apps (Published + InProcess). In-app More apps: Published only.
+        var allow = (catalog.policy && catalog.policy.websiteShowStatuses) || [
+          "Published",
+          "InProcess"
+        ];
         var apps = (catalog.apps || [])
-          .filter(function (a) { return a && a.enabled !== false; })
+          .filter(function (a) {
+            if (!a || a.enabled === false) return false;
+            return allow.indexOf(normalizeStatus(a)) !== -1;
+          })
           .slice()
           .sort(function (a, b) {
             return (a.sortOrder || 0) - (b.sortOrder || 0);

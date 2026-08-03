@@ -37,9 +37,15 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
     "website": "https://mobileatsg.github.io/",
     "supportEmail": "mobileatsg@gmail.com"
   },
+  "policy": {
+    "websiteShowStatuses": ["Published", "InProcess"],
+    "inAppMoreAppsShowStatuses": ["Published"]
+  },
   "apps": [ /* AppEntry */ ]
 }
 ```
+
+`policy` documents the filter rules; clients should still implement them even if they ignore the object.
 
 ### `AppEntry`
 
@@ -49,6 +55,7 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 | `name` | string | Display name |
 | `blurb` | string | One short description |
 | `category` | string | Chip label |
+| `status` | `"Published"` \| `"InProcess"` | Store readiness (see below) |
 | `platforms` | `ios` \| `android`[] | Store buttons / platform filter |
 | `tags` | string[] | Extra chips (e.g. `No ads`) |
 | `bundleId` | string \| null | iOS production bundle |
@@ -63,16 +70,38 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 | `enabled` | bool | `false` hides without deleting |
 | `featured` | bool | Optional highlight / soft-promo pick |
 
-### Client rules (website + apps)
+### `status` values
+
+| Value | Meaning |
+|-------|---------|
+| **`Published`** | Live (or ready) on store(s) |
+| **`InProcess`** | Building / not store-live yet |
+
+Exact strings (case-sensitive): `Published`, `InProcess`.  
+If `status` is missing, treat as **`Published`**.
+
+### Display policy (required)
+
+| Surface | Which apps | Status UI |
+|---------|------------|-----------|
+| **Developer website** | **All** `enabled` apps (`Published` + `InProcess`) | Show status badge; store buttons only if `Published`; `InProcess` → “Coming soon” |
+| **In-app More apps** | **Only** `status === "Published"` | No InProcess rows; also exclude the current app |
+
+Do **not** show `InProcess` apps inside More apps (users cannot install them yet).  
+The website is the full public roadmap; the app only cross-promotes store-ready titles.
+
+### Client rules
 
 1. Ignore entries with `enabled: false`.  
 2. Sort by `sortOrder` ascending.  
-3. **In-app only:** exclude the current app  
-   (`bundleId` / `androidPackage` == this install).  
-4. Prefer `appStoreUrl` → else `iosAppStoreId` → else search / website.  
-5. Prefer `playStoreUrl` → else package details URL.  
-6. Load `iconUrl` over the network (cache on disk in apps).  
-7. On network failure: last successful cache → bundled fallback (apps only).
+3. **Website:** render every remaining app; respect status for CTAs/badges.  
+4. **In-app More apps:**  
+   - `status === "Published"` only  
+   - exclude current app (`bundleId` / `androidPackage` == this install)  
+5. Prefer `appStoreUrl` → else `iosAppStoreId` → else search / website.  
+6. Prefer `playStoreUrl` → else package details URL.  
+7. Load `iconUrl` over the network (cache on disk in apps).  
+8. On network failure: last successful cache → bundled fallback (apps only).
 
 ### Canonical fetch URL
 

@@ -6,12 +6,17 @@
     "website": "https://mobileatsg.github.io/",
     "supportEmail": "mobileatsg@gmail.com"
   },
+  "policy": {
+    "websiteShowStatuses": ["Published", "InProcess"],
+    "inAppMoreAppsShowStatuses": ["Published"]
+  },
   "apps": [
     {
       "id": "stocksg",
       "name": "Stock@SG",
       "blurb": "Lightweight SGX companion — watchlist, market movers, announcements, dividends, charts, and price alerts.",
       "category": "Finance",
+      "status": "Published",
       "platforms": ["ios", "android"],
       "tags": [],
       "bundleId": "com.mobilesg.stocksg",
@@ -31,6 +36,7 @@
       "name": "Sudoku Mix",
       "blurb": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.",
       "category": "Games · Puzzle",
+      "status": "InProcess",
       "platforms": ["ios", "android"],
       "tags": [],
       "bundleId": "com.mobilesg.sudoku",
@@ -50,6 +56,7 @@
       "name": "Pixel Color",
       "blurb": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.",
       "category": "Entertainment",
+      "status": "InProcess",
       "platforms": ["ios", "android"],
       "tags": [],
       "bundleId": "com.mobilesg.pixelcolor",
@@ -69,6 +76,7 @@
       "name": "Smart Alarm No Ads",
       "blurb": "Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.",
       "category": "Utilities",
+      "status": "InProcess",
       "platforms": ["ios"],
       "tags": ["No ads"],
       "bundleId": "com.mobilesg.smartalarm",
@@ -88,6 +96,7 @@
       "name": "Math Buddy Kids",
       "blurb": "Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English & 中文.",
       "category": "Education",
+      "status": "InProcess",
       "platforms": ["ios"],
       "tags": ["Kids · Family"],
       "bundleId": "com.mobilesg.mathbuddy",
