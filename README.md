@@ -55,8 +55,8 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 | `name` | string | Display name |
 | `blurb` | string | One short description |
 | `category` | string | Chip label |
-| `status` | `"Published"` \| `"InProcess"` | Store readiness (see below) |
-| `platforms` | `ios` \| `android`[] | Store buttons / platform filter |
+| `status` | object or string | **Per platform** (preferred) or legacy single string (see below) |
+| `platforms` | `ios` \| `android`[] | Platforms this app ships on |
 | `tags` | string[] | Extra chips (e.g. `No ads`) |
 | `bundleId` | string \| null | iOS production bundle |
 | `androidPackage` | string \| null | Play `applicationId` |
@@ -70,34 +70,46 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 | `enabled` | bool | `false` hides without deleting |
 | `featured` | bool | Optional highlight / soft-promo pick |
 
-### `status` values
+### `status` (per platform)
+
+**Preferred** — configure iOS and Android independently:
+
+```json
+"status": {
+  "ios": "InProcess",
+  "android": "Published"
+}
+```
+
+Example: Sudoku Mix Android live, iOS still shipping → Android store button only; iOS More apps on Android can still promote it; iOS More apps will **not** list it until `ios` is `Published`.
 
 | Value | Meaning |
 |-------|---------|
-| **`Published`** | Live (or ready) on store(s) |
-| **`InProcess`** | Building / not store-live yet |
+| **`Published`** | Live (or ready) on that store |
+| **`InProcess`** | Building / not store-live on that platform |
 
-Exact strings (case-sensitive): `Published`, `InProcess`.  
-If `status` is missing, treat as **`Published`**.
+Exact strings (case-sensitive). Omit a platform key if that platform is not in `platforms`.
+
+**Legacy** (still accepted): `"status": "Published"` applies the same value to all listed platforms.
 
 ### Display policy (required)
 
 | Surface | Which apps | Status UI |
 |---------|------------|-----------|
-| **Developer website** | **All** `enabled` apps (`Published` + `InProcess`) | Show status badge; store buttons only if `Published`; `InProcess` → “Coming soon” |
-| **In-app More apps** | **Only** `status === "Published"` | No InProcess rows; also exclude the current app |
+| **Developer website** | All `enabled` apps | Per-platform chips (`iOS · Published`, `Android · In process`); store button only for platforms that are `Published` |
+| **In-app More apps (iOS)** | Peer with **`status.ios === "Published"`** | Exclude self; no InProcess iOS |
+| **In-app More apps (Android)** | Peer with **`status.android === "Published"`** | Exclude self; no InProcess Android |
 
-Do **not** show `InProcess` apps inside More apps (users cannot install them yet).  
-The website is the full public roadmap; the app only cross-promotes store-ready titles.
+Do **not** show an app in More apps on a platform where that platform’s status is `InProcess`.
 
 ### Client rules
 
 1. Ignore entries with `enabled: false`.  
 2. Sort by `sortOrder` ascending.  
-3. **Website:** render every remaining app; respect status for CTAs/badges.  
+3. **Website:** render every remaining app; badges + CTAs per platform status.  
 4. **In-app More apps:**  
-   - `status === "Published"` only  
-   - exclude current app (`bundleId` / `androidPackage` == this install)  
+   - current platform status must be **`Published`**  
+   - exclude current app (`bundleId` / `androidPackage`)  
 5. Prefer `appStoreUrl` → else `iosAppStoreId` → else search / website.  
 6. Prefer `playStoreUrl` → else package details URL.  
 7. Load `iconUrl` over the network (cache on disk in apps).  

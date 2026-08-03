@@ -446,11 +446,40 @@
         return p;
       }
 
-      /** @returns {"Published"|"InProcess"} */
-      function normalizeStatus(app) {
-        var s = app && app.status;
+      /**
+       * Per-platform status. Preferred shape:
+       *   "status": { "ios": "Published", "android": "InProcess" }
+       * Legacy string still accepted: "status": "Published" (applies to all platforms).
+       * @returns {"Published"|"InProcess"}
+       */
+      function normalizeStatusValue(s) {
         if (s === "Published" || s === "InProcess") return s;
         return "Published";
+      }
+
+      function statusForPlatform(app, platform) {
+        var s = app && app.status;
+        if (s == null) return "Published";
+        if (typeof s === "string") return normalizeStatusValue(s);
+        if (typeof s === "object") {
+          if (s[platform] != null) return normalizeStatusValue(s[platform]);
+          // If only one platform key exists, do not invent the other
+          return null;
+        }
+        return "Published";
+      }
+
+      function platformsOf(app) {
+        var list = app.platforms;
+        if (list && list.length) return list.slice();
+        // Infer from status object keys when platforms omitted
+        var s = app.status;
+        if (s && typeof s === "object" && !Array.isArray(s)) {
+          return Object.keys(s).filter(function (k) {
+            return k === "ios" || k === "android";
+          });
+        }
+        return ["ios", "android"];
       }
 
       function statusLabel(status) {
@@ -462,8 +491,14 @@
         return status === "InProcess" ? "chip status-inprocess" : "chip status-published";
       }
 
-      function isPublished(app) {
-        return normalizeStatus(app) === "Published";
+      /** True if any listed platform is Published (for list inclusion on website). */
+      function anyStatusAllowed(app, allow) {
+        var plats = platformsOf(app);
+        if (!plats.length) return allow.indexOf("Published") !== -1;
+        return plats.some(function (p) {
+          var st = statusForPlatform(app, p);
+          return st != null && allow.indexOf(st) !== -1;
+        });
       }
 
       function appStoreHref(app) {
@@ -491,42 +526,50 @@
       }
 
       function renderApp(app) {
-        var status = normalizeStatus(app);
-        var published = isPublished(app);
+        var platforms = platformsOf(app);
+        var hasIos = platforms.indexOf("ios") !== -1;
+        var hasAndroid = platforms.indexOf("android") !== -1;
+        var iosStatus = hasIos ? statusForPlatform(app, "ios") : null;
+        var androidStatus = hasAndroid ? statusForPlatform(app, "android") : null;
+        var iosPublished = iosStatus === "Published";
+        var androidPublished = androidStatus === "Published";
+
         var chips = [];
-        chips.push(
-          '<span class="' + statusChipClass(status) + '">' + esc(statusLabel(status)) + "</span>"
-        );
+        if (hasIos && iosStatus) {
+          chips.push(
+            '<span class="' + statusChipClass(iosStatus) + '">iOS · ' + esc(statusLabel(iosStatus)) + "</span>"
+          );
+        }
+        if (hasAndroid && androidStatus) {
+          chips.push(
+            '<span class="' + statusChipClass(androidStatus) + '">Android · ' + esc(statusLabel(androidStatus)) + "</span>"
+          );
+        }
         if (app.category) {
           chips.push('<span class="chip accent">' + esc(app.category) + "</span>");
         }
-        (app.platforms || []).forEach(function (p) {
-          chips.push('<span class="chip">' + esc(platformLabel(p)) + "</span>");
-        });
         (app.tags || []).forEach(function (t) {
           chips.push('<span class="chip">' + esc(t) + "</span>");
         });
 
         var actions = [];
         var play = playHref(app);
-        var platforms = app.platforms || [];
-        var hasIos = platforms.indexOf("ios") !== -1;
-        var hasAndroid = platforms.indexOf("android") !== -1;
-
-        // Store links only when Published (InProcess = coming soon on the public site).
-        if (published) {
-          if (play && hasAndroid) {
-            actions.push(
-              '<a class="btn primary" href="' + esc(play) + '" rel="noopener noreferrer">Google Play</a>'
-            );
-          }
-          if (hasIos) {
-            actions.push(
-              '<a class="btn" href="' + esc(appStoreHref(app)) + '" rel="noopener noreferrer">App Store</a>'
-            );
-          }
-        } else {
+        // Store links per platform status
+        if (androidPublished && play) {
+          actions.push(
+            '<a class="btn primary" href="' + esc(play) + '" rel="noopener noreferrer">Google Play</a>'
+          );
+        }
+        if (iosPublished) {
+          actions.push(
+            '<a class="btn" href="' + esc(appStoreHref(app)) + '" rel="noopener noreferrer">App Store</a>'
+          );
+        }
+        if (!iosPublished && !androidPublished) {
           actions.push('<span class="btn ghost" aria-disabled="true">Coming soon</span>');
+        } else if ((hasIos && !iosPublished) || (hasAndroid && !androidPublished)) {
+          // Partial: one platform still in process
+          actions.push('<span class="btn ghost" aria-disabled="true">Coming soon on other platforms</span>');
         }
         if (app.privacyUrl) {
           actions.push(
@@ -534,8 +577,13 @@
           );
         }
 
+        var dataStatus = [
+          hasIos && iosStatus ? "ios:" + iosStatus : null,
+          hasAndroid && androidStatus ? "android:" + androidStatus : null
+        ].filter(Boolean).join(";");
+
         return (
-          '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(status) + '">' +
+          '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(dataStatus) + '">' +
             '<div class="card-top">' +
               '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(app.name) + ' icon" loading="lazy" />' +
               "<div>" +
@@ -566,7 +614,8 @@
       }
 
       function renderCatalog(catalog) {
-        // Website: all enabled apps (Published + InProcess). In-app More apps: Published only.
+        // Website: all enabled apps if any platform status is allowed (Published + InProcess).
+        // In-app More apps: only platforms with status Published (see skill /feature-mobilesg-info).
         var allow = (catalog.policy && catalog.policy.websiteShowStatuses) || [
           "Published",
           "InProcess"
@@ -574,7 +623,7 @@
         var apps = (catalog.apps || [])
           .filter(function (a) {
             if (!a || a.enabled === false) return false;
-            return allow.indexOf(normalizeStatus(a)) !== -1;
+            return anyStatusAllowed(a, allow);
           })
           .slice()
           .sort(function (a, b) {
