@@ -220,6 +220,16 @@
       border-color: #355a78;
       background: rgba(91, 159, 212, 0.12);
     }
+    .chip.status-published {
+      color: #b8f0c8;
+      border-color: #2f6b45;
+      background: rgba(107, 207, 142, 0.14);
+    }
+    .chip.status-inprocess {
+      color: #f5e0a8;
+      border-color: #6b5a2f;
+      background: rgba(230, 180, 70, 0.14);
+    }
 
     .pkg {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -436,6 +446,26 @@
         return p;
       }
 
+      /** @returns {"Published"|"InProcess"} */
+      function normalizeStatus(app) {
+        var s = app && app.status;
+        if (s === "Published" || s === "InProcess") return s;
+        return "Published";
+      }
+
+      function statusLabel(status) {
+        if (status === "InProcess") return "In process";
+        return "Published";
+      }
+
+      function statusChipClass(status) {
+        return status === "InProcess" ? "chip status-inprocess" : "chip status-published";
+      }
+
+      function isPublished(app) {
+        return normalizeStatus(app) === "Published";
+      }
+
       function appStoreHref(app) {
         if (app.appStoreUrl) return app.appStoreUrl;
         if (app.iosAppStoreId) {
@@ -461,7 +491,12 @@
       }
 
       function renderApp(app) {
+        var status = normalizeStatus(app);
+        var published = isPublished(app);
         var chips = [];
+        chips.push(
+          '<span class="' + statusChipClass(status) + '">' + esc(statusLabel(status)) + "</span>"
+        );
         if (app.category) {
           chips.push('<span class="chip accent">' + esc(app.category) + "</span>");
         }
@@ -478,15 +513,20 @@
         var hasIos = platforms.indexOf("ios") !== -1;
         var hasAndroid = platforms.indexOf("android") !== -1;
 
-        if (play && hasAndroid) {
-          actions.push(
-            '<a class="btn primary" href="' + esc(play) + '" rel="noopener noreferrer">Google Play</a>'
-          );
-        }
-        if (hasIos) {
-          actions.push(
-            '<a class="btn" href="' + esc(appStoreHref(app)) + '" rel="noopener noreferrer">App Store</a>'
-          );
+        // Store links only when Published (InProcess = coming soon on the public site).
+        if (published) {
+          if (play && hasAndroid) {
+            actions.push(
+              '<a class="btn primary" href="' + esc(play) + '" rel="noopener noreferrer">Google Play</a>'
+            );
+          }
+          if (hasIos) {
+            actions.push(
+              '<a class="btn" href="' + esc(appStoreHref(app)) + '" rel="noopener noreferrer">App Store</a>'
+            );
+          }
+        } else {
+          actions.push('<span class="btn ghost" aria-disabled="true">Coming soon</span>');
         }
         if (app.privacyUrl) {
           actions.push(
@@ -495,7 +535,7 @@
         }
 
         return (
-          '<article class="card" data-app-id="' + esc(app.id) + '">' +
+          '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(status) + '">' +
             '<div class="card-top">' +
               '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(app.name) + ' icon" loading="lazy" />' +
               "<div>" +
