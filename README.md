@@ -97,10 +97,10 @@ Exact strings (case-sensitive). Omit a platform key if that platform is not in `
 | Surface | Which apps | Status UI |
 |---------|------------|-----------|
 | **Developer website** | All `enabled` apps | Per-platform chips (`iOS · Published`, `Android · In process`); store button only for platforms that are `Published` |
-| **In-app More apps (iOS)** | Peer with **`status.ios === "Published"`** | Exclude self; no InProcess iOS |
-| **In-app More apps (Android)** | Peer with **`status.android === "Published"`** | Exclude self; no InProcess Android |
+| **In-app More apps (iOS device)** | Only peers with **`status.ios === "Published"`** | Ignore `status.android` for the list; exclude self |
+| **In-app More apps (Android device)** | Only peers with **`status.android === "Published"`** | Ignore `status.ios` for the list; exclude self |
 
-Do **not** show an app in More apps on a platform where that platform’s status is `InProcess`.
+**Required:** filter by **device platform**. Do not show an app because the *other* store is Published. Missing status for this platform ⇒ exclude.
 
 ### Client rules
 

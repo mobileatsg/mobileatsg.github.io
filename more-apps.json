@@ -8,7 +8,8 @@
   },
   "policy": {
     "websiteShowStatuses": ["Published", "InProcess"],
-    "inAppMoreAppsShowStatuses": ["Published"]
+    "inAppMoreAppsShowStatuses": ["Published"],
+    "inAppFilterByDevicePlatform": true
   },
   "apps": [
     {
