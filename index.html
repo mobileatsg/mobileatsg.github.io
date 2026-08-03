@@ -207,18 +207,59 @@
       overflow: hidden;
       text-overflow: ellipsis;
     }
+    .card-blurb-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.2rem;
+      min-width: 0;
+    }
     .card-blurb {
       margin: 0;
       color: var(--muted);
       font-size: 0.9rem;
       line-height: 1.45;
-      /* Always reserve 3 lines so cards align */
+      /* Collapsed: 3 lines + ellipsis; expand via More */
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
       line-clamp: 3;
       overflow: hidden;
       min-height: calc(1.45em * 3);
+      max-height: calc(1.45em * 3);
+      transition: max-height 0.2s ease;
+    }
+    .card.is-expanded .card-blurb {
+      display: block;
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+      overflow: visible;
+      min-height: calc(1.45em * 3);
+      max-height: none;
+    }
+    .blurb-toggle {
+      appearance: none;
+      border: 0;
+      background: none;
+      padding: 0;
+      margin: 0;
+      color: var(--link);
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .blurb-toggle:hover {
+      text-decoration: underline;
+    }
+    .blurb-toggle:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+      border-radius: 4px;
+    }
+    .blurb-toggle[hidden] {
+      display: none;
     }
 
     /* Platform status — always 2 rows (iOS / Android) */
@@ -700,7 +741,16 @@
               '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(app.name) + ' icon" loading="lazy" />' +
               '<div class="card-top-text">' +
                 '<h3 class="card-title">' + esc(app.name) + "</h3>" +
-                '<p class="card-blurb">' + esc(app.blurb || "") + "</p>" +
+                '<div class="card-blurb-wrap">' +
+                  '<p class="card-blurb" id="blurb-' + esc(app.id) + '">' + esc(app.blurb || "") + "</p>" +
+                  '<button type="button" class="blurb-toggle" hidden' +
+                    ' aria-expanded="false"' +
+                    ' aria-controls="blurb-' + esc(app.id) + '"' +
+                    ' data-more="More"' +
+                    ' data-less="Less">' +
+                    "More" +
+                  "</button>" +
+                "</div>" +
               "</div>" +
             "</div>" +
             '<ul class="platform-list" aria-label="Platform status">' +
@@ -751,7 +801,57 @@
         gridEl.hidden = false;
         statusEl.hidden = true;
         countEl.textContent = apps.length + (apps.length === 1 ? " app" : " apps");
+        setupBlurbToggles(gridEl);
       }
+
+      function isBlurbClamped(el) {
+        // scrollHeight > clientHeight when line-clamp truncates
+        return el.scrollHeight > el.clientHeight + 1;
+      }
+
+      function setupBlurbToggles(root) {
+        root.querySelectorAll(".card").forEach(function (card) {
+          var blurb = card.querySelector(".card-blurb");
+          var btn = card.querySelector(".blurb-toggle");
+          if (!blurb || !btn) return;
+
+          // Show More only when text is actually truncated
+          if (isBlurbClamped(blurb)) {
+            btn.hidden = false;
+          } else {
+            btn.hidden = true;
+          }
+        });
+      }
+
+      // Event delegation for More / Less
+      gridEl.addEventListener("click", function (e) {
+        var btn = e.target.closest(".blurb-toggle");
+        if (!btn || !gridEl.contains(btn)) return;
+        var card = btn.closest(".card");
+        if (!card) return;
+        var expanded = card.classList.toggle("is-expanded");
+        btn.setAttribute("aria-expanded", expanded ? "true" : "false");
+        btn.textContent = expanded
+          ? btn.getAttribute("data-less") || "Less"
+          : btn.getAttribute("data-more") || "More";
+        // If collapsed again, re-check clamp (font/layout stable)
+        if (!expanded) {
+          var blurb = card.querySelector(".card-blurb");
+          if (blurb && !isBlurbClamped(blurb)) {
+            // rare: short after collapse — keep button if it was needed before
+          }
+        }
+      });
+
+      // Re-evaluate clamp after fonts/layout (resize)
+      var resizeTimer;
+      window.addEventListener("resize", function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          if (!gridEl.hidden) setupBlurbToggles(gridEl);
+        }, 150);
+      });
 
       fetch(CATALOG_URL, { cache: "no-cache" })
         .then(function (res) {
