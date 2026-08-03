@@ -33,7 +33,7 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
   "schemaVersion": 1,
   "updatedAt": "YYYY-MM-DD",
   "defaultLocale": "en",
-  "supportedLocales": ["en", "zh-Hans", "zh-Hant"],
+  "supportedLocales": ["en", "zh-Hans"],
   "publisher": { ... },
   "policy": { ... },
   "apps": [ /* AppEntry */ ]
@@ -42,13 +42,14 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 
 `policy` documents the filter rules; clients should still implement them even if they ignore the object.
 
-### Locales (English + Chinese)
+### Locales (English + Simplified Chinese only)
 
 | Locale | Meaning |
 |--------|---------|
 | `en` | English — **default** top-level `name` / `blurb` / `category` / `tags` |
 | `zh-Hans` | 简体中文 |
-| `zh-Hant` | 繁體中文 |
+
+**Do not** add `zh-Hant` (Traditional Chinese) to this catalog.
 
 ```json
 {
@@ -62,12 +63,6 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
       "blurb": "多彩数独…",
       "category": "游戏 · 益智",
       "tags": []
-    },
-    "zh-Hant": {
-      "name": "數獨混合",
-      "blurb": "多彩數獨…",
-      "category": "遊戲 · 益智",
-      "tags": []
     }
   }
 }
@@ -76,13 +71,13 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 **Resolve (website + in-app):**
 
 ```text
-locale = en | zh-Hans | zh-Hant
-if locale != en and app.locales[locale][field] present → use it
+locale = en | zh-Hans
+if locale == zh-Hans and app.locales["zh-Hans"][field] present → use it
 else → top-level English field
 ```
 
-Website: browser language + **EN / 简 / 繁** switcher (saved in `localStorage`).  
-In-app: use the app’s UI language (same keys).
+Website: browser language + **EN / 中文** switcher (saved in `localStorage`). Any `zh*` browser locale uses 简体.  
+In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 
 ### `AppEntry`
 
@@ -92,7 +87,7 @@ In-app: use the app’s UI language (same keys).
 | `name` | string | Display name (**English** default) |
 | `blurb` | string | One short description (**English**) |
 | `category` | string | Chip label (**English**) |
-| `locales` | object | Optional `zh-Hans` / `zh-Hant` overrides for `name`, `blurb`, `category`, `tags` |
+| `locales` | object | Optional `zh-Hans` overrides for `name`, `blurb`, `category`, `tags` |
 | `status` | object or string | **Per platform** (preferred) or legacy single string (see below) |
 | `platforms` | `ios` \| `android`[] | Platforms this app ships on |
 | `tags` | string[] | Extra chips (e.g. `No ads`) — English default |

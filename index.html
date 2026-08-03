@@ -526,8 +526,7 @@
         <a href="#contact" data-i18n="navContact">Contact</a>
         <div class="lang-switch" role="group" aria-label="Language">
           <button type="button" data-locale="en" aria-pressed="true">EN</button>
-          <button type="button" data-locale="zh-Hans" aria-pressed="false">简</button>
-          <button type="button" data-locale="zh-Hant" aria-pressed="false">繁</button>
+          <button type="button" data-locale="zh-Hans" aria-pressed="false">中文</button>
         </div>
       </nav>
     </header>
@@ -683,44 +682,6 @@
           title: "Mobile@SG — 应用",
           metaDescription: "Mobile@SG 出品的 iOS 与 Android 应用。浏览 App Store 与 Google Play 上的作品。"
         },
-        "zh-Hant": {
-          brandTagline: "iOS 與 Android 應用",
-          navApps: "應用",
-          navAbout: "關於",
-          navContact: "聯絡",
-          heroEyebrow: "開發者 · 發行商",
-          heroTitle: "Mobile@SG 應用",
-          heroBody:
-            "我們為 iPhone 與 Android 打造簡單實用的應用 — 益智、學習、工具與行情。免費應用可能包含廣告；歡迎透過電子郵件聯絡支援。",
-          appsTitle: "我們的應用",
-          loadingApps: "正在載入應用…",
-          aboutTitle: "關於 Mobile@SG",
-          aboutP1:
-            '<strong style="color: var(--text);">Mobile@SG</strong> 是獨立應用發行商。我們注重實用、打磨與可離線體驗，預設尊重隱私，並對廣告與商業模式保持坦誠。',
-          aboutP2:
-            '應用在已上架地區可於 <strong style="color: var(--text);">Apple App Store</strong> 與 <strong style="color: var(--text);">Google Play</strong> 取得。各應用隱私政策發布於本站對應路徑。',
-          contactTitle: "聯絡與支援",
-          contactBody:
-            "如需回饋、回報問題或隱私相關請求，請寄信給我們。請盡量附上應用名稱與版本，以便更快處理。",
-          labelEmail: "支援信箱",
-          labelWebsite: "網站",
-          labelDeveloper: "開發者",
-          footerLegal: "App Store 與 Google Play 為其各自所有者的商標。",
-          appCountOne: "1 個應用",
-          appCountMany: "{n} 個應用",
-          statusPublished: "已上架",
-          statusInProcess: "開發中",
-          notAvailable: "暫無",
-          more: "更多",
-          less: "收起",
-          appStore: "App Store",
-          googlePlay: "Google Play",
-          privacy: "隱私",
-          platformStatus: "平台狀態",
-          loadErrorPrefix: "無法載入應用目錄。請透過本機伺服器開啟本站（例如 python3 -m http.server）或部署到 GitHub Pages。目錄網址：",
-          title: "Mobile@SG — 應用",
-          metaDescription: "Mobile@SG 出品的 iOS 與 Android 應用。瀏覽 App Store 與 Google Play 上的作品。"
-        }
       };
 
       function t(key) {
@@ -731,32 +692,24 @@
       function detectLocale() {
         try {
           var saved = localStorage.getItem(LOCALE_KEY);
-          if (saved === "en" || saved === "zh-Hans" || saved === "zh-Hant") return saved;
+          // Legacy zh-Hant preference maps to Simplified
+          if (saved === "zh-Hant") return "zh-Hans";
+          if (saved === "en" || saved === "zh-Hans") return saved;
         } catch (e) { /* ignore */ }
         var lang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-        if (lang.indexOf("zh") === 0) {
-          // zh-TW / zh-HK / zh-Hant → Traditional; else Simplified
-          if (
-            lang.indexOf("tw") !== -1 ||
-            lang.indexOf("hk") !== -1 ||
-            lang.indexOf("mo") !== -1 ||
-            lang.indexOf("hant") !== -1
-          ) {
-            return "zh-Hant";
-          }
-          return "zh-Hans";
-        }
+        // Any Chinese browser language → Simplified Chinese only
+        if (lang.indexOf("zh") === 0) return "zh-Hans";
         return "en";
       }
 
       function setLocale(locale) {
-        if (locale !== "en" && locale !== "zh-Hans" && locale !== "zh-Hant") locale = "en";
+        if (locale === "zh-Hant") locale = "zh-Hans";
+        if (locale !== "en" && locale !== "zh-Hans") locale = "en";
         currentLocale = locale;
         try {
           localStorage.setItem(LOCALE_KEY, locale);
         } catch (e) { /* ignore */ }
-        document.documentElement.lang =
-          locale === "zh-Hans" ? "zh-Hans" : locale === "zh-Hant" ? "zh-Hant" : "en";
+        document.documentElement.lang = locale === "zh-Hans" ? "zh-Hans" : "en";
         applyUiStrings();
         document.querySelectorAll(".lang-switch button").forEach(function (btn) {
           btn.setAttribute("aria-pressed", btn.getAttribute("data-locale") === locale ? "true" : "false");
@@ -781,11 +734,11 @@
       /**
        * Resolve localized app field.
        * EN: top-level name/blurb/category/tags
-       * Chinese: app.locales["zh-Hans"|"zh-Hant"].field with EN fallback
+       * Chinese: app.locales["zh-Hans"].field with EN fallback
        */
       function appField(app, field) {
-        if (currentLocale !== "en" && app.locales && app.locales[currentLocale]) {
-          var v = app.locales[currentLocale][field];
+        if (currentLocale === "zh-Hans" && app.locales && app.locales["zh-Hans"]) {
+          var v = app.locales["zh-Hans"][field];
           if (v != null && v !== "") return v;
         }
         return app[field];
