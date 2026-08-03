@@ -3,374 +3,560 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Privacy Policy — Stock@SG</title>
-  <meta name="description" content="Privacy Policy for Stock@SG by Mobile@SG." />
+  <title>Mobile@SG — Apps</title>
+  <meta name="description" content="Mobile@SG publishes free and useful iOS &amp; Android apps. Browse our apps on the App Store and Google Play." />
   <meta name="author" content="Mobile@SG" />
-  <link rel="canonical" href="https://mobileatsg.github.io/stocksg/" />
+  <link rel="canonical" href="https://mobileatsg.github.io/" />
+  <meta property="og:title" content="Mobile@SG — Apps" />
+  <meta property="og:description" content="iOS and Android apps by Mobile@SG." />
+  <meta property="og:url" content="https://mobileatsg.github.io/" />
+  <meta property="og:type" content="website" />
+  <meta name="theme-color" content="#0f1419" />
+  <link rel="icon" href="assets/brand/mobileatsg-logo.png" type="image/png" />
   <style>
     :root {
       --bg: #0f1419;
       --surface: #1a2332;
+      --surface-hover: #213044;
       --text: #e7ecf3;
       --muted: #9aa8b8;
       --accent: #5b9fd4;
       --border: #2a3648;
       --link: #7ec8ff;
+      --ok: #6bcf8e;
+      --chip: #243044;
+      --radius: 16px;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
     }
+
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.65;
+      line-height: 1.55;
       color: var(--text);
-      background: var(--bg);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(91, 159, 212, 0.14), transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, rgba(123, 108, 240, 0.10), transparent 50%),
+        var(--bg);
+      min-height: 100vh;
     }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
     .wrap {
-      max-width: 720px;
+      max-width: 1040px;
       margin: 0 auto;
-      padding: 2rem 1.25rem 4rem;
+      padding: 1.5rem 1.25rem 4rem;
     }
-    header {
+
+    /* Header */
+    .site-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.5rem 0 1.75rem;
       border-bottom: 1px solid var(--border);
-      padding-bottom: 1.25rem;
-      margin-bottom: 1.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
     }
     .brand {
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      color: inherit;
+      text-decoration: none;
+    }
+    .brand:hover { text-decoration: none; }
+    .brand img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .brand-text strong {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .brand-text span {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .nav {
+      display: flex;
+      gap: 0.5rem 1rem;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+    }
+    .nav a {
+      color: var(--muted);
+      padding: 0.35rem 0.15rem;
+    }
+    .nav a:hover { color: var(--link); }
+
+    /* Hero */
+    .hero {
+      margin-bottom: 2rem;
+    }
+    .hero .eyebrow {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--accent);
-      margin: 0 0 0.35rem;
-    }
-    h1 {
-      font-size: 1.75rem;
-      line-height: 1.25;
+      font-weight: 600;
       margin: 0 0 0.5rem;
-      font-weight: 700;
     }
-    .meta {
-      color: var(--muted);
-      font-size: 0.95rem;
+    .hero h1 {
+      font-size: clamp(1.75rem, 4vw, 2.35rem);
+      line-height: 1.2;
+      margin: 0 0 0.65rem;
+      font-weight: 750;
+      letter-spacing: -0.02em;
+    }
+    .hero p {
       margin: 0;
+      max-width: 40rem;
+      color: var(--muted);
+      font-size: 1.05rem;
     }
-    h2 {
+
+    /* Toolbar */
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+      flex-wrap: wrap;
+    }
+    .toolbar h2 {
+      margin: 0;
       font-size: 1.15rem;
-      margin: 2rem 0 0.75rem;
-      padding-top: 0.25rem;
-      border-top: 1px solid var(--border);
-      padding-top: 1.25rem;
+      font-weight: 650;
     }
-    h2:first-of-type { border-top: none; padding-top: 0; }
-    p, li { color: var(--text); }
-    ul { padding-left: 1.25rem; }
-    li { margin: 0.35rem 0; }
-    a { color: var(--link); }
+    .count {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    /* Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1rem;
+    }
+
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1rem 1.15rem;
-      margin: 1rem 0;
+      border-radius: var(--radius);
+      padding: 1.15rem 1.2rem 1.2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
     }
-    .card strong { color: var(--accent); }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.95rem;
-      margin: 0.75rem 0 1rem;
+    .card:hover {
+      border-color: #3a4d66;
+      background: var(--surface-hover);
+      transform: translateY(-1px);
     }
-    th, td {
-      text-align: left;
-      padding: 0.55rem 0.65rem;
+
+    .card-top {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+    .icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      object-fit: cover;
+      flex-shrink: 0;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+      background: #111;
+    }
+    .card-title {
+      margin: 0 0 0.2rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .card-blurb {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.5;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: var(--chip);
       border: 1px solid var(--border);
-      vertical-align: top;
+      color: var(--muted);
+      font-size: 0.78rem;
+      padding: 0.22rem 0.55rem;
+      border-radius: 999px;
+      white-space: nowrap;
     }
-    th { background: var(--surface); color: var(--muted); font-weight: 600; }
+    .chip.accent {
+      color: #cfe8fb;
+      border-color: #355a78;
+      background: rgba(91, 159, 212, 0.12);
+    }
+
+    .pkg {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: var(--muted);
+      word-break: break-all;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+      padding-top: 0.25rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      padding: 0.48rem 0.8rem;
+      border-radius: 10px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      transition: background 0.12s ease, border-color 0.12s ease;
+    }
+    .btn:hover {
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.04);
+      border-color: #3d516b;
+    }
+    .btn.primary {
+      background: rgba(91, 159, 212, 0.18);
+      border-color: #3f6f96;
+      color: #d7ecff;
+    }
+    .btn.primary:hover {
+      background: rgba(91, 159, 212, 0.28);
+    }
+    .btn.ghost {
+      color: var(--muted);
+    }
+
+    .status {
+      color: var(--muted);
+      font-size: 0.95rem;
+      padding: 1rem 0;
+    }
+    .status.error { color: #f0a8a8; }
+
+    /* About / contact */
+    .section {
+      margin-top: 2.75rem;
+      padding-top: 1.75rem;
+      border-top: 1px solid var(--border);
+    }
+    .section h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.2rem;
+    }
+    .section p {
+      margin: 0 0 0.75rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+    .contact-card {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .contact-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+    }
+    .contact-item .label {
+      display: block;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+      font-weight: 600;
+    }
+    .contact-item .value {
+      color: var(--text);
+      font-size: 0.98rem;
+      word-break: break-word;
+    }
+
     footer {
-      margin-top: 2.5rem;
+      margin-top: 2.75rem;
       padding-top: 1.25rem;
       border-top: 1px solid var(--border);
       color: var(--muted);
       font-size: 0.9rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1rem;
+      justify-content: space-between;
     }
-    .muted { color: var(--muted); }
-    code {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.88em;
-      background: var(--surface);
-      padding: 0.1em 0.35em;
-      border-radius: 4px;
+
+    @media (max-width: 480px) {
+      .icon { width: 56px; height: 56px; border-radius: 12px; }
+      .brand img { width: 44px; height: 44px; border-radius: 12px; }
+      .grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <header>
-      <p class="brand">Mobile@SG</p>
-      <h1>Privacy Policy</h1>
-      <p class="meta">
-        <strong>Stock@SG</strong><br />
-        Effective date: August 3, 2026 · Last updated: August 3, 2026
-      </p>
+    <header class="site-header">
+      <a class="brand" href="./">
+        <img src="assets/brand/mobileatsg-logo.png" width="52" height="52" alt="Mobile@SG logo" />
+        <span class="brand-text">
+          <strong>Mobile@SG</strong>
+          <span>iOS &amp; Android apps</span>
+        </span>
+      </a>
+      <nav class="nav" aria-label="Site">
+        <a href="#apps">Apps</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </header>
 
-    <div class="card">
-      <p style="margin:0">
-        This Privacy Policy describes how <strong>Mobile@SG</strong> (“we”, “us”, or “our”)
-        handles information in connection with the mobile application
-        <strong>Stock@SG</strong> (the “App”), available on the Apple App Store and Google Play.
-        
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="eyebrow">Developer · Publisher</p>
+      <h1 id="hero-title">Apps by Mobile@SG</h1>
+      <p>
+        We build simple, useful apps for iPhone and Android — puzzles, learning, utilities, and market tools.
+        Free apps may show ads; support is always welcome via email.
       </p>
-      <p class="muted" style="margin:0.75rem 0 0">
-        Package / Bundle ID: <code>com.mobilesg.stocksg</code><br />
-        Developer site: <a href="https://mobileatsg.github.io/">https://mobileatsg.github.io/</a>
+    </section>
+
+    <section id="apps" aria-labelledby="apps-title">
+      <div class="toolbar">
+        <h2 id="apps-title">Our apps</h2>
+        <span class="count" id="app-count">…</span>
+      </div>
+      <div id="apps-status" class="status" role="status">Loading apps…</div>
+      <div class="grid" id="apps-grid" hidden></div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <h2 id="about-title">About Mobile@SG</h2>
+      <p>
+        <strong style="color: var(--text);">Mobile@SG</strong> is an independent app publisher.
+        We focus on practical, polished experiences that work offline where it matters, respect privacy by default,
+        and stay honest about ads and monetization.
       </p>
-    </div>
-
-    <h2>1. Who we are</h2>
-    <p>
-      The App is developed and published by <strong>Mobile@SG</strong>.
-      For privacy questions or requests, contact us at
-      <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a>.
-    </p>
-
-    <h2>2. Summary</h2>
-    <ul>
-      <li><strong>Developer:</strong> Mobile@SG</li>
-      <li><strong>Contact:</strong> <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a></li>
-      <li><strong>Collects personal data:</strong> Yes</li>
-      <li><strong>Contains ads:</strong> Yes</li>
-      <li><strong>Account required:</strong> No</li>
-      <li><strong>Sells personal data:</strong> No</li>
-    </ul>
-    
-
-    <h2>3. Information we collect</h2>
-    
-    <p>Stock@SG is a free SGX stock companion app. We do not require you to create an account. The App and related services may process limited information needed to show market data, save your watchlist preferences on your device, deliver optional price-alert and announcement push notifications, show advertisements, and improve reliability. Categories are summarized below.</p>
-
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Examples</th>
-          <th>Purpose</th>
-          <th>Linked to identity?</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Device identifiers</td>
-          <td>App-generated device UUID stored on device; advertising identifiers where permitted</td>
-          <td>Associate price alerts and push registration with your installation; advertising</td>
-          <td>Device-scoped (not a named account)</td>
-        </tr>
-        <tr>
-          <td>App activity &amp; preferences</td>
-          <td>Favourite stock codes, alert rules you create, display preferences</td>
-          <td>Provide watchlist, alerts, and settings; register watched codes for notifications</td>
-          <td>Device-scoped</td>
-        </tr>
-        <tr>
-          <td>Push token</td>
-          <td>Firebase Cloud Messaging (FCM) / APNs device token</td>
-          <td>Deliver optional notifications for alerts and announcements</td>
-          <td>Device-scoped</td>
-        </tr>
-        <tr>
-          <td>Diagnostics (when Firebase is enabled)</td>
-          <td>Crash/performance or analytics events, device model, OS version</td>
-          <td>Stability, product improvement</td>
-          <td>Typically not linked to your name</td>
-        </tr>
-        <tr>
-          <td>Advertising data</td>
-          <td>Ad interactions, advertising ID (subject to your OS privacy settings)</td>
-          <td>Show banner and interstitial ads via Google AdMob</td>
-          <td>May be used by Google under its policies</td>
-        </tr>
-        <tr>
-          <td>Support communications</td>
-          <td>Email address and message content you send to support</td>
-          <td>Respond to feedback or bug reports you initiate</td>
-          <td>Yes (email you provide)</td>
-        </tr>
-        
-      </tbody>
-    </table>
-
-    <h2>4. Information we do not collect</h2>
-    <p>We do not require you to create an account, and we do not intentionally collect your legal name, postal address, government ID, precise location, contacts, photos, microphone audio, or full payment card numbers through the App. We do not provide brokerage trading or order placement. If you email support, you may voluntarily include personal details in that message.</p>
-    <!-- Default suggestion when true:
-    We do not require you to create an account, and we do not intentionally collect
-    your name, email address, precise location, contacts, photos, or payment card details
-    through the App, except as stated above.
-    -->
-
-    <h2>5. How we use information</h2>
-    <p>We use information only for the purposes described in this policy, which may include:</p>
-    <ul>
-      <li>Providing SGX market prices, watchlist, charts, announcements, dividends, and related App features</li>
-      <li>Storing favourites and preferences on your device</li>
-      <li>Creating and managing price alerts and delivering optional push notifications</li>
-      <li>Displaying advertisements to support a free App</li>
-      <li>Operating Remote Config feature flags (for example, optional AI analytic entry points)</li>
-      <li>Diagnosing crashes and improving performance when analytics/crash tooling is enabled</li>
-      <li>Responding to support requests you send us by email</li>
-      <!-- Examples:
-      <li>Providing and maintaining App functionality</li>
-      <li>Diagnosing crashes and improving performance</li>
-      <li>Responding to support requests you send us by email</li>
-      -->
-    </ul>
-
-    <h2>6. Third-party services</h2>
-    <p>The App uses third-party services to provide hosting, messaging, configuration, and advertising. Those providers may process limited technical data as described in their policies.</p>
-    <table>
-      <thead>
-        <tr>
-          <th>Service</th>
-          <th>Purpose</th>
-          <th>Privacy information</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Google Mobile Ads (AdMob)</td>
-          <td>Banner and interstitial advertising</td>
-          <td><a href="https://policies.google.com/privacy">Google Privacy Policy</a></td>
-        </tr>
-        <tr>
-          <td>Firebase (Google) — Messaging, Remote Config, and optionally Analytics</td>
-          <td>Push delivery, feature configuration, diagnostics</td>
-          <td><a href="https://firebase.google.com/support/privacy">Firebase Privacy</a></td>
-        </tr>
-        <tr>
-          <td>Stock@SG backend API (hosted infrastructure, e.g. cloud API gateway)</td>
-          <td>Market data, alerts, device registration, optional AI analytic content</td>
-          <td>Processed under this policy and our hosting provider terms</td>
-        </tr>
-        <tr>
-          <td>Singapore Exchange (SGX) public announcement services</td>
-          <td>Corporate announcements and related document links you open in the App</td>
-          <td><a href="https://www.sgx.com/">SGX</a> (third-party site/services)</td>
-        </tr>
-        <tr>
-          <td>Apple App Store / Google Play</td>
-          <td>App distribution and platform services</td>
-          <td>Apple and Google platform privacy policies</td>
-        </tr>
-        
-      </tbody>
-    </table>
-    <p class="muted">
-      Third parties may process data under their own privacy policies. We encourage you to review those policies.
-    </p>
-
-    <h2>7. Permissions</h2>
-    <p>
-      The App may request device permissions only as needed for features you use.
-      You can deny or revoke permissions in your device settings; some features may not work without them.
-    </p>
-    <ul>
-      <li><strong>Internet / network</strong> — load market data, announcements, ads, and optional AI content</li>
-      <li><strong>Notifications</strong> — optional price alerts and announcement notifications (you can deny or disable in iOS/Android Settings)</li>
-      <li><strong>Advertising identifier</strong> — used by the ads SDK where allowed by your platform privacy settings</li>
-      <!-- Examples:
-      <li><strong>Camera</strong> — to capture photos for …</li>
-      <li><strong>Notifications</strong> — to send optional reminders</li>
-      If none: <li>The App does not request sensitive device permissions beyond standard network access.</li>
-      -->
-    </ul>
-
-    <h2>8. Advertising</h2>
-    <p>The App displays third-party advertisements using <strong>Google AdMob</strong>, including an adaptive banner and frequency-capped interstitial ads. Ad networks may collect or use device and advertising identifiers, IP address, and interaction data to serve and measure ads, including personalized ads where permitted by law and your device settings (for example, App Tracking Transparency on iOS and advertising ID controls on Android). You can limit ad tracking in iOS/Android Settings. If no ad is available, the App continues to function without ads.</p>
-    
-
-    <h2>9. Purchases and payments</h2>
-    <p>The App does not offer in-app purchases. If you obtained the App through Apple or Google, any platform fees or paid download (if applicable) are processed by Apple or Google; we do not receive your full payment card number.</p>
-    
-
-    <h2>10. Data retention</h2>
-    <p>Favourites and display preferences are stored on your device until you change them or uninstall the App. Alert rules and device registration associated with your device identifier are retained on our backend until you delete the alerts, stop using the App, or request deletion where applicable. Push tokens are retained as needed to deliver notifications. Crash and diagnostic data retained by third-party providers is subject to their retention periods. Support emails are retained as needed to handle your request.</p>
-    
-
-    <h2>11. Data sharing and sale</h2>
-    <p>
-      We do <strong>not sell</strong> your personal information.
-      We do not share personal information with third parties for their own independent marketing,
-      except as disclosed in this policy (for example, when you interact with an advertising SDK, if any).
-    </p>
-    <p>We share limited technical information with service providers who process data on our behalf (for example, cloud hosting, Firebase, and Google advertising services) solely to operate the App and show ads, subject to this policy and their terms.</p>
-
-    <h2>12. Security</h2>
-    <p>
-      We take reasonable technical and organizational measures designed to protect information
-      processed in connection with the App. No method of transmission or storage is completely secure;
-      we cannot guarantee absolute security.
-    </p>
-    <p>
-      Where data is transmitted over the internet, we use encrypted connections (HTTPS) when communicating with our services.
-    </p>
-
-    <h2>13. Children’s privacy</h2>
-    <p>The App is not directed to children under 13 (or the equivalent minimum age in your jurisdiction), and we do not knowingly collect personal information from children. If you believe a child has provided us personal information, contact mobileatsg@gmail.com and we will take appropriate steps.</p>
-    
-
-    <h2>14. International users</h2>
-    <p>
-      We may process information in countries other than your own. Those countries may have different
-      data protection laws. Where required, we take steps to protect information in accordance with this policy.
-    </p>
-
-    <h2>15. Your rights and choices</h2>
-    <p>
-      Depending on your location, you may have rights to access, correct, delete, or restrict certain
-      processing of your personal information, or to object to certain processing.
-    </p>
-    <ul>
-      <li>Device permissions: manage in iOS/Android Settings</li>
-      <li>Advertising ID / personalized ads: manage in device privacy settings (where applicable)</li>
-      <li>Support and privacy requests: email <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a></li>
-      <li>Uninstall the App to remove local watchlist and preference data stored on your device</li>
-    </ul>
-    <p>
-      We will respond to verifiable requests within a reasonable period, subject to applicable law.
-    </p>
-
-    <h2>16. Data deletion requests</h2>
-    <p>Most App data (favourites, local preferences) is stored on your device. Uninstalling the App removes that local data. To request deletion of personal data we may hold in connection with the App (for example, device registration or alert records tied to your installation, or information you emailed to support), contact mobileatsg@gmail.com with the subject “Data deletion request — Stock@SG” and include enough detail for us to locate the relevant records (such as approximate install date or device type). We will take appropriate steps subject to applicable law and technical feasibility.</p>
-    
-
-    <h2>17. Third-party links</h2>
-    <p>
-      The App or this page may link to third-party websites or services. We are not responsible for
-      the privacy practices of those third parties. Their privacy policies govern their services.
-    </p>
-
-    <h2>18. Changes to this policy</h2>
-    <p>
-      We may update this Privacy Policy from time to time. The “Last updated” date at the top will change
-      when we do. Continued use of the App after an update means you acknowledge the revised policy.
-      Material changes may be highlighted on this page or within the App when appropriate.
-    </p>
-
-    <h2>19. Contact us</h2>
-    <div class="card">
-      <p style="margin:0">
-        <strong>Mobile@SG</strong><br />
-        Email: <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a><br />
-        Website: <a href="https://mobileatsg.github.io/">https://mobileatsg.github.io/</a><br />
-        This policy: <a href="https://mobileatsg.github.io/stocksg/">https://mobileatsg.github.io/stocksg/</a>
+      <p>
+        Apps are available on the <strong style="color: var(--text);">Apple App Store</strong> and
+        <strong style="color: var(--text);">Google Play</strong> where listed.
+        Privacy policies for each app live on this site under the app’s package slug.
       </p>
-    </div>
+    </section>
+
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <h2 id="contact-title">Contact &amp; support</h2>
+      <p>
+        For bug reports, feedback, or privacy requests, email us. Include the app name and version if you can —
+        it helps us respond faster.
+      </p>
+      <div class="contact-card">
+        <div class="contact-item">
+          <span class="label">Support email</span>
+          <a class="value" href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">Website</span>
+          <a class="value" href="https://mobileatsg.github.io/">mobileatsg.github.io</a>
+        </div>
+        <div class="contact-item">
+          <span class="label">Developer</span>
+          <span class="value">Mobile@SG</span>
+        </div>
+      </div>
+    </section>
 
     <footer>
-      <p>
-        © 2026 Mobile@SG. All rights reserved.<br />
-        <span class="muted">Stock@SG · Privacy Policy</span>
-      </p>
+      <span>© <span id="year">2026</span> Mobile@SG</span>
+      <span>App Store &amp; Google Play are trademarks of their respective owners.</span>
     </footer>
   </div>
+
+  <script>
+    (function () {
+      var CATALOG_URL = "more-apps.json";
+      var yearEl = document.getElementById("year");
+      var countEl = document.getElementById("app-count");
+      var statusEl = document.getElementById("apps-status");
+      var gridEl = document.getElementById("apps-grid");
+
+      yearEl.textContent = String(new Date().getFullYear());
+
+      function esc(s) {
+        return String(s == null ? "" : s)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function platformLabel(p) {
+        if (p === "ios") return "iOS";
+        if (p === "android") return "Android";
+        return p;
+      }
+
+      function appStoreHref(app) {
+        if (app.appStoreUrl) return app.appStoreUrl;
+        if (app.iosAppStoreId) {
+          return "https://apps.apple.com/app/id" + encodeURIComponent(String(app.iosAppStoreId));
+        }
+        return "https://apps.apple.com/search?term=" + encodeURIComponent(app.name + " Mobile@SG");
+      }
+
+      function playHref(app) {
+        if (app.playStoreUrl) return app.playStoreUrl;
+        if (app.androidPackage) {
+          return "https://play.google.com/store/apps/details?id=" + encodeURIComponent(app.androidPackage);
+        }
+        return null;
+      }
+
+      function pkgLabel(app) {
+        return app.androidPackage || app.bundleId || "";
+      }
+
+      function iconSrc(app) {
+        return app.iconPath || app.iconUrl || "";
+      }
+
+      function renderApp(app) {
+        var chips = [];
+        if (app.category) {
+          chips.push('<span class="chip accent">' + esc(app.category) + "</span>");
+        }
+        (app.platforms || []).forEach(function (p) {
+          chips.push('<span class="chip">' + esc(platformLabel(p)) + "</span>");
+        });
+        (app.tags || []).forEach(function (t) {
+          chips.push('<span class="chip">' + esc(t) + "</span>");
+        });
+
+        var actions = [];
+        var play = playHref(app);
+        var platforms = app.platforms || [];
+        var hasIos = platforms.indexOf("ios") !== -1;
+        var hasAndroid = platforms.indexOf("android") !== -1;
+
+        if (play && hasAndroid) {
+          actions.push(
+            '<a class="btn primary" href="' + esc(play) + '" rel="noopener noreferrer">Google Play</a>'
+          );
+        }
+        if (hasIos) {
+          actions.push(
+            '<a class="btn" href="' + esc(appStoreHref(app)) + '" rel="noopener noreferrer">App Store</a>'
+          );
+        }
+        if (app.privacyUrl) {
+          actions.push(
+            '<a class="btn ghost" href="' + esc(app.privacyUrl) + '">Privacy</a>'
+          );
+        }
+
+        return (
+          '<article class="card" data-app-id="' + esc(app.id) + '">' +
+            '<div class="card-top">' +
+              '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(app.name) + ' icon" loading="lazy" />' +
+              "<div>" +
+                '<h3 class="card-title">' + esc(app.name) + "</h3>" +
+                '<p class="card-blurb">' + esc(app.blurb) + "</p>" +
+              "</div>" +
+            "</div>" +
+            '<div class="meta-row">' + chips.join("") + "</div>" +
+            (pkgLabel(app) ? '<div class="pkg">' + esc(pkgLabel(app)) + "</div>" : "") +
+            '<div class="actions">' + actions.join("") + "</div>" +
+          "</article>"
+        );
+      }
+
+      function applyPublisher(catalog) {
+        var pub = catalog.publisher || {};
+        if (pub.supportEmail) {
+          var mail = document.querySelector('#contact a[href^="mailto:"]');
+          if (mail) {
+            mail.href = "mailto:" + pub.supportEmail;
+            mail.textContent = pub.supportEmail;
+          }
+        }
+        if (pub.name) {
+          var dev = document.querySelector("#contact .contact-item:last-child .value");
+          if (dev && !dev.href) dev.textContent = pub.name;
+        }
+      }
+
+      function renderCatalog(catalog) {
+        var apps = (catalog.apps || [])
+          .filter(function (a) { return a && a.enabled !== false; })
+          .slice()
+          .sort(function (a, b) {
+            return (a.sortOrder || 0) - (b.sortOrder || 0);
+          });
+
+        applyPublisher(catalog);
+        gridEl.innerHTML = apps.map(renderApp).join("");
+        gridEl.hidden = false;
+        statusEl.hidden = true;
+        countEl.textContent = apps.length + (apps.length === 1 ? " app" : " apps");
+      }
+
+      fetch(CATALOG_URL, { cache: "no-cache" })
+        .then(function (res) {
+          if (!res.ok) throw new Error("HTTP " + res.status);
+          return res.json();
+        })
+        .then(renderCatalog)
+        .catch(function (err) {
+          console.error("Failed to load more-apps.json", err);
+          statusEl.className = "status error";
+          statusEl.hidden = false;
+          statusEl.innerHTML =
+            "Could not load the app catalog. Open this site via a local server " +
+            "(e.g. <code>python3 -m http.server</code>) or deploy to GitHub Pages. " +
+            "Catalog URL: <a href=\"" + esc(CATALOG_URL) + "\">" + esc(CATALOG_URL) + "</a>.";
+          countEl.textContent = "—";
+        });
+    })();
+  </script>
 </body>
 </html>
