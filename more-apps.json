@@ -17,8 +17,8 @@
       "blurb": "Lightweight SGX companion — watchlist, market movers, announcements, dividends, charts, and price alerts.",
       "category": "Finance",
       "status": {
-        "ios": "Published",
-        "android": "Published"
+        "ios": "InProcess",
+        "android": "InProcess"
       },
       "platforms": ["ios", "android"],
       "tags": [],
