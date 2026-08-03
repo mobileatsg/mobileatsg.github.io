@@ -147,21 +147,24 @@
       font-size: 0.92rem;
     }
 
-    /* Grid */
+    /* Grid — equal-height cards */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1rem;
+      align-items: stretch;
     }
 
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.15rem 1.2rem 1.2rem;
+      padding: 1.15rem 1.2rem 1.15rem;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
+      gap: 0.9rem;
+      height: 100%;
+      min-height: 320px;
       transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
     }
@@ -175,6 +178,14 @@
       display: flex;
       gap: 0.9rem;
       align-items: flex-start;
+      min-height: 5.5rem; /* icon + 3-line blurb region */
+    }
+    .card-top-text {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
     }
     .icon {
       width: 64px;
@@ -186,22 +197,68 @@
       background: #111;
     }
     .card-title {
-      margin: 0 0 0.2rem;
+      margin: 0;
       font-size: 1.1rem;
       font-weight: 700;
       letter-spacing: -0.01em;
+      line-height: 1.3;
+      /* One line title for alignment */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .card-blurb {
       margin: 0;
       color: var(--muted);
-      font-size: 0.94rem;
-      line-height: 1.5;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      /* Always reserve 3 lines so cards align */
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      overflow: hidden;
+      min-height: calc(1.45em * 3);
+    }
+
+    /* Platform status — always 2 rows (iOS / Android) */
+    .platform-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+      margin: 0;
+      padding: 0.65rem 0.75rem;
+      list-style: none;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .platform-row {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr auto;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.86rem;
+      min-height: 1.5rem;
+    }
+    .platform-name {
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .platform-status {
+      justify-self: start;
+    }
+    .platform-na {
+      color: #6b7785;
+      font-size: 0.82rem;
     }
 
     .meta-row {
       display: flex;
       flex-wrap: wrap;
       gap: 0.4rem;
+      min-height: 1.6rem;
+      align-items: center;
     }
     .chip {
       display: inline-flex;
@@ -210,10 +267,11 @@
       background: var(--chip);
       border: 1px solid var(--border);
       color: var(--muted);
-      font-size: 0.78rem;
-      padding: 0.22rem 0.55rem;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.5rem;
       border-radius: 999px;
       white-space: nowrap;
+      line-height: 1.2;
     }
     .chip.accent {
       color: #cfe8fb;
@@ -230,37 +288,57 @@
       border-color: #6b5a2f;
       background: rgba(230, 180, 70, 0.14);
     }
+    .chip.status-na {
+      color: #7a8794;
+      border-color: #2a3648;
+      background: transparent;
+    }
+    .dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot.published { background: #6bcf8e; }
+    .dot.inprocess { background: #e6b446; }
+    .dot.na { background: #4a5563; }
 
     .pkg {
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--muted);
       word-break: break-all;
+      min-height: 1.1rem;
+      line-height: 1.35;
     }
 
+    /* Actions: always 3 equal slots (App Store | Play | Privacy) */
     .actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.45rem;
       margin-top: auto;
-      padding-top: 0.25rem;
+      padding-top: 0.15rem;
     }
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.35rem;
-      padding: 0.48rem 0.8rem;
+      gap: 0.3rem;
+      padding: 0.5rem 0.4rem;
       border-radius: 10px;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       font-weight: 600;
       border: 1px solid var(--border);
       background: transparent;
       color: var(--text);
       text-decoration: none;
       transition: background 0.12s ease, border-color 0.12s ease;
+      text-align: center;
+      min-height: 2.4rem;
+      line-height: 1.2;
     }
-    .btn:hover {
+    .btn:hover:not(.disabled):not([aria-disabled="true"]) {
       text-decoration: none;
       background: rgba(255, 255, 255, 0.04);
       border-color: #3d516b;
@@ -270,11 +348,23 @@
       border-color: #3f6f96;
       color: #d7ecff;
     }
-    .btn.primary:hover {
+    .btn.primary:hover:not(.disabled):not([aria-disabled="true"]) {
       background: rgba(91, 159, 212, 0.28);
     }
     .btn.ghost {
       color: var(--muted);
+    }
+    .btn.disabled,
+    .btn[aria-disabled="true"] {
+      opacity: 0.55;
+      cursor: default;
+      pointer-events: none;
+      color: var(--muted);
+      background: transparent;
+    }
+
+    @media (max-width: 380px) {
+      .actions { grid-template-columns: 1fr; }
     }
 
     .status {
@@ -342,6 +432,8 @@
       .icon { width: 56px; height: 56px; border-radius: 12px; }
       .brand img { width: 44px; height: 44px; border-radius: 12px; }
       .grid { grid-template-columns: 1fr; }
+      .card { min-height: 0; }
+      .card-title { white-space: normal; }
     }
   </style>
 </head>
@@ -525,75 +617,99 @@
         return app.iconPath || app.iconUrl || "";
       }
 
+      function platformRowHtml(label, status, available) {
+        if (!available) {
+          return (
+            '<li class="platform-row">' +
+              '<span class="platform-name">' + esc(label) + "</span>" +
+              '<span class="platform-status"><span class="chip status-na"><span class="dot na" aria-hidden="true"></span>Not available</span></span>' +
+              '<span class="platform-na" aria-hidden="true"></span>' +
+            "</li>"
+          );
+        }
+        var st = status || "Published";
+        var cls = statusChipClass(st);
+        var dot = st === "Published" ? "published" : "inprocess";
+        return (
+          '<li class="platform-row">' +
+            '<span class="platform-name">' + esc(label) + "</span>" +
+            '<span class="platform-status"><span class="' + cls + '"><span class="dot ' + dot + '" aria-hidden="true"></span>' +
+              esc(statusLabel(st)) +
+            "</span></span>" +
+            '<span class="platform-na" aria-hidden="true"></span>' +
+          "</li>"
+        );
+      }
+
+      function storeBtn(label, href, enabled, primary) {
+        var classes = "btn" + (primary ? " primary" : "") + (enabled ? "" : " disabled");
+        if (enabled && href) {
+          return (
+            '<a class="' + classes + '" href="' + esc(href) + '" rel="noopener noreferrer">' +
+              esc(label) +
+            "</a>"
+          );
+        }
+        return (
+          '<span class="' + classes + '" aria-disabled="true" title="Not available yet">' +
+            esc(label) +
+          "</span>"
+        );
+      }
+
       function renderApp(app) {
         var platforms = platformsOf(app);
         var hasIos = platforms.indexOf("ios") !== -1;
         var hasAndroid = platforms.indexOf("android") !== -1;
         var iosStatus = hasIos ? statusForPlatform(app, "ios") : null;
         var androidStatus = hasAndroid ? statusForPlatform(app, "android") : null;
-        var iosPublished = iosStatus === "Published";
-        var androidPublished = androidStatus === "Published";
+        var iosPublished = hasIos && iosStatus === "Published";
+        var androidPublished = hasAndroid && androidStatus === "Published";
 
+        // Category + tags only (platform status lives in the fixed list below)
         var chips = [];
-        if (hasIos && iosStatus) {
-          chips.push(
-            '<span class="' + statusChipClass(iosStatus) + '">iOS · ' + esc(statusLabel(iosStatus)) + "</span>"
-          );
-        }
-        if (hasAndroid && androidStatus) {
-          chips.push(
-            '<span class="' + statusChipClass(androidStatus) + '">Android · ' + esc(statusLabel(androidStatus)) + "</span>"
-          );
-        }
         if (app.category) {
           chips.push('<span class="chip accent">' + esc(app.category) + "</span>");
         }
         (app.tags || []).forEach(function (t) {
           chips.push('<span class="chip">' + esc(t) + "</span>");
         });
+        if (!chips.length) {
+          chips.push('<span class="chip status-na">—</span>');
+        }
 
-        var actions = [];
         var play = playHref(app);
-        // Store links per platform status
-        if (androidPublished && play) {
-          actions.push(
-            '<a class="btn primary" href="' + esc(play) + '" rel="noopener noreferrer">Google Play</a>'
-          );
-        }
-        if (iosPublished) {
-          actions.push(
-            '<a class="btn" href="' + esc(appStoreHref(app)) + '" rel="noopener noreferrer">App Store</a>'
-          );
-        }
-        if (!iosPublished && !androidPublished) {
-          actions.push('<span class="btn ghost" aria-disabled="true">Coming soon</span>');
-        } else if ((hasIos && !iosPublished) || (hasAndroid && !androidPublished)) {
-          // Partial: one platform still in process
-          actions.push('<span class="btn ghost" aria-disabled="true">Coming soon on other platforms</span>');
-        }
-        if (app.privacyUrl) {
-          actions.push(
-            '<a class="btn ghost" href="' + esc(app.privacyUrl) + '">Privacy</a>'
-          );
-        }
+        // Always same 3 action slots: App Store | Google Play | Privacy
+        var actions =
+          storeBtn("App Store", appStoreHref(app), iosPublished, false) +
+          storeBtn("Google Play", play, !!(androidPublished && play), true) +
+          (app.privacyUrl
+            ? '<a class="btn ghost" href="' + esc(app.privacyUrl) + '">Privacy</a>'
+            : '<span class="btn ghost disabled" aria-disabled="true">Privacy</span>');
 
         var dataStatus = [
-          hasIos && iosStatus ? "ios:" + iosStatus : null,
-          hasAndroid && androidStatus ? "android:" + androidStatus : null
-        ].filter(Boolean).join(";");
+          hasIos && iosStatus ? "ios:" + iosStatus : "ios:na",
+          hasAndroid && androidStatus ? "android:" + androidStatus : "android:na"
+        ].join(";");
+
+        var pkg = pkgLabel(app);
 
         return (
           '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(dataStatus) + '">' +
             '<div class="card-top">' +
               '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(app.name) + ' icon" loading="lazy" />' +
-              "<div>" +
+              '<div class="card-top-text">' +
                 '<h3 class="card-title">' + esc(app.name) + "</h3>" +
-                '<p class="card-blurb">' + esc(app.blurb) + "</p>" +
+                '<p class="card-blurb">' + esc(app.blurb || "") + "</p>" +
               "</div>" +
             "</div>" +
+            '<ul class="platform-list" aria-label="Platform status">' +
+              platformRowHtml("iOS", iosStatus, hasIos) +
+              platformRowHtml("Android", androidStatus, hasAndroid) +
+            "</ul>" +
             '<div class="meta-row">' + chips.join("") + "</div>" +
-            (pkgLabel(app) ? '<div class="pkg">' + esc(pkgLabel(app)) + "</div>" : "") +
-            '<div class="actions">' + actions.join("") + "</div>" +
+            '<div class="pkg" title="' + esc(pkg) + '">' + esc(pkg || "—") + "</div>" +
+            '<div class="actions">' + actions + "</div>" +
           "</article>"
         );
       }
