@@ -689,15 +689,45 @@
         return pack[key] != null ? pack[key] : UI.en[key] || key;
       }
 
+      function localeFromQuery() {
+        try {
+          var q = new URLSearchParams(window.location.search);
+          var raw = (q.get("lang") || q.get("locale") || "").trim().toLowerCase();
+          if (!raw) return null;
+          // Shareable: ?lang=zh | ?lang=zh-Hans | ?lang=zh_cn | ?lang=cn | ?lang=en
+          if (raw === "en" || raw === "eng" || raw === "english") return "en";
+          if (
+            raw === "zh" ||
+            raw === "zh-hans" ||
+            raw === "zh_cn" ||
+            raw === "zh-cn" ||
+            raw === "cn" ||
+            raw === "chinese" ||
+            raw === "中文"
+          ) {
+            return "zh-Hans";
+          }
+          // Ignore unknown / removed Traditional variants → treat as Simplified
+          if (raw.indexOf("zh") === 0) return "zh-Hans";
+        } catch (e) { /* ignore */ }
+        return null;
+      }
+
       function detectLocale() {
+        // 1) URL wins (shareable Chinese link)
+        var fromUrl = localeFromQuery();
+        if (fromUrl) return fromUrl;
+
+        // 2) Last choice on this browser
         try {
           var saved = localStorage.getItem(LOCALE_KEY);
           // Legacy zh-Hant preference maps to Simplified
           if (saved === "zh-Hant") return "zh-Hans";
           if (saved === "en" || saved === "zh-Hans") return saved;
         } catch (e) { /* ignore */ }
+
+        // 3) Browser language — any Chinese → Simplified
         var lang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
-        // Any Chinese browser language → Simplified Chinese only
         if (lang.indexOf("zh") === 0) return "zh-Hans";
         return "en";
       }

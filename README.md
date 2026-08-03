@@ -76,7 +76,20 @@ if locale == zh-Hans and app.locales["zh-Hans"][field] present → use it
 else → top-level English field
 ```
 
-Website: browser language + **EN / 中文** switcher (saved in `localStorage`). Any `zh*` browser locale uses 简体.  
+Website language (priority):
+
+1. **URL** — `?lang=zh` or `?lang=zh-Hans` (English: `?lang=en`)  
+2. **Last choice** — `localStorage` (EN / 中文 switcher)  
+3. **Browser** — any `zh*` → 简体  
+
+Examples:
+
+```text
+https://mobileatsg.github.io/?lang=zh
+https://mobileatsg.github.io/?lang=zh-Hans
+https://mobileatsg.github.io/?lang=en
+```
+
 In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 
 ### `AppEntry`
