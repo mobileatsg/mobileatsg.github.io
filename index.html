@@ -95,12 +95,48 @@
       gap: 0.5rem 1rem;
       flex-wrap: wrap;
       font-size: 0.95rem;
+      align-items: center;
     }
     .nav a {
       color: var(--muted);
       padding: 0.35rem 0.15rem;
     }
     .nav a:hover { color: var(--link); }
+
+    .lang-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin-left: 0.35rem;
+      padding: 0.15rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+    }
+    .lang-switch button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.28rem 0.55rem;
+      border-radius: 999px;
+      cursor: pointer;
+      line-height: 1.2;
+    }
+    .lang-switch button:hover {
+      color: var(--text);
+    }
+    .lang-switch button[aria-pressed="true"] {
+      background: rgba(91, 159, 212, 0.22);
+      color: #d7ecff;
+    }
+    .lang-switch button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 1px;
+    }
 
     /* Hero */
     .hero {
@@ -481,20 +517,25 @@
         <img src="assets/brand/mobileatsg-logo.png" width="52" height="52" alt="Mobile@SG logo" />
         <span class="brand-text">
           <strong>Mobile@SG</strong>
-          <span>iOS &amp; Android apps</span>
+          <span data-i18n="brandTagline">iOS &amp; Android apps</span>
         </span>
       </a>
       <nav class="nav" aria-label="Site">
-        <a href="#apps">Apps</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#apps" data-i18n="navApps">Apps</a>
+        <a href="#about" data-i18n="navAbout">About</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+        <div class="lang-switch" role="group" aria-label="Language">
+          <button type="button" data-locale="en" aria-pressed="true">EN</button>
+          <button type="button" data-locale="zh-Hans" aria-pressed="false">简</button>
+          <button type="button" data-locale="zh-Hant" aria-pressed="false">繁</button>
+        </div>
       </nav>
     </header>
 
     <section class="hero" aria-labelledby="hero-title">
-      <p class="eyebrow">Developer · Publisher</p>
-      <h1 id="hero-title">Apps by Mobile@SG</h1>
-      <p>
+      <p class="eyebrow" data-i18n="heroEyebrow">Developer · Publisher</p>
+      <h1 id="hero-title" data-i18n="heroTitle">Apps by Mobile@SG</h1>
+      <p data-i18n="heroBody">
         We build simple, useful apps for iPhone and Android — puzzles, learning, utilities, and market tools.
         Free apps may show ads; support is always welcome via email.
       </p>
@@ -502,21 +543,21 @@
 
     <section id="apps" aria-labelledby="apps-title">
       <div class="toolbar">
-        <h2 id="apps-title">Our apps</h2>
+        <h2 id="apps-title" data-i18n="appsTitle">Our apps</h2>
         <span class="count" id="app-count">…</span>
       </div>
-      <div id="apps-status" class="status" role="status">Loading apps…</div>
+      <div id="apps-status" class="status" role="status" data-i18n="loadingApps">Loading apps…</div>
       <div class="grid" id="apps-grid" hidden></div>
     </section>
 
     <section class="section" id="about" aria-labelledby="about-title">
-      <h2 id="about-title">About Mobile@SG</h2>
-      <p>
+      <h2 id="about-title" data-i18n="aboutTitle">About Mobile@SG</h2>
+      <p data-i18n-html="aboutP1">
         <strong style="color: var(--text);">Mobile@SG</strong> is an independent app publisher.
         We focus on practical, polished experiences that work offline where it matters, respect privacy by default,
         and stay honest about ads and monetization.
       </p>
-      <p>
+      <p data-i18n-html="aboutP2">
         Apps are available on the <strong style="color: var(--text);">Apple App Store</strong> and
         <strong style="color: var(--text);">Google Play</strong> where listed.
         Privacy policies for each app live on this site under the app’s package slug.
@@ -524,22 +565,22 @@
     </section>
 
     <section class="section" id="contact" aria-labelledby="contact-title">
-      <h2 id="contact-title">Contact &amp; support</h2>
-      <p>
+      <h2 id="contact-title" data-i18n="contactTitle">Contact &amp; support</h2>
+      <p data-i18n="contactBody">
         For bug reports, feedback, or privacy requests, email us. Include the app name and version if you can —
         it helps us respond faster.
       </p>
       <div class="contact-card">
         <div class="contact-item">
-          <span class="label">Support email</span>
+          <span class="label" data-i18n="labelEmail">Support email</span>
           <a class="value" href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a>
         </div>
         <div class="contact-item">
-          <span class="label">Website</span>
+          <span class="label" data-i18n="labelWebsite">Website</span>
           <a class="value" href="https://mobileatsg.github.io/">mobileatsg.github.io</a>
         </div>
         <div class="contact-item">
-          <span class="label">Developer</span>
+          <span class="label" data-i18n="labelDeveloper">Developer</span>
           <span class="value">Mobile@SG</span>
         </div>
       </div>
@@ -547,19 +588,208 @@
 
     <footer>
       <span>© <span id="year">2026</span> Mobile@SG</span>
-      <span>App Store &amp; Google Play are trademarks of their respective owners.</span>
+      <span data-i18n="footerLegal">App Store &amp; Google Play are trademarks of their respective owners.</span>
     </footer>
   </div>
 
   <script>
     (function () {
       var CATALOG_URL = "more-apps.json";
+      var LOCALE_KEY = "mobilesg.locale";
       var yearEl = document.getElementById("year");
       var countEl = document.getElementById("app-count");
       var statusEl = document.getElementById("apps-status");
       var gridEl = document.getElementById("apps-grid");
+      var catalogCache = null;
+      var currentLocale = "en";
 
       yearEl.textContent = String(new Date().getFullYear());
+
+      var UI = {
+        en: {
+          brandTagline: "iOS & Android apps",
+          navApps: "Apps",
+          navAbout: "About",
+          navContact: "Contact",
+          heroEyebrow: "Developer · Publisher",
+          heroTitle: "Apps by Mobile@SG",
+          heroBody:
+            "We build simple, useful apps for iPhone and Android — puzzles, learning, utilities, and market tools. Free apps may show ads; support is always welcome via email.",
+          appsTitle: "Our apps",
+          loadingApps: "Loading apps…",
+          aboutTitle: "About Mobile@SG",
+          aboutP1:
+            '<strong style="color: var(--text);">Mobile@SG</strong> is an independent app publisher. We focus on practical, polished experiences that work offline where it matters, respect privacy by default, and stay honest about ads and monetization.',
+          aboutP2:
+            'Apps are available on the <strong style="color: var(--text);">Apple App Store</strong> and <strong style="color: var(--text);">Google Play</strong> where listed. Privacy policies for each app live on this site under the app’s package slug.',
+          contactTitle: "Contact & support",
+          contactBody:
+            "For bug reports, feedback, or privacy requests, email us. Include the app name and version if you can — it helps us respond faster.",
+          labelEmail: "Support email",
+          labelWebsite: "Website",
+          labelDeveloper: "Developer",
+          footerLegal: "App Store & Google Play are trademarks of their respective owners.",
+          appCountOne: "1 app",
+          appCountMany: "{n} apps",
+          statusPublished: "Published",
+          statusInProcess: "In process",
+          notAvailable: "Not available",
+          more: "More",
+          less: "Less",
+          appStore: "App Store",
+          googlePlay: "Google Play",
+          privacy: "Privacy",
+          platformStatus: "Platform status",
+          loadErrorPrefix: "Could not load the app catalog. Open this site via a local server (e.g. python3 -m http.server) or deploy to GitHub Pages. Catalog URL:",
+          title: "Mobile@SG — Apps",
+          metaDescription:
+            "Mobile@SG publishes free and useful iOS & Android apps. Browse our apps on the App Store and Google Play."
+        },
+        "zh-Hans": {
+          brandTagline: "iOS 与 Android 应用",
+          navApps: "应用",
+          navAbout: "关于",
+          navContact: "联系",
+          heroEyebrow: "开发者 · 发行商",
+          heroTitle: "Mobile@SG 应用",
+          heroBody:
+            "我们为 iPhone 与 Android 打造简单实用的应用 — 益智、学习、工具与行情。免费应用可能包含广告；欢迎通过邮件联系支持。",
+          appsTitle: "我们的应用",
+          loadingApps: "正在加载应用…",
+          aboutTitle: "关于 Mobile@SG",
+          aboutP1:
+            '<strong style="color: var(--text);">Mobile@SG</strong> 是独立应用发行商。我们注重实用、打磨与可离线体验，默认尊重隐私，并对广告与商业模式保持坦诚。',
+          aboutP2:
+            '应用在已上架地区可于 <strong style="color: var(--text);">Apple App Store</strong> 与 <strong style="color: var(--text);">Google Play</strong> 获取。各应用隐私政策发布于本站对应路径。',
+          contactTitle: "联系与支持",
+          contactBody:
+            "如需反馈、报告问题或隐私相关请求，请发邮件给我们。尽量附上应用名称与版本，便于更快处理。",
+          labelEmail: "支持邮箱",
+          labelWebsite: "网站",
+          labelDeveloper: "开发者",
+          footerLegal: "App Store 与 Google Play 为其各自所有者的商标。",
+          appCountOne: "1 个应用",
+          appCountMany: "{n} 个应用",
+          statusPublished: "已上架",
+          statusInProcess: "开发中",
+          notAvailable: "暂无",
+          more: "更多",
+          less: "收起",
+          appStore: "App Store",
+          googlePlay: "Google Play",
+          privacy: "隐私",
+          platformStatus: "平台状态",
+          loadErrorPrefix: "无法加载应用目录。请通过本地服务器打开本站（例如 python3 -m http.server）或部署到 GitHub Pages。目录地址：",
+          title: "Mobile@SG — 应用",
+          metaDescription: "Mobile@SG 出品的 iOS 与 Android 应用。浏览 App Store 与 Google Play 上的作品。"
+        },
+        "zh-Hant": {
+          brandTagline: "iOS 與 Android 應用",
+          navApps: "應用",
+          navAbout: "關於",
+          navContact: "聯絡",
+          heroEyebrow: "開發者 · 發行商",
+          heroTitle: "Mobile@SG 應用",
+          heroBody:
+            "我們為 iPhone 與 Android 打造簡單實用的應用 — 益智、學習、工具與行情。免費應用可能包含廣告；歡迎透過電子郵件聯絡支援。",
+          appsTitle: "我們的應用",
+          loadingApps: "正在載入應用…",
+          aboutTitle: "關於 Mobile@SG",
+          aboutP1:
+            '<strong style="color: var(--text);">Mobile@SG</strong> 是獨立應用發行商。我們注重實用、打磨與可離線體驗，預設尊重隱私，並對廣告與商業模式保持坦誠。',
+          aboutP2:
+            '應用在已上架地區可於 <strong style="color: var(--text);">Apple App Store</strong> 與 <strong style="color: var(--text);">Google Play</strong> 取得。各應用隱私政策發布於本站對應路徑。',
+          contactTitle: "聯絡與支援",
+          contactBody:
+            "如需回饋、回報問題或隱私相關請求，請寄信給我們。請盡量附上應用名稱與版本，以便更快處理。",
+          labelEmail: "支援信箱",
+          labelWebsite: "網站",
+          labelDeveloper: "開發者",
+          footerLegal: "App Store 與 Google Play 為其各自所有者的商標。",
+          appCountOne: "1 個應用",
+          appCountMany: "{n} 個應用",
+          statusPublished: "已上架",
+          statusInProcess: "開發中",
+          notAvailable: "暫無",
+          more: "更多",
+          less: "收起",
+          appStore: "App Store",
+          googlePlay: "Google Play",
+          privacy: "隱私",
+          platformStatus: "平台狀態",
+          loadErrorPrefix: "無法載入應用目錄。請透過本機伺服器開啟本站（例如 python3 -m http.server）或部署到 GitHub Pages。目錄網址：",
+          title: "Mobile@SG — 應用",
+          metaDescription: "Mobile@SG 出品的 iOS 與 Android 應用。瀏覽 App Store 與 Google Play 上的作品。"
+        }
+      };
+
+      function t(key) {
+        var pack = UI[currentLocale] || UI.en;
+        return pack[key] != null ? pack[key] : UI.en[key] || key;
+      }
+
+      function detectLocale() {
+        try {
+          var saved = localStorage.getItem(LOCALE_KEY);
+          if (saved === "en" || saved === "zh-Hans" || saved === "zh-Hant") return saved;
+        } catch (e) { /* ignore */ }
+        var lang = (navigator.language || navigator.userLanguage || "en").toLowerCase();
+        if (lang.indexOf("zh") === 0) {
+          // zh-TW / zh-HK / zh-Hant → Traditional; else Simplified
+          if (
+            lang.indexOf("tw") !== -1 ||
+            lang.indexOf("hk") !== -1 ||
+            lang.indexOf("mo") !== -1 ||
+            lang.indexOf("hant") !== -1
+          ) {
+            return "zh-Hant";
+          }
+          return "zh-Hans";
+        }
+        return "en";
+      }
+
+      function setLocale(locale) {
+        if (locale !== "en" && locale !== "zh-Hans" && locale !== "zh-Hant") locale = "en";
+        currentLocale = locale;
+        try {
+          localStorage.setItem(LOCALE_KEY, locale);
+        } catch (e) { /* ignore */ }
+        document.documentElement.lang =
+          locale === "zh-Hans" ? "zh-Hans" : locale === "zh-Hant" ? "zh-Hant" : "en";
+        applyUiStrings();
+        document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+          btn.setAttribute("aria-pressed", btn.getAttribute("data-locale") === locale ? "true" : "false");
+        });
+        if (catalogCache) renderCatalog(catalogCache);
+      }
+
+      function applyUiStrings() {
+        document.querySelectorAll("[data-i18n]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n");
+          if (key) el.textContent = t(key);
+        });
+        document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+          var key = el.getAttribute("data-i18n-html");
+          if (key) el.innerHTML = t(key);
+        });
+        document.title = t("title");
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute("content", t("metaDescription"));
+      }
+
+      /**
+       * Resolve localized app field.
+       * EN: top-level name/blurb/category/tags
+       * Chinese: app.locales["zh-Hans"|"zh-Hant"].field with EN fallback
+       */
+      function appField(app, field) {
+        if (currentLocale !== "en" && app.locales && app.locales[currentLocale]) {
+          var v = app.locales[currentLocale][field];
+          if (v != null && v !== "") return v;
+        }
+        return app[field];
+      }
 
       function esc(s) {
         return String(s == null ? "" : s)
@@ -569,18 +799,6 @@
           .replace(/"/g, "&quot;");
       }
 
-      function platformLabel(p) {
-        if (p === "ios") return "iOS";
-        if (p === "android") return "Android";
-        return p;
-      }
-
-      /**
-       * Per-platform status. Preferred shape:
-       *   "status": { "ios": "Published", "android": "InProcess" }
-       * Legacy string still accepted: "status": "Published" (applies to all platforms).
-       * @returns {"Published"|"InProcess"}
-       */
       function normalizeStatusValue(s) {
         if (s === "Published" || s === "InProcess") return s;
         return "Published";
@@ -592,7 +810,6 @@
         if (typeof s === "string") return normalizeStatusValue(s);
         if (typeof s === "object") {
           if (s[platform] != null) return normalizeStatusValue(s[platform]);
-          // If only one platform key exists, do not invent the other
           return null;
         }
         return "Published";
@@ -601,7 +818,6 @@
       function platformsOf(app) {
         var list = app.platforms;
         if (list && list.length) return list.slice();
-        // Infer from status object keys when platforms omitted
         var s = app.status;
         if (s && typeof s === "object" && !Array.isArray(s)) {
           return Object.keys(s).filter(function (k) {
@@ -612,15 +828,14 @@
       }
 
       function statusLabel(status) {
-        if (status === "InProcess") return "In process";
-        return "Published";
+        if (status === "InProcess") return t("statusInProcess");
+        return t("statusPublished");
       }
 
       function statusChipClass(status) {
         return status === "InProcess" ? "chip status-inprocess" : "chip status-published";
       }
 
-      /** True if any listed platform is Published (for list inclusion on website). */
       function anyStatusAllowed(app, allow) {
         var plats = platformsOf(app);
         if (!plats.length) return allow.indexOf("Published") !== -1;
@@ -635,7 +850,8 @@
         if (app.iosAppStoreId) {
           return "https://apps.apple.com/app/id" + encodeURIComponent(String(app.iosAppStoreId));
         }
-        return "https://apps.apple.com/search?term=" + encodeURIComponent(app.name + " Mobile@SG");
+        var name = appField(app, "name") || app.name;
+        return "https://apps.apple.com/search?term=" + encodeURIComponent(name + " Mobile@SG");
       }
 
       function playHref(app) {
@@ -659,7 +875,9 @@
           return (
             '<li class="platform-row">' +
               '<span class="platform-name">' + esc(label) + "</span>" +
-              '<span class="platform-status"><span class="chip status-na"><span class="dot na" aria-hidden="true"></span>Not available</span></span>' +
+              '<span class="platform-status"><span class="chip status-na"><span class="dot na" aria-hidden="true"></span>' +
+                esc(t("notAvailable")) +
+              "</span></span>" +
               '<span class="platform-na" aria-hidden="true"></span>' +
             "</li>"
           );
@@ -688,7 +906,7 @@
           );
         }
         return (
-          '<span class="' + classes + '" aria-disabled="true" title="Not available yet">' +
+          '<span class="' + classes + '" aria-disabled="true" title="' + esc(t("notAvailable")) + '">' +
             esc(label) +
           "</span>"
         );
@@ -703,26 +921,30 @@
         var iosPublished = hasIos && iosStatus === "Published";
         var androidPublished = hasAndroid && androidStatus === "Published";
 
-        // Category + tags only (platform status lives in the fixed list below)
+        var name = appField(app, "name") || app.name || "";
+        var blurb = appField(app, "blurb") || "";
+        var category = appField(app, "category");
+        var tags = appField(app, "tags");
+        if (!Array.isArray(tags)) tags = app.tags || [];
+
         var chips = [];
-        if (app.category) {
-          chips.push('<span class="chip accent">' + esc(app.category) + "</span>");
+        if (category) {
+          chips.push('<span class="chip accent">' + esc(category) + "</span>");
         }
-        (app.tags || []).forEach(function (t) {
-          chips.push('<span class="chip">' + esc(t) + "</span>");
+        tags.forEach(function (tag) {
+          chips.push('<span class="chip">' + esc(tag) + "</span>");
         });
         if (!chips.length) {
           chips.push('<span class="chip status-na">—</span>');
         }
 
         var play = playHref(app);
-        // Always same 3 action slots: App Store | Google Play | Privacy
         var actions =
-          storeBtn("App Store", appStoreHref(app), iosPublished, false) +
-          storeBtn("Google Play", play, !!(androidPublished && play), true) +
+          storeBtn(t("appStore"), appStoreHref(app), iosPublished, false) +
+          storeBtn(t("googlePlay"), play, !!(androidPublished && play), true) +
           (app.privacyUrl
-            ? '<a class="btn ghost" href="' + esc(app.privacyUrl) + '">Privacy</a>'
-            : '<span class="btn ghost disabled" aria-disabled="true">Privacy</span>');
+            ? '<a class="btn ghost" href="' + esc(app.privacyUrl) + '">' + esc(t("privacy")) + "</a>"
+            : '<span class="btn ghost disabled" aria-disabled="true">' + esc(t("privacy")) + "</span>");
 
         var dataStatus = [
           hasIos && iosStatus ? "ios:" + iosStatus : "ios:na",
@@ -734,20 +956,20 @@
         return (
           '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(dataStatus) + '">' +
             '<div class="card-header">' +
-              '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(app.name) + ' icon" loading="lazy" />' +
-              '<h3 class="card-title">' + esc(app.name) + "</h3>" +
+              '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(name) + ' icon" loading="lazy" />' +
+              '<h3 class="card-title">' + esc(name) + "</h3>" +
             "</div>" +
             '<div class="card-blurb-wrap">' +
-              '<p class="card-blurb" id="blurb-' + esc(app.id) + '">' + esc(app.blurb || "") + "</p>" +
+              '<p class="card-blurb" id="blurb-' + esc(app.id) + '">' + esc(blurb) + "</p>" +
               '<button type="button" class="blurb-toggle" hidden' +
                 ' aria-expanded="false"' +
                 ' aria-controls="blurb-' + esc(app.id) + '"' +
-                ' data-more="More"' +
-                ' data-less="Less">' +
-                "More" +
+                ' data-more="' + esc(t("more")) + '"' +
+                ' data-less="' + esc(t("less")) + '">' +
+                esc(t("more")) +
               "</button>" +
             "</div>" +
-            '<ul class="platform-list" aria-label="Platform status">' +
+            '<ul class="platform-list" aria-label="' + esc(t("platformStatus")) + '">' +
               platformRowHtml("iOS", iosStatus, hasIos) +
               platformRowHtml("Android", androidStatus, hasAndroid) +
             "</ul>" +
@@ -774,8 +996,6 @@
       }
 
       function renderCatalog(catalog) {
-        // Website: all enabled apps if any platform status is allowed (Published + InProcess).
-        // In-app More apps: only platforms with status Published (see skill /feature-mobilesg-info).
         var allow = (catalog.policy && catalog.policy.websiteShowStatuses) || [
           "Published",
           "InProcess"
@@ -794,12 +1014,14 @@
         gridEl.innerHTML = apps.map(renderApp).join("");
         gridEl.hidden = false;
         statusEl.hidden = true;
-        countEl.textContent = apps.length + (apps.length === 1 ? " app" : " apps");
+        countEl.textContent =
+          apps.length === 1
+            ? t("appCountOne")
+            : t("appCountMany").replace("{n}", String(apps.length));
         setupBlurbToggles(gridEl);
       }
 
       function isBlurbClamped(el) {
-        // scrollHeight > clientHeight when line-clamp truncates
         return el.scrollHeight > el.clientHeight + 1;
       }
 
@@ -808,17 +1030,10 @@
           var blurb = card.querySelector(".card-blurb");
           var btn = card.querySelector(".blurb-toggle");
           if (!blurb || !btn) return;
-
-          // Show More only when text is actually truncated
-          if (isBlurbClamped(blurb)) {
-            btn.hidden = false;
-          } else {
-            btn.hidden = true;
-          }
+          btn.hidden = !isBlurbClamped(blurb);
         });
       }
 
-      // Event delegation for More / Less
       gridEl.addEventListener("click", function (e) {
         var btn = e.target.closest(".blurb-toggle");
         if (!btn || !gridEl.contains(btn)) return;
@@ -827,18 +1042,10 @@
         var expanded = card.classList.toggle("is-expanded");
         btn.setAttribute("aria-expanded", expanded ? "true" : "false");
         btn.textContent = expanded
-          ? btn.getAttribute("data-less") || "Less"
-          : btn.getAttribute("data-more") || "More";
-        // If collapsed again, re-check clamp (font/layout stable)
-        if (!expanded) {
-          var blurb = card.querySelector(".card-blurb");
-          if (blurb && !isBlurbClamped(blurb)) {
-            // rare: short after collapse — keep button if it was needed before
-          }
-        }
+          ? btn.getAttribute("data-less") || t("less")
+          : btn.getAttribute("data-more") || t("more");
       });
 
-      // Re-evaluate clamp after fonts/layout (resize)
       var resizeTimer;
       window.addEventListener("resize", function () {
         clearTimeout(resizeTimer);
@@ -847,20 +1054,34 @@
         }, 150);
       });
 
+      document.querySelectorAll(".lang-switch button").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          setLocale(btn.getAttribute("data-locale"));
+        });
+      });
+
+      setLocale(detectLocale());
+
       fetch(CATALOG_URL, { cache: "no-cache" })
         .then(function (res) {
           if (!res.ok) throw new Error("HTTP " + res.status);
           return res.json();
         })
-        .then(renderCatalog)
+        .then(function (catalog) {
+          catalogCache = catalog;
+          renderCatalog(catalog);
+        })
         .catch(function (err) {
           console.error("Failed to load more-apps.json", err);
           statusEl.className = "status error";
           statusEl.hidden = false;
           statusEl.innerHTML =
-            "Could not load the app catalog. Open this site via a local server " +
-            "(e.g. <code>python3 -m http.server</code>) or deploy to GitHub Pages. " +
-            "Catalog URL: <a href=\"" + esc(CATALOG_URL) + "\">" + esc(CATALOG_URL) + "</a>.";
+            esc(t("loadErrorPrefix")) +
+            ' <a href="' +
+            esc(CATALOG_URL) +
+            '">' +
+            esc(CATALOG_URL) +
+            "</a>.";
           countEl.textContent = "—";
         });
     })();

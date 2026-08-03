@@ -32,32 +32,70 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 {
   "schemaVersion": 1,
   "updatedAt": "YYYY-MM-DD",
-  "publisher": {
-    "name": "Mobile@SG",
-    "website": "https://mobileatsg.github.io/",
-    "supportEmail": "mobileatsg@gmail.com"
-  },
-  "policy": {
-    "websiteShowStatuses": ["Published", "InProcess"],
-    "inAppMoreAppsShowStatuses": ["Published"]
-  },
+  "defaultLocale": "en",
+  "supportedLocales": ["en", "zh-Hans", "zh-Hant"],
+  "publisher": { ... },
+  "policy": { ... },
   "apps": [ /* AppEntry */ ]
 }
 ```
 
 `policy` documents the filter rules; clients should still implement them even if they ignore the object.
 
+### Locales (English + Chinese)
+
+| Locale | Meaning |
+|--------|---------|
+| `en` | English — **default** top-level `name` / `blurb` / `category` / `tags` |
+| `zh-Hans` | 简体中文 |
+| `zh-Hant` | 繁體中文 |
+
+```json
+{
+  "name": "Sudoku Mix",
+  "blurb": "Colorful Sudoku…",
+  "category": "Games · Puzzle",
+  "tags": [],
+  "locales": {
+    "zh-Hans": {
+      "name": "数独混合",
+      "blurb": "多彩数独…",
+      "category": "游戏 · 益智",
+      "tags": []
+    },
+    "zh-Hant": {
+      "name": "數獨混合",
+      "blurb": "多彩數獨…",
+      "category": "遊戲 · 益智",
+      "tags": []
+    }
+  }
+}
+```
+
+**Resolve (website + in-app):**
+
+```text
+locale = en | zh-Hans | zh-Hant
+if locale != en and app.locales[locale][field] present → use it
+else → top-level English field
+```
+
+Website: browser language + **EN / 简 / 繁** switcher (saved in `localStorage`).  
+In-app: use the app’s UI language (same keys).
+
 ### `AppEntry`
 
 | Field | Type | Notes |
 |-------|------|--------|
 | `id` | string | Stable slug (`stocksg`, `sudoku`, …) |
-| `name` | string | Display name |
-| `blurb` | string | One short description |
-| `category` | string | Chip label |
+| `name` | string | Display name (**English** default) |
+| `blurb` | string | One short description (**English**) |
+| `category` | string | Chip label (**English**) |
+| `locales` | object | Optional `zh-Hans` / `zh-Hant` overrides for `name`, `blurb`, `category`, `tags` |
 | `status` | object or string | **Per platform** (preferred) or legacy single string (see below) |
 | `platforms` | `ios` \| `android`[] | Platforms this app ships on |
-| `tags` | string[] | Extra chips (e.g. `No ads`) |
+| `tags` | string[] | Extra chips (e.g. `No ads`) — English default |
 | `bundleId` | string \| null | iOS production bundle |
 | `androidPackage` | string \| null | Play `applicationId` |
 | `iosAppStoreId` | string \| null | Numeric App Store id when live |

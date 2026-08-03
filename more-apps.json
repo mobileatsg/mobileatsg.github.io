@@ -1,6 +1,8 @@
 {
   "schemaVersion": 1,
   "updatedAt": "2026-08-03",
+  "defaultLocale": "en",
+  "supportedLocales": ["en", "zh-Hans", "zh-Hant"],
   "publisher": {
     "name": "Mobile@SG",
     "website": "https://mobileatsg.github.io/",
@@ -23,6 +25,20 @@
       },
       "platforms": ["ios", "android"],
       "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "Stock@SG",
+          "blurb": "轻量级新交所（SGX）股票助手 — 自选股、市场动向、公告、股息、图表与价格提醒。",
+          "category": "金融",
+          "tags": []
+        },
+        "zh-Hant": {
+          "name": "Stock@SG",
+          "blurb": "輕量級新交所（SGX）股票助手 — 自選股、市場動向、公告、股息、圖表與價格提醒。",
+          "category": "金融",
+          "tags": []
+        }
+      },
       "bundleId": "com.mobilesg.stocksg",
       "androidPackage": "com.mobilesg.stocksg",
       "iosAppStoreId": "1467395641",
@@ -46,6 +62,20 @@
       },
       "platforms": ["ios", "android"],
       "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "数独混合",
+          "blurb": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。",
+          "category": "游戏 · 益智",
+          "tags": []
+        },
+        "zh-Hant": {
+          "name": "數獨混合",
+          "blurb": "多彩數獨：數字、ABC、符號與混合模式。4×4 → 9×9 → 16×16，每日挑戰、提示與成就統計。",
+          "category": "遊戲 · 益智",
+          "tags": []
+        }
+      },
       "bundleId": "com.mobilesg.sudoku",
       "androidPackage": "com.mobilesg.sudoku",
       "iosAppStoreId": "6795599852",
@@ -69,6 +99,20 @@
       },
       "platforms": ["ios", "android"],
       "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "像素填色",
+          "blurb": "轻松数字填色，适合儿童与家庭 — 按编号填色、解锁画作，创作缤纷场景。",
+          "category": "娱乐",
+          "tags": []
+        },
+        "zh-Hant": {
+          "name": "像素填色",
+          "blurb": "輕鬆數字填色，適合兒童與家庭 — 按編號填色、解鎖畫作，創作繽紛場景。",
+          "category": "娛樂",
+          "tags": []
+        }
+      },
       "bundleId": "com.mobilesg.pixelcolor",
       "androidPackage": "com.mobilesg.pixelcolor",
       "iosAppStoreId": "6795452132",
@@ -91,6 +135,20 @@
       },
       "platforms": ["ios"],
       "tags": ["No ads"],
+      "locales": {
+        "zh-Hans": {
+          "name": "智能闹钟（无广告）",
+          "blurb": "本地优先的闹钟，依托系统可靠响铃；可选预响 Live Activity、贪睡、跳过一次与日期暂停 — 无广告。",
+          "category": "工具",
+          "tags": ["无广告"]
+        },
+        "zh-Hant": {
+          "name": "智慧鬧鐘（無廣告）",
+          "blurb": "本地優先的鬧鐘，依托系統可靠響鈴；可選預響 Live Activity、貪睡、跳過一次與日期暫停 — 無廣告。",
+          "category": "工具",
+          "tags": ["無廣告"]
+        }
+      },
       "bundleId": "com.mobilesg.smartalarm",
       "androidPackage": null,
       "iosAppStoreId": "6796323409",
@@ -113,6 +171,20 @@
       },
       "platforms": ["ios"],
       "tags": ["Kids · Family"],
+      "locales": {
+        "zh-Hans": {
+          "name": "数学小伙伴",
+          "blurb": "面向 5–9 岁（新加坡 K1–P3）的每日趣味数学练习。课程、教学视频、小游戏，支持英文与中文。",
+          "category": "教育",
+          "tags": ["儿童 · 家庭"]
+        },
+        "zh-Hant": {
+          "name": "數學小伙伴",
+          "blurb": "面向 5–9 歲（新加坡 K1–P3）的每日趣味數學練習。課程、教學影片、小遊戲，支援英文與中文。",
+          "category": "教育",
+          "tags": ["兒童 · 家庭"]
+        }
+      },
       "bundleId": "com.mobilesg.mathbuddy",
       "androidPackage": null,
       "iosAppStoreId": null,
