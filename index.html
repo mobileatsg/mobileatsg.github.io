@@ -185,10 +185,10 @@
       font-size: 0.92rem;
     }
 
-    /* Grid — full-width cards so descriptions use the whole content panel */
+    /* Grid — multi-column app cards */
     .grid {
       display: grid;
-      grid-template-columns: 1fr; /* one column: blurb spans full wrap width */
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
       gap: 1rem;
       align-items: stretch;
       width: 100%;
@@ -198,13 +198,12 @@
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.15rem 1.25rem 1.2rem;
+      padding: 1.15rem 1.2rem 1.15rem;
       display: flex;
       flex-direction: column;
       gap: 0.9rem;
-      width: 100%;
-      max-width: 100%;
-      min-height: 0;
+      height: 100%;
+      min-height: 320px;
       transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
       box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
     }
@@ -385,24 +384,14 @@
     .dot.inprocess { background: #e6b446; }
     .dot.na { background: #4a5563; }
 
-    .pkg {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-      font-size: 0.75rem;
-      color: var(--muted);
-      word-break: break-all;
-      min-height: 1.1rem;
-      line-height: 1.35;
-    }
-
-    /* Actions: three slots; roomy on full-width cards */
+    /* Actions: always 3 equal slots (App Store | Play | Privacy) */
     .actions {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.55rem;
-      margin-top: 0.15rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.45rem;
+      margin-top: auto;
       padding-top: 0.15rem;
       width: 100%;
-      max-width: 28rem; /* buttons stay readable; card body stays full width */
     }
     .btn {
       display: inline-flex;
@@ -945,8 +934,6 @@
           hasAndroid && androidStatus ? "android:" + androidStatus : "android:na"
         ].join(";");
 
-        var pkg = pkgLabel(app);
-
         return (
           '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(dataStatus) + '">' +
             '<div class="card-header">' +
@@ -968,7 +955,7 @@
               platformRowHtml("Android", androidStatus, hasAndroid) +
             "</ul>" +
             '<div class="meta-row">' + chips.join("") + "</div>" +
-            '<div class="pkg" title="' + esc(pkg) + '">' + esc(pkg || "—") + "</div>" +
+            /* package / bundle id intentionally not shown on the card */
             '<div class="actions">' + actions + "</div>" +
           "</article>"
         );
