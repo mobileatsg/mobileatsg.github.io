@@ -831,7 +831,7 @@
       function appStoreHref(app) {
         if (app.appStoreUrl) return app.appStoreUrl;
         if (app.iosAppStoreId) {
-          return "https://apps.apple.com/app/id" + encodeURIComponent(String(app.iosAppStoreId));
+          return "https://apps.apple.com/sg/app/id" + encodeURIComponent(String(app.iosAppStoreId));
         }
         var name = appField(app, "name") || app.name;
         return "https://apps.apple.com/search?term=" + encodeURIComponent(name + " Mobile@SG");
