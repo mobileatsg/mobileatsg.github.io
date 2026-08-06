@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-06",
+  "updatedAt": "2026-08-07",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -67,7 +67,7 @@
       "blurb": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.",
       "category": "Games · Puzzle",
       "status": {
-        "ios": "InProcess",
+        "ios": "Published",
         "android": "Published"
       },
       "platforms": [
@@ -88,7 +88,7 @@
       "iosAppStoreId": "6795599852",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.sudoku",
       "appStoreUrl": "https://apps.apple.com/sg/app/id6795599852",
-      "privacyUrl": "https://mobileatsg.github.io/sudokumix/",
+      "privacyUrl": "https://mobileatsg.github.io/sudoku/",
       "iconUrl": "https://mobileatsg.github.io/assets/apps/sudoku.png",
       "iconPath": "assets/apps/sudoku.png",
       "sortOrder": 20,
