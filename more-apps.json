@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-03",
+  "updatedAt": "2026-08-06",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -19,7 +19,9 @@
     "inAppMoreAppsShowStatuses": [
       "Published"
     ],
-    "inAppFilterByDevicePlatform": true
+    "inAppFilterByDevicePlatform": true,
+    "inAppMoreAppsExclusions": true,
+    "exclusionNotes": "hideInAppIds on a peer hides it when More apps runs inside those host app ids. moreAppsExcludeIds on the host also hides those peer ids. Website ignores both."
   },
   "apps": [
     {
@@ -54,7 +56,10 @@
       "iconPath": "assets/apps/stocksg.png",
       "sortOrder": 10,
       "enabled": true,
-      "featured": false
+      "featured": false,
+      "hideInAppIds": [
+        "mathbuddy"
+      ]
     },
     {
       "id": "sudoku",
@@ -194,7 +199,10 @@
       "iconPath": "assets/apps/mathbuddy.png",
       "sortOrder": 50,
       "enabled": true,
-      "featured": false
+      "featured": false,
+      "moreAppsExcludeIds": [
+        "stocksg"
+      ]
     }
   ]
 }

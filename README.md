@@ -148,14 +148,25 @@ Exact strings (case-sensitive). Omit a platform key if that platform is not in `
 
 **Required:** filter by **device platform**. Do not show an app because the *other* store is Published. Missing status for this platform ⇒ exclude.
 
+### Exclusion lists (in-app More apps only)
+
+| Field | On | Meaning |
+|-------|-----|---------|
+| `hideInAppIds` | Peer (e.g. Stock@SG) | Hide this peer inside these host app `id`s |
+| `moreAppsExcludeIds` | Host (e.g. Math Buddy) | Host never lists these peer `id`s |
+
+Example: Stock@SG not for kids → `"hideInAppIds": ["mathbuddy"]` and/or Math Buddy `"moreAppsExcludeIds": ["stocksg"]`.  
+**Website ignores exclusions.**
+
 ### Client rules
 
 1. Ignore entries with `enabled: false`.  
 2. Sort by `sortOrder` ascending.  
-3. **Website:** render every remaining app; badges + CTAs per platform status.  
+3. **Website:** render every remaining app; badges + CTAs per platform status (**no** exclusion filter).  
 4. **In-app More apps:**  
    - current platform status must be **`Published`**  
    - exclude current app (`bundleId` / `androidPackage`)  
+   - apply `hideInAppIds` / `moreAppsExcludeIds`  
 5. Prefer `appStoreUrl` → else `iosAppStoreId` → else search / website.  
 6. Prefer `playStoreUrl` → else package details URL.  
 7. Load `iconUrl` over the network (cache on disk in apps).  
