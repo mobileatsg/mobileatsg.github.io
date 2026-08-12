@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-08-13",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -171,10 +171,12 @@
       "blurb": "Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English & 中文.",
       "category": "Education",
       "status": {
-        "ios": "InProcess"
+        "ios": "InProcess",
+        "android": "InProcess"
       },
       "platforms": [
-        "ios"
+        "ios",
+        "android"
       ],
       "tags": [
         "Kids · Family"
@@ -190,9 +192,9 @@
         }
       },
       "bundleId": "com.mobilesg.mathbuddy",
-      "androidPackage": null,
+      "androidPackage": "com.mobilesg.mathbuddy",
       "iosAppStoreId": null,
-      "playStoreUrl": null,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.mathbuddy",
       "appStoreUrl": null,
       "privacyUrl": "https://mobileatsg.github.io/mathbuddy/",
       "iconUrl": "https://mobileatsg.github.io/assets/apps/mathbuddy.png",
@@ -203,6 +205,70 @@
       "moreAppsExcludeIds": [
         "stocksg"
       ]
+    },
+    {
+      "id": "parksg",
+      "name": "Park & Charge SG",
+      "blurb": "Live Singapore carpark lots and EV chargers on a map — availability, plug types, prices, and directions.",
+      "category": "Navigation",
+      "status": {
+        "ios": "InProcess"
+      },
+      "platforms": [
+        "ios"
+      ],
+      "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "泊车充电 SG",
+          "blurb": "新加坡实时停车场车位与电动车充电桩地图 — 空位、接口类型、价格与导航。",
+          "category": "导航",
+          "tags": []
+        }
+      },
+      "bundleId": "com.mobilesg.parksg",
+      "androidPackage": null,
+      "iosAppStoreId": null,
+      "playStoreUrl": null,
+      "appStoreUrl": null,
+      "privacyUrl": "https://mobileatsg.github.io/parksg/",
+      "iconUrl": "https://mobileatsg.github.io/assets/apps/parksg.png",
+      "iconPath": "assets/apps/parksg.png",
+      "sortOrder": 55,
+      "enabled": true,
+      "featured": false
+    },
+    {
+      "id": "totomatch",
+      "name": "TOTO Match",
+      "blurb": "Scan Singapore Pools TOTO tickets, match winning numbers, and see prize groups — multi-ticket photos.",
+      "category": "Utilities",
+      "status": {
+        "ios": "InProcess"
+      },
+      "platforms": [
+        "ios"
+      ],
+      "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "TOTO 对奖",
+          "blurb": "扫描新加坡 Pools TOTO 彩票、核对中奖号码并查看奖组 — 支持多张票照片。",
+          "category": "工具",
+          "tags": []
+        }
+      },
+      "bundleId": "sg.mobilesg.totomatch",
+      "androidPackage": null,
+      "iosAppStoreId": null,
+      "playStoreUrl": null,
+      "appStoreUrl": null,
+      "privacyUrl": "https://mobileatsg.github.io/totomatch/",
+      "iconUrl": "https://mobileatsg.github.io/assets/apps/totomatch.png",
+      "iconPath": "assets/apps/totomatch.png",
+      "sortOrder": 60,
+      "enabled": true,
+      "featured": false
     }
   ]
 }
