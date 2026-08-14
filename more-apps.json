@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-14",
+  "updatedAt": "2026-08-15",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -230,9 +230,9 @@
       },
       "bundleId": "com.mobilesg.parksg",
       "androidPackage": "com.mobilesg.parksg",
-      "iosAppStoreId": null,
+      "iosAppStoreId": "6801415528",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.parksg",
-      "appStoreUrl": null,
+      "appStoreUrl": "https://apps.apple.com/sg/app/id6801415528",
       "privacyUrl": "https://mobileatsg.github.io/parksg/",
       "iconUrl": "https://mobileatsg.github.io/assets/apps/parksg.png",
       "iconPath": "assets/apps/parksg.png",
@@ -246,10 +246,12 @@
       "blurb": "Scan Singapore Pools TOTO tickets from photos (up to 4 per shot), match official draws & prize groups, track My matches.",
       "category": "Utilities",
       "status": {
-        "ios": "InProcess"
+        "ios": "InProcess",
+        "android": "InProcess"
       },
       "platforms": [
-        "ios"
+        "ios",
+        "android"
       ],
       "tags": [],
       "locales": {
@@ -261,10 +263,10 @@
         }
       },
       "bundleId": "com.mobilesg.totomatch",
-      "androidPackage": null,
-      "iosAppStoreId": null,
-      "playStoreUrl": null,
-      "appStoreUrl": null,
+      "androidPackage": "com.mobilesg.totomatch",
+      "iosAppStoreId": "6801416628",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.totomatch",
+      "appStoreUrl": "https://apps.apple.com/sg/app/id6801416628",
       "privacyUrl": "https://mobileatsg.github.io/totomatch/",
       "iconUrl": "https://mobileatsg.github.io/assets/apps/totomatch.png",
       "iconPath": "assets/apps/totomatch.png",
