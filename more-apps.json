@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-13",
+  "updatedAt": "2026-08-14",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -209,27 +209,29 @@
     {
       "id": "parksg",
       "name": "Park & Charge SG",
-      "blurb": "Live Singapore carpark lots and EV chargers on a map — availability, plug types, prices, and directions.",
+      "blurb": "Singapore parking & EV chargers on a map — live lots, plug status & prices, mall rates, search, and directions.",
       "category": "Navigation",
       "status": {
-        "ios": "InProcess"
+        "ios": "InProcess",
+        "android": "InProcess"
       },
       "platforms": [
-        "ios"
+        "ios",
+        "android"
       ],
       "tags": [],
       "locales": {
         "zh-Hans": {
           "name": "泊车充电 SG",
-          "blurb": "新加坡实时停车场车位与电动车充电桩地图 — 空位、接口类型、价格与导航。",
+          "blurb": "新加坡停车与电动车充电地图 — 实时车位、充电状态与价格、商场费率、搜索与导航。",
           "category": "导航",
           "tags": []
         }
       },
       "bundleId": "com.mobilesg.parksg",
-      "androidPackage": null,
+      "androidPackage": "com.mobilesg.parksg",
       "iosAppStoreId": null,
-      "playStoreUrl": null,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.parksg",
       "appStoreUrl": null,
       "privacyUrl": "https://mobileatsg.github.io/parksg/",
       "iconUrl": "https://mobileatsg.github.io/assets/apps/parksg.png",
@@ -241,7 +243,7 @@
     {
       "id": "totomatch",
       "name": "TOTO Match",
-      "blurb": "Scan Singapore Pools TOTO tickets, match winning numbers, and see prize groups — multi-ticket photos.",
+      "blurb": "Scan Singapore Pools TOTO tickets from photos (up to 4 per shot), match official draws & prize groups, track My matches.",
       "category": "Utilities",
       "status": {
         "ios": "InProcess"
@@ -253,12 +255,12 @@
       "locales": {
         "zh-Hans": {
           "name": "TOTO 对奖",
-          "blurb": "扫描新加坡 Pools TOTO 彩票、核对中奖号码并查看奖组 — 支持多张票照片。",
+          "blurb": "拍照扫描新加坡 Pools TOTO 彩票（每张照片最多 4 注），对照官方开奖与奖组，在「我的对奖」中追踪。",
           "category": "工具",
           "tags": []
         }
       },
-      "bundleId": "sg.mobilesg.totomatch",
+      "bundleId": "com.mobilesg.totomatch",
       "androidPackage": null,
       "iosAppStoreId": null,
       "playStoreUrl": null,
