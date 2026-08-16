@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-14",
+  "updatedAt": "2026-08-16",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -31,7 +31,7 @@
       "category": "Finance",
       "status": {
         "ios": "InProcess",
-        "android": "InProcess"
+        "android": "Published"
       },
       "platforms": [
         "ios",
