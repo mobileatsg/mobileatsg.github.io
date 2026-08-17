@@ -194,6 +194,26 @@ python3 -m http.server 8080
 
 ---
 
+## Privacy policies (same repo — no extra Pages project)
+
+Each app’s live policy is **`{slug}/index.html`** in **this** folder. One public site, one repo (`mobileatsg/mobileatsg.github.io`).
+
+| Slug folder | Public URL |
+|-------------|------------|
+| `sudoku/` | https://mobileatsg.github.io/sudoku/ |
+| `sudokumix/` | Redirect → `/sudoku/` |
+| `pixelcolor/` | https://mobileatsg.github.io/pixelcolor/ |
+| `smartalarm/` | https://mobileatsg.github.io/smartalarm/ |
+| `mathbuddy/` | https://mobileatsg.github.io/mathbuddy/ |
+| `parksg/` | https://mobileatsg.github.io/parksg/ |
+| `totomatch/` | https://mobileatsg.github.io/totomatch/ |
+| `stocksg/` | https://mobileatsg.github.io/stocksg/ |
+| `stocksg/eula/` | https://mobileatsg.github.io/stocksg/eula/ |
+
+`/generate-privacy-policy-html` writes the app copy **and** overwrites `website/{slug}/index.html` here. Then push this repo.
+
+Do **not** create a new GitHub repo or Pages site per app.
+
 ## Deploy to GitHub Pages
 
 Target: **`mobileatsg/mobileatsg.github.io`**.
@@ -202,10 +222,11 @@ Target: **`mobileatsg/mobileatsg.github.io`**.
    - `index.html`
    - `more-apps.json`
    - `assets/…`
-2. Keep privacy folders: `stocksg/`, `sudoku/`, `pixelcolor/`, `smartalarm/`, `mathbuddy/`, …  
-3. Confirm:
+   - `{slug}/index.html` (privacy pages)
+2. Confirm:
    - https://mobileatsg.github.io/
    - https://mobileatsg.github.io/more-apps.json
+   - https://mobileatsg.github.io/{slug}/
 
 ---
 
