@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-16",
+  "updatedAt": "2026-08-17",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -213,7 +213,7 @@
       "category": "Navigation",
       "status": {
         "ios": "InProcess",
-        "android": "InProcess"
+        "android": "Published"
       },
       "platforms": [
         "ios",
