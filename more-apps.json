@@ -101,8 +101,8 @@
       "blurb": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.",
       "category": "Entertainment",
       "status": {
-        "ios": "InProcess",
-        "android": "InProcess"
+        "ios": "Published",
+        "android": "Published"
       },
       "platforms": [
         "ios",
