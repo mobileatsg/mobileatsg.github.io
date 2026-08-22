@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-22",
+  "updatedAt": "2026-08-23",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -247,7 +247,7 @@
       "category": "Utilities",
       "status": {
         "ios": "InProcess",
-        "android": "InProcess"
+        "android": "Published"
       },
       "platforms": [
         "ios",
