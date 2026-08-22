@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-17",
+  "updatedAt": "2026-08-22",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -271,6 +271,40 @@
       "iconUrl": "https://mobileatsg.github.io/assets/apps/totomatch.png",
       "iconPath": "assets/apps/totomatch.png",
       "sortOrder": 60,
+      "enabled": true,
+      "featured": false
+    },
+    {
+      "id": "commutesg",
+      "name": "Commute SG",
+      "blurb": "Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.",
+      "category": "Navigation",
+      "status": {
+        "ios": "InProcess",
+        "android": "InProcess"
+      },
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "通勤 SG",
+          "blurb": "新加坡巴士看板 — 收藏线路与车站、实时到站、沿线事故，以及锁屏 Live 看板。",
+          "category": "导航",
+          "tags": []
+        }
+      },
+      "bundleId": "com.mobilesg.commutesg",
+      "androidPackage": "com.mobilesg.commutesg",
+      "iosAppStoreId": null,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.commutesg",
+      "appStoreUrl": null,
+      "privacyUrl": "https://mobileatsg.github.io/commutesg/",
+      "iconUrl": "https://mobileatsg.github.io/assets/apps/commutesg.png",
+      "iconPath": "assets/apps/commutesg.png",
+      "sortOrder": 52,
       "enabled": true,
       "featured": false
     }
