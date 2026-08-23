@@ -109,7 +109,7 @@
       <h1>Privacy Policy</h1>
       <p class="meta">
         <strong>TOTO Match</strong><br />
-        Effective date: August 15, 2026 · Last updated: August 15, 2026
+        Effective date: August 15, 2026 · Last updated: August 24, 2026
       </p>
     </header>
 
@@ -131,6 +131,12 @@
       For privacy questions or requests, contact us at
       <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a>.
     </p>
+    <p>
+      TOTO Match is a personal ticket checker for <strong>Singapore Pools TOTO Ordinary</strong>
+      and <strong>Malaysia Sports Toto</strong> (Star 6/50, Power 6/55, and Supreme 6/58).
+      You choose a market on first launch or in Settings. The App is not affiliated with
+      Singapore Pools or Sports Toto and does not sell tickets, take bets, or pay prizes.
+    </p>
 
     <h2>2. Summary</h2>
     <ul>
@@ -145,8 +151,8 @@
     <h2>3. Information we collect</h2>
     <p>
       The App processes limited information on your device and through our cloud match service and
-      advertising partners so you can scan tickets, receive match results, and earn free match credits.
-      We do not require an account.
+      advertising partners so you can scan tickets for the market you selected (Singapore or Malaysia),
+      receive match results, and earn free match credits. We do not require an account.
     </p>
 
     <table>
@@ -162,20 +168,32 @@
         <tr>
           <td>Device / install identifiers</td>
           <td>Anonymous install UUID stored on device; push notification tokens (FCM)</td>
-          <td>Credit ledger, pending-draw notifications, service reliability</td>
+          <td>Credit ledger, pending-draw notifications, optional history restore, service reliability</td>
           <td>Not linked to your name; used as a stable install key</td>
         </tr>
         <tr>
+          <td>Market preference</td>
+          <td>Singapore or Malaysia choice stored on the device</td>
+          <td>Show the correct official results and prize rules</td>
+          <td>No</td>
+        </tr>
+        <tr>
           <td>Ticket images you upload</td>
-          <td>Photos of TOTO tickets you choose to upload</td>
-          <td>Cloud AI extract and prize matching</td>
+          <td>Photos of Singapore Pools TOTO Ordinary or Malaysia Sports Toto (Star / Power / Supreme) tickets you choose to upload</td>
+          <td>Cloud AI extract and prize matching for that market</td>
           <td>Processed for the match job; not used for marketing</td>
         </tr>
         <tr>
           <td>Match job metadata</td>
-          <td>Ticket boards, draw dates, prize results, status</td>
+          <td>Market (SG or MY), ticket boards, draw dates or draw numbers, prize results, status</td>
           <td>Show history, rematch pending tickets, share cards</td>
           <td>Stored on device and/or our match servers for service delivery</td>
+        </tr>
+        <tr>
+          <td>Official draw data</td>
+          <td>Public winning numbers and jackpot estimates we cache for Singapore Pools TOTO and Sports Toto</td>
+          <td>Score tickets against official results</td>
+          <td>Not personal data about you</td>
         </tr>
         <tr>
           <td>Advertising data (third parties)</td>
@@ -196,13 +214,15 @@
     <p>
       We do not require you to create an account, and we do not intentionally collect your name,
       precise GPS location, contacts, or payment card details through the App. Ticket photos are used
-      only for matching features you request.
+      only for matching features you request. We do not collect Singapore Pools or Sports Toto account
+      logins; you only photograph tickets you already have.
     </p>
 
     <h2>5. How we use information</h2>
     <p>We use information only for the purposes described in this policy, which may include:</p>
     <ul>
-      <li>Providing ticket scan, cloud match, history, and share features</li>
+      <li>Providing ticket scan, cloud match, history, and share features for Singapore TOTO and Malaysia Sports Toto</li>
+      <li>Applying the prize rules and official results for the market you selected</li>
       <li>Managing free AI match credits, empty-upload limits (for example every few no-ticket photos may use a credit), and rewarded-ad grants</li>
       <li>Sending optional push notifications when pending draw results are ready</li>
       <li>Displaying third-party rewarded ads</li>
@@ -236,7 +256,7 @@
         </tr>
         <tr>
           <td>Mobile@SG match API / hosting</td>
-          <td>Cloud ticket extract and prize matching</td>
+          <td>Cloud ticket extract and prize matching for SG and MY markets</td>
           <td>This Privacy Policy · <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a></td>
         </tr>
       </tbody>
@@ -251,10 +271,10 @@
       You can deny or revoke permissions in your device settings; some features may not work without them.
     </p>
     <ul>
-      <li><strong>Camera / Photos</strong> — to photograph or select TOTO ticket images for matching</li>
+      <li><strong>Camera / Photos</strong> — to photograph or select TOTO / Sports Toto ticket images for matching</li>
       <li><strong>Photo library (add)</strong> — optional save of match overview images</li>
       <li><strong>Notifications</strong> — optional alerts when match results are ready</li>
-      <li><strong>Internet</strong> — to call the match service, load ads, and sync official draw data</li>
+      <li><strong>Internet</strong> — to call the match service, load ads, and sync official draw data for Singapore and Malaysia</li>
       <li><strong>Advertising ID</strong> (where applicable) — used by Google ads for ad serving and measurement</li>
     </ul>
 
@@ -275,11 +295,15 @@
 
     <h2>10. Data retention</h2>
     <p>
-      Match images and results may be retained on our servers as needed to complete processing, show
-      history, and re-score pending tickets when official draws are published. Device install identifiers
-      and credit balances are retained while you continue to use the service. Push tokens are kept until
-      they change or become invalid. Support emails are retained as needed to handle your request.
-      Uninstalling the App removes local device data.
+      After AI extract, we delete the original upload photo from our servers. Structured match results
+      (boards, prizes, status) and an optional numbered overview image may be kept for up to
+      <strong>90 days</strong> so we can rematch pending draws and, if you reinstall with the same
+      install ID, offer to restore history without the original camera photo. Deleting a row in
+      My matches removes that server record. Device install identifiers and credit balances are retained
+      while you continue to use the service. Push tokens are kept until they change or become invalid.
+      Support emails are retained as needed to handle your request. Uninstalling the App removes local
+      device data. On Android, Google Backup (if enabled) may restore local history and photos after
+      reinstall; that copy is stored under your Google account settings, not by us as a separate backup service.
     </p>
 
     <h2>11. Data sharing and sale</h2>
@@ -289,7 +313,8 @@
       except as disclosed in this policy (for example, when you interact with an advertising SDK).
     </p>
     <p>
-      Ticket images and match results are sent to our match API so we can extract boards and score prizes.
+      Ticket images and match results are sent to our match API so we can extract boards and score prizes
+      for the Singapore or Malaysia market you selected.
       Advertising SDKs may receive device and ad interaction data as described by Google.
     </p>
 
@@ -324,6 +349,7 @@
     <ul>
       <li>Device permissions: manage in iOS/Android Settings</li>
       <li>Advertising ID / personalized ads: manage in device privacy settings (where applicable)</li>
+      <li>Market (Singapore / Malaysia): change in the App Settings</li>
       <li>Support and privacy requests: email <a href="mailto:mobileatsg@gmail.com">mobileatsg@gmail.com</a></li>
     </ul>
     <p>
