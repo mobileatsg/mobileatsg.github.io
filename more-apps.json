@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-23",
+  "updatedAt": "2026-08-24",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -276,7 +276,7 @@
     },
     {
       "id": "commutesg",
-      "name": "Commute SG",
+      "name": "Board SG",
       "blurb": "Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.",
       "category": "Navigation",
       "status": {
@@ -290,7 +290,7 @@
       "tags": [],
       "locales": {
         "zh-Hans": {
-          "name": "通勤 SG",
+          "name": "看板 SG",
           "blurb": "新加坡巴士看板 — 收藏线路与车站、实时到站、沿线事故，以及锁屏 Live 看板。",
           "category": "导航",
           "tags": []
