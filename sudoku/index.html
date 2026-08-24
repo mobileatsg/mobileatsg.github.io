@@ -110,7 +110,7 @@
       <h1>Privacy Policy</h1>
       <p class="meta">
         <strong>Sudoku Mix</strong><br />
-        Effective date: August 5, 2026 · Last updated: August 5, 2026
+        Effective date: August 5, 2026 · Last updated: August 24, 2026
       </p>
     </header>
 
@@ -147,7 +147,7 @@
 
     <h2>3. Information we collect</h2>
     
-    <p>Sudoku Mix is free with ads. Most gameplay progress is stored only on your device. If you use the optional Daily leaderboard, we process limited identifiers and scores via Firebase. Advertising is provided by Google AdMob. Contacting support by email shares whatever you include in the message.</p>
+    <p>Sudoku Mix is free with ads. Most gameplay progress is stored only on your device. If you use the optional Daily leaderboard, we process a player token, optional display name, and scores on our leaderboard API. Advertising is provided by Google AdMob. Firebase Analytics and Crashlytics collect app-usage events and crash diagnostics. Contacting support by email shares whatever you include in the message.</p>
 
     <table>
       <thead>
@@ -160,12 +160,13 @@
       </thead>
       <tbody>
         
-<tr><td>Advertising identifier (IDFA / GAID) and ad interaction data</td><td>Deliver and measure ads; fund a free app</td><td>Google AdMob / Google Mobile Ads SDK</td></tr>
-<tr><td>Device and app diagnostics used by ad / Firebase SDKs</td><td>Serve ads, measure performance, operate optional leaderboard</td><td>Google (AdMob); Google Firebase when leaderboard is used</td></tr>
-<tr><td>Anonymous Firebase Auth UID (optional)</td><td>Submit and rank personal-best daily times without a password account</td><td>Google Firebase Authentication &amp; Firestore</td></tr>
-<tr><td>Daily leaderboard display name (optional, ≤20 characters) and score/time/stars</td><td>Show rankings for the shared UTC daily puzzle</td><td>Google Firebase Firestore</td></tr>
-<tr><td>Local game progress, settings, and soft-review preferences</td><td>Play the game on your device</td><td>Stored on device only</td></tr>
-<tr><td>Support emails you send (content you choose to include)</td><td>Respond to bugs and feedback</td><td>Email provider; Mobile@SG reads the message you send</td></tr>
+<tr><td>Advertising identifier (IDFA / GAID) and ad interaction data</td><td>Advertising ID, ad impressions and clicks</td><td>Deliver and measure ads; fund a free app</td><td>Google AdMob (not a login identity)</td></tr>
+<tr><td>App interactions</td><td>Screens viewed; play start; game win/over; share</td><td>Product analytics</td><td>Firebase Analytics (device/app instance; no name)</td></tr>
+<tr><td>Crash logs and diagnostics</td><td>Stack traces, device model, OS version, app version</td><td>Fix crashes and stability</td><td>Firebase Crashlytics (no display names or tokens)</td></tr>
+<tr><td>Leaderboard player token, optional display name (≤20 characters), score/time/stars</td><td>Submit and rank personal-best daily times without a password account</td><td>Optional Daily challenge rankings</td><td>Mobile@SG leaderboard API (not Firebase Auth)</td></tr>
+<tr><td>FCM registration token (optional)</td><td>Device push token</td><td>Optional daily overtake notifications</td><td>Google Firebase Cloud Messaging</td></tr>
+<tr><td>Local game progress, settings, and soft-review preferences</td><td>Board progress, difficulty, theme</td><td>Play the game on your device</td><td>On device only</td></tr>
+<tr><td>Support emails you send</td><td>Content you choose to include</td><td>Respond to bugs and feedback</td><td>Email provider; Mobile@SG reads the message</td></tr>
 
         <!--
           Example row:
@@ -195,9 +196,10 @@
       
 <li>Provide Sudoku gameplay, settings, and local progress on your device</li>
 <li>Show Google AdMob ads (banner, interstitial, and optional rewarded interstitial continue on free play)</li>
-<li>Optionally operate the Daily challenge leaderboard via Firebase Anonymous Auth and Firestore</li>
+<li>Optionally operate the Daily challenge leaderboard via our API</li>
+<li>Measure in-app usage with Firebase Analytics (no names or tokens)</li>
+<li>Diagnose crashes with Firebase Crashlytics</li>
 <li>Respond when you email support with a bug report or feedback</li>
-<li>Improve reliability of ads and optional cloud features through SDK diagnostics</li>
 
       <!-- Examples:
       <li>Providing and maintaining App functionality</li>
@@ -219,7 +221,10 @@
       <tbody>
         
 <tr><td>Google Mobile Ads (AdMob)</td><td>Banner, interstitial, and rewarded interstitial ads</td><td><a href="https://policies.google.com/privacy" rel="noopener">Google Privacy Policy</a></td></tr>
-<tr><td>Google Firebase (Authentication &amp; Firestore)</td><td>Optional anonymous daily leaderboard</td><td><a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase Privacy</a></td></tr>
+<tr><td>Google Firebase Analytics</td><td>App usage events (screens, play start, win/over, share)</td><td><a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase Privacy</a></td></tr>
+<tr><td>Google Firebase Crashlytics</td><td>Crash reports and diagnostic logs</td><td><a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase Privacy</a></td></tr>
+<tr><td>Google Firebase Cloud Messaging</td><td>Optional daily overtake push notifications</td><td><a href="https://firebase.google.com/support/privacy" rel="noopener">Firebase Privacy</a></td></tr>
+<tr><td>Mobile@SG leaderboard API</td><td>Optional Daily challenge rankings</td><td>This policy; HTTPS API</td></tr>
 <tr><td>Apple / Google platforms</td><td>App distribution, in-app review sheets, and system services</td><td>Apple or Google privacy policies for the platform you use</td></tr>
 
         <!--
@@ -245,7 +250,7 @@
     </p>
     <ul>
       
-<li><strong>Internet / network</strong> — load ads, optional leaderboard, and More apps catalog</li>
+<li><strong>Internet / network</strong> — load ads, optional leaderboard, analytics/crash reports, and More apps catalog</li>
 <li><strong>Advertising ID (Android AD_ID; iOS App Tracking Transparency when prompted)</strong> — used by AdMob for ad measurement and personalization subject to your choices</li>
 <li>No camera, microphone, contacts, precise location, or photo library access for core play</li>
 
@@ -271,7 +276,7 @@
     -->
 
     <h2>10. Data retention</h2>
-    <p>Local progress remains on your device until you clear app data or uninstall. Leaderboard entries and anonymous Firebase identifiers are retained while needed to operate rankings and may be deleted or anonymized when no longer needed or upon a verified deletion request. Ad partners retain data according to their policies. Support emails are retained as long as reasonably needed to respond and for legitimate business records.</p>
+    <p>Local progress remains on your device until you clear app data or uninstall. Leaderboard entries are retained while needed to operate rankings and may be deleted or anonymized when no longer needed or upon a verified deletion request. Firebase Analytics and Crashlytics retain events and crash reports under Google’s retention periods. Ad partners retain data according to their policies. Support emails are retained as long as reasonably needed to respond and for legitimate business records.</p>
     <!--
       Default: We retain information only as long as needed for the purposes described above,
       including legitimate business or legal requirements. Crash and diagnostic data retained by
@@ -284,7 +289,7 @@
       We do not share personal information with third parties for their own independent marketing,
       except as disclosed in this policy (for example, when you interact with an advertising SDK, if any).
     </p>
-    <p>We do not sell personal information. Data is processed by Google (ads / optional Firebase) as independent controllers or processors under their terms when those SDKs run.</p>
+    <p>We do not sell personal information. Data is processed by Google (AdMob, Analytics, Crashlytics, optional FCM) and our leaderboard API as independent controllers or processors under their terms when those services run.</p>
 
     <h2>12. Security</h2>
     <p>
