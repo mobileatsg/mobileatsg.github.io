@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-24",
+  "updatedAt": "2026-08-27",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -135,7 +135,7 @@
       "blurb": "Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.",
       "category": "Utilities",
       "status": {
-        "ios": "InProcess"
+        "ios": "Published"
       },
       "platforms": [
         "ios"
@@ -305,6 +305,40 @@
       "iconUrl": "https://mobileatsg.github.io/assets/apps/commutesg.png",
       "iconPath": "assets/apps/commutesg.png",
       "sortOrder": 52,
+      "enabled": true,
+      "featured": false
+    },
+    {
+      "id": "rainpause",
+      "name": "Rain Pause",
+      "blurb": "A quiet rainy window. Two minutes. No streaks.",
+      "category": "Games · Casual",
+      "status": {
+        "ios": "InProcess",
+        "android": "InProcess"
+      },
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "雨歇",
+          "blurb": "一扇安静的雨窗。两分钟。没有打卡。",
+          "category": "游戏 · 休闲",
+          "tags": []
+        }
+      },
+      "bundleId": "com.mobilesg.rainpause",
+      "androidPackage": "com.mobilesg.rainpause",
+      "iosAppStoreId": null,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.rainpause",
+      "appStoreUrl": null,
+      "privacyUrl": "https://mobileatsg.github.io/rainpause/",
+      "iconUrl": "https://mobileatsg.github.io/assets/apps/rainpause.png",
+      "iconPath": "assets/apps/rainpause.png",
+      "sortOrder": 70,
       "enabled": true,
       "featured": false
     }
