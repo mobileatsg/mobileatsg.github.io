@@ -339,7 +339,7 @@
       "iconUrl": "https://mobileatsg.github.io/assets/apps/rainpause.png",
       "iconPath": "assets/apps/rainpause.png",
       "sortOrder": 70,
-      "enabled": true,
+      "enabled": false,
       "featured": false
     }
   ]
