@@ -281,7 +281,7 @@
       "category": "Navigation",
       "status": {
         "ios": "InProcess",
-        "android": "InProcess"
+        "android": "Published"
       },
       "platforms": [
         "ios",
