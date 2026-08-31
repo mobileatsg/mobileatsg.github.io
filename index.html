@@ -500,7 +500,13 @@
       flex-wrap: wrap;
       gap: 0.5rem 1rem;
       justify-content: space-between;
+      align-items: center;
     }
+    footer a {
+      color: var(--link);
+      font-weight: 600;
+    }
+    footer a:hover { text-decoration: underline; }
 
     @media (max-width: 480px) {
       .icon { width: 56px; height: 56px; border-radius: 12px; }
@@ -576,17 +582,22 @@
         </div>
         <div class="contact-item">
           <span class="label" data-i18n="labelWebsite">Website</span>
-          <a class="value" href="https://mobileatsg.github.io/">mobileatsg.github.io</a>
+          <a class="value" id="contact-website" href="https://mobileatsg.github.io/">mobileatsg.github.io</a>
+        </div>
+        <div class="contact-item">
+          <span class="label" data-i18n="labelX">X</span>
+          <a class="value" id="contact-x" href="https://x.com/mobileatsg" target="_blank" rel="noopener noreferrer">@mobileatsg</a>
         </div>
         <div class="contact-item">
           <span class="label" data-i18n="labelDeveloper">Developer</span>
-          <span class="value">Mobile@SG</span>
+          <span class="value" id="contact-developer">Mobile@SG</span>
         </div>
       </div>
     </section>
 
     <footer>
       <span>© <span id="year">2026</span> Mobile@SG</span>
+      <a href="https://x.com/mobileatsg" id="footer-x" target="_blank" rel="noopener noreferrer">@mobileatsg</a>
       <span data-i18n="footerLegal">App Store &amp; Google Play are trademarks of their respective owners.</span>
     </footer>
   </div>
@@ -626,6 +637,7 @@
             "For bug reports, feedback, or privacy requests, email us. Include the app name and version if you can — it helps us respond faster.",
           labelEmail: "Support email",
           labelWebsite: "Website",
+          labelX: "X",
           labelDeveloper: "Developer",
           footerLegal: "App Store & Google Play are trademarks of their respective owners.",
           appCountOne: "1 app",
@@ -665,6 +677,7 @@
             "如需反馈、报告问题或隐私相关请求，请发邮件给我们。尽量附上应用名称与版本，便于更快处理。",
           labelEmail: "支持邮箱",
           labelWebsite: "网站",
+          labelX: "X",
           labelDeveloper: "开发者",
           footerLegal: "App Store 与 Google Play 为其各自所有者的商标。",
           appCountOne: "1 个应用",
@@ -970,9 +983,31 @@
             mail.textContent = pub.supportEmail;
           }
         }
+        if (pub.website) {
+          var site = document.getElementById("contact-website");
+          if (site) {
+            site.href = pub.website;
+            try {
+              var u = new URL(pub.website);
+              site.textContent = u.hostname + (u.pathname !== "/" ? u.pathname.replace(/\/$/, "") : "");
+            } catch (e) {
+              site.textContent = pub.website;
+            }
+          }
+        }
+        var xLink = document.getElementById("contact-x");
+        var footerX = document.getElementById("footer-x");
+        if (pub.xUrl && xLink) {
+          xLink.href = pub.xUrl;
+          xLink.textContent = pub.xHandle || pub.xUrl.replace(/^https?:\/\/(www\.)?(x|twitter)\.com\//i, "@");
+        }
+        if (pub.xUrl && footerX) {
+          footerX.href = pub.xUrl;
+          footerX.textContent = pub.xHandle || xLink.textContent;
+        }
         if (pub.name) {
-          var dev = document.querySelector("#contact .contact-item:last-child .value");
-          if (dev && !dev.href) dev.textContent = pub.name;
+          var dev = document.getElementById("contact-developer");
+          if (dev) dev.textContent = pub.name;
         }
       }
 
