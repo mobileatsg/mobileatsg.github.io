@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-31",
+  "updatedAt": "2026-09-02",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -341,7 +341,7 @@
       "iconUrl": "https://mobileatsg.github.io/assets/apps/rainpause.png",
       "iconPath": "assets/apps/rainpause.png",
       "sortOrder": 70,
-      "enabled": false,
+      "enabled": true,
       "featured": false
     }
   ]
