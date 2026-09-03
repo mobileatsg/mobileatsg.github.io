@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-02",
+  "updatedAt": "2026-09-03",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -317,7 +317,7 @@
       "category": "Games · Casual",
       "status": {
         "ios": "InProcess",
-        "android": "InProcess"
+        "android": "Published"
       },
       "platforms": [
         "ios",
