@@ -23,7 +23,7 @@
     ],
     "inAppFilterByDevicePlatform": true,
     "inAppMoreAppsExclusions": true,
-    "exclusionNotes": "hideInAppIds on a peer hides it when More apps runs inside those host app ids. moreAppsExcludeIds on the host also hides those peer ids. Website ignores both. showInMobileApp: false hides peer from in-app More apps only (website ignores). Missing showInMobileApp ⇒ true (backward compatible).",
+    "exclusionNotes": "hideInAppIds on a peer hides it when More apps runs inside those host app ids. moreAppsExcludeIds on the host also hides those peer ids. Website ignores both. showInMobileApp: false hides peer from in-app More apps only (website ignores). Missing showInMobileApp ⇒ true (backward compatible). In-app More apps require status.<devicePlatform>==Published (never InProcess). showInMobileApp false hides even if Published; missing showInMobileApp ⇒ true.",
     "inAppRespectShowInMobileApp": true
   },
   "apps": [
@@ -208,7 +208,7 @@
       "iconPath": "assets/apps/mathbuddy.png",
       "sortOrder": 50,
       "enabled": true,
-      "showInMobileApp": true,
+      "showInMobileApp": false,
       "featured": false,
       "moreAppsExcludeIds": [
         "stocksg"
