@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-03",
+  "updatedAt": "2026-09-07",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -23,7 +23,8 @@
     ],
     "inAppFilterByDevicePlatform": true,
     "inAppMoreAppsExclusions": true,
-    "exclusionNotes": "hideInAppIds on a peer hides it when More apps runs inside those host app ids. moreAppsExcludeIds on the host also hides those peer ids. Website ignores both."
+    "exclusionNotes": "hideInAppIds on a peer hides it when More apps runs inside those host app ids. moreAppsExcludeIds on the host also hides those peer ids. Website ignores both. showInMobileApp: false hides peer from in-app More apps only (website ignores). Missing showInMobileApp ⇒ true (backward compatible).",
+    "inAppRespectShowInMobileApp": true
   },
   "apps": [
     {
@@ -58,6 +59,7 @@
       "iconPath": "assets/apps/stocksg.png",
       "sortOrder": 10,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false,
       "hideInAppIds": [
         "mathbuddy"
@@ -95,6 +97,7 @@
       "iconPath": "assets/apps/sudoku.png",
       "sortOrder": 20,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": true
     },
     {
@@ -129,6 +132,7 @@
       "iconPath": "assets/apps/pixelcolor.png",
       "sortOrder": 30,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false
     },
     {
@@ -165,6 +169,7 @@
       "iconPath": "assets/apps/smartalarm.png",
       "sortOrder": 40,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false
     },
     {
@@ -203,6 +208,7 @@
       "iconPath": "assets/apps/mathbuddy.png",
       "sortOrder": 50,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false,
       "moreAppsExcludeIds": [
         "stocksg"
@@ -240,6 +246,7 @@
       "iconPath": "assets/apps/parksg.png",
       "sortOrder": 55,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false
     },
     {
@@ -274,6 +281,7 @@
       "iconPath": "assets/apps/totomatch.png",
       "sortOrder": 60,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false
     },
     {
@@ -308,6 +316,7 @@
       "iconPath": "assets/apps/commutesg.png",
       "sortOrder": 52,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false
     },
     {
@@ -342,6 +351,7 @@
       "iconPath": "assets/apps/rainpause.png",
       "sortOrder": 70,
       "enabled": true,
+      "showInMobileApp": true,
       "featured": false
     }
   ]

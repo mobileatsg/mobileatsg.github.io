@@ -113,7 +113,8 @@ In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 | `iconUrl` | string | Absolute icon URL (for apps) |
 | `iconPath` | string | Relative path (for website) |
 | `sortOrder` | number | Ascending |
-| `enabled` | bool | `false` hides without deleting |
+| `enabled` | bool | `false` hides without deleting (website + in-app) |
+| `showInMobileApp` | bool | **Optional.** `false` = hide from **in-app** More apps only; website still shows. **Missing ⇒ `true`** (backward compatible; do not bump `schemaVersion`) |
 | `featured` | bool | Optional highlight / soft-promo pick |
 
 ### `status` (per platform)
@@ -142,9 +143,9 @@ Exact strings (case-sensitive). Omit a platform key if that platform is not in `
 
 | Surface | Which apps | Status UI |
 |---------|------------|-----------|
-| **Developer website** | All `enabled` apps | Per-platform chips (`iOS · Published`, `Android · In process`); store button only for platforms that are `Published` |
-| **In-app More apps (iOS device)** | Only peers with **`status.ios === "Published"`** | Ignore `status.android` for the list; exclude self |
-| **In-app More apps (Android device)** | Only peers with **`status.android === "Published"`** | Ignore `status.ios` for the list; exclude self |
+| **Developer website** | All `enabled` apps (**ignores** `showInMobileApp`) | Per-platform chips (`iOS · Published`, `Android · In process`); store button only for platforms that are `Published` |
+| **In-app More apps (iOS device)** | `showInMobileApp != false` + **`status.ios === "Published"`** | Ignore `status.android` for the list; exclude self |
+| **In-app More apps (Android device)** | `showInMobileApp != false` + **`status.android === "Published"`** | Ignore `status.ios` for the list; exclude self |
 
 **Required:** filter by **device platform**. Do not show an app because the *other* store is Published. Missing status for this platform ⇒ exclude.
 
@@ -164,6 +165,7 @@ Example: Stock@SG not for kids → `"hideInAppIds": ["mathbuddy"]` and/or Math B
 2. Sort by `sortOrder` ascending.  
 3. **Website:** render every remaining app; badges + CTAs per platform status (**no** exclusion filter).  
 4. **In-app More apps:**  
+   - `showInMobileApp != false` (missing ⇒ **true**)  
    - current platform status must be **`Published`**  
    - exclude current app (`bundleId` / `androidPackage`)  
    - apply `hideInAppIds` / `moreAppsExcludeIds`  
@@ -233,13 +235,14 @@ Target: **`mobileatsg/mobileatsg.github.io`**.
 ## Adding a new app (no other app redeploy)
 
 1. Add icon: `assets/apps/{id}.png` (256×256).  
-2. Append an entry to **`more-apps.json`** (`enabled: true`).  
+2. Append an entry to **`more-apps.json`** (`enabled: true`, `showInMobileApp: true` unless you want website-only).  
 3. Deploy Pages.  
 4. Fill `iosAppStoreId` / store URLs when listings go live (edit JSON only).  
 
 In-app More apps and this website pick it up on next catalog fetch.
 
-To pause: `"enabled": false` → redeploy JSON only.
+To pause everywhere: `"enabled": false` → redeploy JSON only.  
+To hide from in-app More apps only (keep on website): `"showInMobileApp": false`.
 
 ---
 
