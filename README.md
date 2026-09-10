@@ -2,6 +2,8 @@
 
 Static landing page for **https://mobileatsg.github.io/** — publisher identity + list of apps.
 
+**Git:** this folder **is** the working tree for [`mobileatsg/mobileatsg.github.io`](https://github.com/mobileatsg/mobileatsg.github.io) (`main`). Edit here, then `git push origin main` to publish Pages.
+
 ## Shared catalog (source of truth)
 
 | URL (after deploy) | File |
