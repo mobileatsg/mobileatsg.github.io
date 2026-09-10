@@ -209,6 +209,7 @@ Each app’s live policy is **`{slug}/index.html`** in **this** folder. One publ
 | `mathbuddy/` | https://mobileatsg.github.io/mathbuddy/ |
 | `parksg/` | https://mobileatsg.github.io/parksg/ |
 | `totomatch/` | https://mobileatsg.github.io/totomatch/ |
+| `fourdmatch/` | https://mobileatsg.github.io/fourdmatch/ |
 | `stocksg/` | https://mobileatsg.github.io/stocksg/ |
 | `stocksg/eula/` | https://mobileatsg.github.io/stocksg/eula/ |
 

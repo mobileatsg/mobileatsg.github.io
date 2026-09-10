@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-07",
+  "updatedAt": "2026-09-10",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -280,6 +280,41 @@
       "iconUrl": "https://mobileatsg.github.io/assets/apps/totomatch.png",
       "iconPath": "assets/apps/totomatch.png",
       "sortOrder": 60,
+      "enabled": true,
+      "showInMobileApp": true,
+      "featured": false
+    },
+    {
+      "id": "fourdmatch",
+      "name": "4D Match",
+      "blurb": "Scan Singapore & Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.",
+      "category": "Utilities",
+      "status": {
+        "ios": "InProcess",
+        "android": "InProcess"
+      },
+      "platforms": [
+        "ios",
+        "android"
+      ],
+      "tags": [],
+      "locales": {
+        "zh-Hans": {
+          "name": "4D 对奖",
+          "blurb": "拍照扫描新加坡与马来西亚 4D 彩票，对照官方开奖（中奖类别），并管理全系统号码库。",
+          "category": "工具",
+          "tags": []
+        }
+      },
+      "bundleId": "com.mobilesg.fourdmatch",
+      "androidPackage": "com.mobilesg.fourdmatch",
+      "iosAppStoreId": null,
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.fourdmatch",
+      "appStoreUrl": null,
+      "privacyUrl": "https://mobileatsg.github.io/fourdmatch/",
+      "iconUrl": "https://mobileatsg.github.io/assets/apps/fourdmatch.png",
+      "iconPath": "assets/apps/fourdmatch.png",
+      "sortOrder": 65,
       "enabled": true,
       "showInMobileApp": true,
       "featured": false
