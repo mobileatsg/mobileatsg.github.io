@@ -2,7 +2,21 @@
 
 Static landing page for **https://mobileatsg.github.io/** — publisher identity + list of apps.
 
-**Git:** this folder **is** the working tree for [`mobileatsg/mobileatsg.github.io`](https://github.com/mobileatsg/mobileatsg.github.io) (`main`). Edit here, then `git push origin main` to publish Pages.
+**Git:** this folder is the working tree for:
+
+| Remote | Repo | Role |
+|--------|------|------|
+| **`origin`** | [`chachean/mobilesg`](https://github.com/chachean/mobilesg) | Canonical source (`main`) |
+| **`pages`** | [`mobileatsg/mobileatsg.github.io`](https://github.com/mobileatsg/mobileatsg.github.io) | Legacy GitHub Pages mirror (optional) |
+
+```bash
+git push origin main          # primary
+git push pages main           # keep github.io in sync if still used
+```
+
+SSH: `origin` uses host alias **`github.com-chachean`** (`~/.ssh/id_github` → user **chachean**). Default `github.com` key is **mobileatsg** (org), which cannot see private `chachean/*` repos.
+
+Point **Cloudflare Pages** at **`chachean/mobilesg`** when you cut over from `mobileatsg.github.io`.
 
 ## Shared catalog (source of truth)
 
