@@ -7,10 +7,10 @@
   <title>Mobile@SG — Apps</title>
   <meta name="description" content="Mobile@SG publishes free and useful iOS &amp; Android apps. Browse our apps on the App Store and Google Play." />
   <meta name="author" content="Mobile@SG" />
-  <link rel="canonical" href="https://mobileatsg.github.io/" />
+  <link rel="canonical" href="/" />
   <meta property="og:title" content="Mobile@SG — Apps" />
   <meta property="og:description" content="iOS and Android apps by Mobile@SG." />
-  <meta property="og:url" content="https://mobileatsg.github.io/" />
+  <meta property="og:url" content="/" />
   <meta property="og:type" content="website" />
   <meta name="theme-color" content="#0f1419" />
   <link rel="icon" href="assets/brand/mobileatsg-logo.png" type="image/png" />
@@ -583,7 +583,8 @@
         </div>
         <div class="contact-item">
           <span class="label" data-i18n="labelWebsite">Website</span>
-          <a class="value" id="contact-website" href="https://mobileatsg.github.io/">mobileatsg.github.io</a>
+          <a class="value" id="contact-website" href="/">
+            mobilesg.org</a>
         </div>
         <div class="contact-item">
           <span class="label" data-i18n="labelX">X</span>
@@ -863,8 +864,19 @@
         return app.androidPackage || app.bundleId || "";
       }
 
+      /** Resolve catalog paths against the current host (www vs apex). */
+      function resolveUrl(href) {
+        if (!href) return "";
+        try {
+          return new URL(href, window.location.origin + "/").href;
+        } catch (e) {
+          return href;
+        }
+      }
+
       function iconSrc(app) {
-        return app.iconPath || app.iconUrl || "";
+        var raw = app.iconUrl || (app.iconPath ? "/" + String(app.iconPath).replace(/^\//, "") : "");
+        return resolveUrl(raw);
       }
 
       function platformRowHtml(label, status, available) {
@@ -940,7 +952,7 @@
           storeBtn(t("appStore"), appStoreHref(app), iosPublished, false) +
           storeBtn(t("googlePlay"), play, !!(androidPublished && play), true) +
           (app.privacyUrl
-            ? '<a class="btn ghost" href="' + esc(app.privacyUrl) + '">' + esc(t("privacy")) + "</a>"
+            ? '<a class="btn ghost" href="' + esc(resolveUrl(app.privacyUrl)) + '">' + esc(t("privacy")) + "</a>"
             : '<span class="btn ghost disabled" aria-disabled="true">' + esc(t("privacy")) + "</span>");
 
         var dataStatus = [
@@ -984,16 +996,23 @@
             mail.textContent = pub.supportEmail;
           }
         }
-        if (pub.website) {
+        if (pub.website != null && pub.website !== "") {
           var site = document.getElementById("contact-website");
           if (site) {
-            site.href = pub.website;
+            var siteHref = resolveUrl(pub.website);
+            site.href = siteHref;
             try {
-              var u = new URL(pub.website);
+              var u = new URL(siteHref);
               site.textContent = u.hostname + (u.pathname !== "/" ? u.pathname.replace(/\/$/, "") : "");
             } catch (e) {
-              site.textContent = pub.website;
+              site.textContent = window.location.hostname;
             }
+          }
+        } else {
+          var siteFallback = document.getElementById("contact-website");
+          if (siteFallback) {
+            siteFallback.href = window.location.origin + "/";
+            siteFallback.textContent = window.location.hostname;
           }
         }
         var xLink = document.getElementById("contact-x");

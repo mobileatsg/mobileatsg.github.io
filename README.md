@@ -1,6 +1,6 @@
 # Mobile@SG website (apps list)
 
-Static landing page for **https://mobileatsg.github.io/** — publisher identity + list of apps.
+Static landing page for **https://mobilesg.org/** — publisher identity + list of apps.
 
 **Git:** this folder is the working tree for:
 
@@ -22,7 +22,7 @@ Point **Cloudflare Pages** at **`chachean/mobilesg`** when you cut over from `mo
 
 | URL (after deploy) | File |
 |--------------------|------|
-| `https://mobileatsg.github.io/more-apps.json` | [`more-apps.json`](./more-apps.json) |
+| `https://mobilesg.org/more-apps.json` | [`more-apps.json`](./more-apps.json) |
 
 **One JSON drives both:**
 
@@ -101,9 +101,9 @@ Website language (priority):
 Examples:
 
 ```text
-https://mobileatsg.github.io/?lang=zh
-https://mobileatsg.github.io/?lang=zh-Hans
-https://mobileatsg.github.io/?lang=en
+https://mobilesg.org/?lang=zh
+https://mobilesg.org/?lang=zh-Hans
+https://mobilesg.org/?lang=en
 ```
 
 In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
@@ -125,7 +125,8 @@ In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 | `iosAppStoreId` | string \| null | Numeric App Store id when live |
 | `playStoreUrl` | string \| null | Optional override |
 | `appStoreUrl` | string \| null | Optional override |
-| `privacyUrl` | string | `https://mobileatsg.github.io/{id}/` |
+| `privacyUrl` | string | **Host-relative** path, e.g. `/{id}/` (resolved against the page/catalog origin — works for `www` and apex) |
+| `iconUrl` | string | **Host-relative** path, e.g. `/assets/apps/{id}.png` |
 | `iconUrl` | string | Absolute icon URL (for apps) |
 | `iconPath` | string | Relative path (for website) |
 | `sortOrder` | number | Ascending |
@@ -193,7 +194,7 @@ Example: Stock@SG not for kids → `"hideInAppIds": ["mathbuddy"]` and/or Math B
 ### Canonical fetch URL
 
 ```text
-https://mobileatsg.github.io/more-apps.json
+https://mobilesg.org/more-apps.json
 ```
 
 Suggested app cache TTL: **12–24 hours** (still refresh when opening Settings / More apps if stale).
@@ -218,16 +219,16 @@ Each app’s live policy is **`{slug}/index.html`** in **this** folder. One publ
 
 | Slug folder | Public URL |
 |-------------|------------|
-| `sudoku/` | https://mobileatsg.github.io/sudoku/ |
+| `sudoku/` | https://mobilesg.org/sudoku/ |
 | `sudokumix/` | Redirect → `/sudoku/` |
-| `pixelcolor/` | https://mobileatsg.github.io/pixelcolor/ |
-| `smartalarm/` | https://mobileatsg.github.io/smartalarm/ |
-| `mathbuddy/` | https://mobileatsg.github.io/mathbuddy/ |
-| `parksg/` | https://mobileatsg.github.io/parksg/ |
-| `totomatch/` | https://mobileatsg.github.io/totomatch/ |
-| `fourdmatch/` | https://mobileatsg.github.io/fourdmatch/ |
-| `stocksg/` | https://mobileatsg.github.io/stocksg/ |
-| `stocksg/eula/` | https://mobileatsg.github.io/stocksg/eula/ |
+| `pixelcolor/` | https://mobilesg.org/pixelcolor/ |
+| `smartalarm/` | https://mobilesg.org/smartalarm/ |
+| `mathbuddy/` | https://mobilesg.org/mathbuddy/ |
+| `parksg/` | https://mobilesg.org/parksg/ |
+| `totomatch/` | https://mobilesg.org/totomatch/ |
+| `fourdmatch/` | https://mobilesg.org/fourdmatch/ |
+| `stocksg/` | https://mobilesg.org/stocksg/ |
+| `stocksg/eula/` | https://mobilesg.org/stocksg/eula/ |
 
 `/generate-privacy-policy-html` writes the app copy **and** overwrites `website/{slug}/index.html` here. Then push this repo.
 
@@ -243,9 +244,9 @@ Target: **`mobileatsg/mobileatsg.github.io`**.
    - `assets/…`
    - `{slug}/index.html` (privacy pages)
 2. Confirm:
-   - https://mobileatsg.github.io/
-   - https://mobileatsg.github.io/more-apps.json
-   - https://mobileatsg.github.io/{slug}/
+   - https://mobilesg.org/
+   - https://mobilesg.org/more-apps.json
+   - https://mobilesg.org/{slug}/
 
 ---
 
@@ -269,5 +270,5 @@ To hide from in-app More apps only (keep on website): `"showInMobileApp": false`
 |-------|--------|
 | Developer | Mobile@SG |
 | Support | mobileatsg@gmail.com |
-| Site | https://mobileatsg.github.io/ |
-| Catalog | https://mobileatsg.github.io/more-apps.json |
+| Site | https://mobilesg.org/ |
+| Catalog | https://mobilesg.org/more-apps.json |
