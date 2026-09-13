@@ -875,7 +875,11 @@
       }
 
       function iconSrc(app) {
-        var raw = app.iconUrl || (app.iconPath ? "/" + String(app.iconPath).replace(/^\//, "") : "");
+        // Prefer relative iconPath so www vs apex stay on the current host.
+        // iconUrl stays absolute for in-app More apps (Coil / URLSession).
+        var raw = app.iconPath
+          ? "/" + String(app.iconPath).replace(/^\//, "")
+          : (app.iconUrl || "");
         return resolveUrl(raw);
       }
 
