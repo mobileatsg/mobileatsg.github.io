@@ -126,8 +126,9 @@ In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 | `playStoreUrl` | string \| null | Optional override |
 | `appStoreUrl` | string \| null | Optional override |
 | `privacyUrl` | string | **Host-relative** path, e.g. `/{id}/` (resolved against the page/catalog origin — works for `www` and apex) |
-| `iconUrl` | string | **Absolute** PNG URL for in-app More apps, e.g. `https://mobilesg.org/assets/apps/{id}.png` (not host-relative — apps cannot load `/assets/...`) |
-| `iconPath` | string | Relative path for website, e.g. `assets/apps/{id}.png` |
+| `iconUrl` | string | **Host-relative** path, e.g. `/assets/apps/{id}.png` |
+| `iconUrl` | string | Absolute icon URL (for apps) |
+| `iconPath` | string | Relative path (for website) |
 | `sortOrder` | number | Ascending |
 | `enabled` | bool | `false` hides without deleting (website + in-app) |
 | `showInMobileApp` | bool | **Optional.** `false` = hide from **in-app** More apps only; website still shows. **Missing ⇒ `true`** (backward compatible; do not bump `schemaVersion`) |
