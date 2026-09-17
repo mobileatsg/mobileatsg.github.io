@@ -231,28 +231,23 @@ def render_card(app: dict, publisher: dict) -> str:
     }}
     .brand img {{ width: 28px; height: 28px; border-radius: 8px; }}
 
-    /* Compact feature strip — not a huge poster */
+    /* Full graphic, natural 1024×500 aspect — no crop / zoom */
     .banner-wrap {{
       margin-bottom: 1.1rem;
       border-radius: 14px;
       overflow: hidden;
       border: 1px solid var(--border);
-      max-height: 140px;
       box-shadow: var(--shadow);
-    }}
-    @media (min-width: 800px) {{
-      .banner-wrap {{ max-height: 168px; }}
+      background: #0b0e11;
+      line-height: 0;
     }}
     .banner {{
       display: block;
       width: 100%;
-      height: 140px;
-      object-fit: cover;
+      height: auto;
+      aspect-ratio: 1024 / 500;
+      object-fit: contain;
       object-position: center;
-      filter: saturate(1.05) contrast(1.02);
-    }}
-    @media (min-width: 800px) {{
-      .banner {{ height: 168px; }}
     }}
 
     .hero {{
