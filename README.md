@@ -35,8 +35,10 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 
 | Path | Role |
 |------|------|
-| `more-apps.json` | **Shared catalog** (website + apps) — single source |
-| `functions/more-apps.json.js` | Edge filter: `?platform=ios` / `android` strips other-store fields + `showInMobileApp != false` |
+| `more-apps.json` | **Shared catalog** — **edit this only** (website) |
+| `more-apps-ios.json` / `more-apps-android.json` | **Generated** for in-app More apps (no other-store fields; `showInMobileApp != false`) |
+| `scripts/generate-platform-catalogs.py` | Builds the platform catalogs from `more-apps.json` |
+| `functions/more-apps.json.js` | Optional CF Pages `?platform=ios\|android` (same filters when Functions are enabled) |
 | `apps/{id}/` | **Share / marketing card** (OG + smart store redirect) — generate via `scripts/generate-app-cards.py` |
 | `scripts/generate-app-cards.py` | Builds static `/apps/{id}/index.html` from the catalog |
 | `index.html` | Landing page (reads catalog) |
