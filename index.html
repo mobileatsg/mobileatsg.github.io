@@ -982,6 +982,12 @@
         var shareHref = app.shareUrl
           ? resolveUrl(app.shareUrl)
           : (app.id ? resolveUrl("/apps/" + app.id + "/") : "");
+        // Keep the same UI language on the app share page.
+        if (shareHref) {
+          var sep = shareHref.indexOf("?") >= 0 ? "&" : "?";
+          var langQ = currentLocale === "zh-Hans" ? "zh" : "en";
+          shareHref = shareHref + sep + "lang=" + langQ;
+        }
         // No separate "App page" button (keeps actions on one row). Icon + title open the share card.
         var actions =
           storeBtn(t("appStore"), appStore, iosClickable, false, {

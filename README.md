@@ -35,7 +35,8 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 
 | Path | Role |
 |------|------|
-| `more-apps.json` | **Shared catalog** (website + apps) |
+| `more-apps.json` | **Shared catalog** (website + apps) — single source |
+| `functions/more-apps.json.js` | Edge filter: `?platform=ios` / `android` strips other-store fields + `showInMobileApp != false` |
 | `apps/{id}/` | **Share / marketing card** (OG + smart store redirect) — generate via `scripts/generate-app-cards.py` |
 | `scripts/generate-app-cards.py` | Builds static `/apps/{id}/index.html` from the catalog |
 | `index.html` | Landing page (reads catalog) |

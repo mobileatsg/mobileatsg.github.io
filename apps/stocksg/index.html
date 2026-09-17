@@ -311,11 +311,33 @@
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
   var params = new URLSearchParams(location.search);
-  var langParam = (params.get("lang") || "").toLowerCase();
-  var locale = (langParam === "zh" || langParam.indexOf("zh") === 0) ? "zh-Hans" : "en";
-  if (!langParam && /zh/i.test(navigator.language || "")) locale = "zh-Hans";
+  var LOCALE_KEY = "mobilesg.locale"; // same key as home page
+  var langParam = (params.get("lang") || params.get("locale") || "").toLowerCase();
+
+  function resolveLocale() {
+    if (langParam === "zh" || langParam.indexOf("zh") === 0 || langParam === "cn") return "zh-Hans";
+    if (langParam === "en") return "en";
+    try {
+      var saved = localStorage.getItem(LOCALE_KEY);
+      if (saved === "zh-Hans" || saved === "zh") return "zh-Hans";
+      if (saved === "en") return "en";
+    } catch (e) {}
+    if (/zh/i.test(navigator.language || "")) return "zh-Hans";
+    return "en";
+  }
+
+  var locale = resolveLocale();
+  try { localStorage.setItem(LOCALE_KEY, locale); } catch (e) {}
 
   function applyLocale(loc) {
+    try { localStorage.setItem(LOCALE_KEY, loc); } catch (e) {}
+    // Keep URL shareable / back-button consistent with chosen language.
+    try {
+      var u = new URL(location.href);
+      u.searchParams.set("lang", loc === "zh-Hans" ? "zh" : "en");
+      history.replaceState(null, "", u.pathname + u.search + u.hash);
+    } catch (e) {}
+
     var L = data[loc] || data.en;
     document.getElementById("el-name").textContent = L.name;
     document.getElementById("el-tagline").textContent = L.tagline || L.blurb;
@@ -331,10 +353,14 @@
     var priv = document.getElementById("el-privacy");
     if (priv) priv.textContent = L.privacy || "Privacy policy";
     var all = document.getElementById("el-all-apps");
-    if (all) all.textContent = L.allApps || "All apps";
+    if (all) {
+      all.textContent = L.allApps || "All apps";
+      all.href = "/?lang=" + (loc === "zh-Hans" ? "zh" : "en");
+    }
     var sup = document.getElementById("el-support");
     if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
+    document.documentElement.lang = loc === "zh-Hans" ? "zh-Hans" : "en";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {
       ul.innerHTML = L.highlights.map(function (h) {
@@ -354,12 +380,18 @@
         : (L.getItOn || "Get it on");
     });
     var link = document.getElementById("lang-link");
-    if (loc === "zh-Hans") {
-      link.textContent = "EN";
-      link.href = link.getAttribute("data-en");
-    } else {
-      link.textContent = "中文";
-      link.href = link.getAttribute("data-zh");
+    if (link) {
+      if (loc === "zh-Hans") {
+        link.textContent = "EN";
+        link.href = link.getAttribute("data-en");
+      } else {
+        link.textContent = "中文";
+        link.href = link.getAttribute("data-zh");
+      }
+      link.onclick = function (ev) {
+        ev.preventDefault();
+        applyLocale(loc === "zh-Hans" ? "en" : "zh-Hans");
+      };
     }
   }
   applyLocale(locale);
