@@ -36,6 +36,8 @@ Do **not** duplicate the app list in HTML or hardcode full catalogs in binaries 
 | Path | Role |
 |------|------|
 | `more-apps.json` | **Shared catalog** (website + apps) |
+| `apps/{id}/` | **Share / marketing card** (OG + smart store redirect) — generate via `scripts/generate-app-cards.py` |
+| `scripts/generate-app-cards.py` | Builds static `/apps/{id}/index.html` from the catalog |
 | `index.html` | Landing page (reads catalog) |
 | `assets/brand/` | Mobile@SG logo |
 | `assets/apps/` | Per-app icons (256×256) |
@@ -116,6 +118,9 @@ In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 | `name` | string | Display name (**English** default) |
 | `blurb` | string | One short description (**English**) |
 | `category` | string | Chip label (**English**) |
+| `shareUrl` | string | Canonical share page, e.g. `/apps/stocksg/` (not raw store links) |
+| `tagline` | string? | Optional shorter line on the share card (defaults to `blurb`) |
+| `ogImageUrl` | string? | Optional OG image (defaults to `iconUrl`) |
 | `locales` | object | Optional `zh-Hans` overrides for `name`, `blurb`, `category`, `tags` |
 | `status` | object or string | **Per platform** (preferred) or legacy single string (see below) |
 | `platforms` | `ios` \| `android`[] | Platforms this app ships on |
@@ -254,6 +259,8 @@ Target: **`mobileatsg/mobileatsg.github.io`**.
 
 1. Add icon: `assets/apps/{id}.png` (256×256).  
 2. Append an entry to **`more-apps.json`** (`enabled: true`, `showInMobileApp: true` unless you want website-only).  
+2b. Run **`python3 scripts/generate-app-cards.py --write-share-urls`** and commit `apps/{id}/`. Share target = `https://mobilesg.org/apps/{id}/` (privacy stays at `/{id}/`).  
+
 3. Deploy Pages.  
 4. Fill `iosAppStoreId` / store URLs when listings go live (edit JSON only).  
 

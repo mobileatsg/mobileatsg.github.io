@@ -241,6 +241,21 @@
       /* Allow wrap on narrow cards; still cap long single tokens */
       overflow-wrap: anywhere;
     }
+    .card-title-link {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      min-width: 0;
+      flex: 1;
+      color: inherit;
+      text-decoration: none;
+    }
+    .card-title-link:hover {
+      text-decoration: none;
+    }
+    .card-title-link:hover .card-title {
+      color: var(--link);
+    }
     .card-blurb-wrap {
       display: flex;
       flex-direction: column;
@@ -651,6 +666,7 @@
           less: "Less",
           appStore: "App Store",
           googlePlay: "Google Play",
+          appPage: "App page",
           privacy: "Privacy",
           platformStatus: "Platform status",
           loadErrorPrefix: "Could not load the app catalog. Open this site via a local server (e.g. python3 -m http.server) or deploy to GitHub Pages. Catalog URL:",
@@ -691,6 +707,7 @@
           less: "收起",
           appStore: "App Store",
           googlePlay: "Google Play",
+          appPage: "应用页",
           privacy: "隐私",
           platformStatus: "平台状态",
           loadErrorPrefix: "无法加载应用目录。请通过本地服务器打开本站（例如 python3 -m http.server）或部署到 GitHub Pages。目录地址：",
@@ -952,7 +969,13 @@
         }
 
         var play = playHref(app);
+        var shareHref = app.shareUrl
+          ? resolveUrl(app.shareUrl)
+          : (app.id ? resolveUrl("/apps/" + app.id + "/") : "");
         var actions =
+          (shareHref
+            ? '<a class="btn" href="' + esc(shareHref) + '">' + esc(t("appPage")) + "</a>"
+            : "") +
           storeBtn(t("appStore"), appStoreHref(app), iosPublished, false) +
           storeBtn(t("googlePlay"), play, !!(androidPublished && play), true) +
           (app.privacyUrl
@@ -964,11 +987,18 @@
           hasAndroid && androidStatus ? "android:" + androidStatus : "android:na"
         ].join(";");
 
+        var titleBlock = shareHref
+          ? ('<a class="card-title-link" href="' + esc(shareHref) + '">' +
+              '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(name) + ' icon" loading="lazy" />' +
+              '<h3 class="card-title">' + esc(name) + "</h3>" +
+            "</a>")
+          : ('<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(name) + ' icon" loading="lazy" />' +
+              '<h3 class="card-title">' + esc(name) + "</h3>");
+
         return (
           '<article class="card" data-app-id="' + esc(app.id) + '" data-status="' + esc(dataStatus) + '">' +
             '<div class="card-header">' +
-              '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(name) + ' icon" loading="lazy" />' +
-              '<h3 class="card-title">' + esc(name) + "</h3>" +
+              titleBlock +
             "</div>" +
             '<div class="card-blurb-wrap">' +
               '<p class="card-blurb" id="blurb-' + esc(app.id) + '">' + esc(blurb) + "</p>" +

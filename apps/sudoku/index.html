@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sudoku Mix — Mobile@SG</title>
+  <meta name="description" content="Colorful Sudoku with numbers, ABC, symbols &amp; Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints &amp; stats." />
+  <meta name="author" content="Mobile@SG" />
+  <link rel="canonical" href="https://mobilesg.org/apps/sudoku/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Mobile@SG" />
+  <meta property="og:title" content="Sudoku Mix" />
+  <meta property="og:description" content="Colorful Sudoku with numbers, ABC, symbols &amp; Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints &amp; stats." />
+  <meta property="og:url" content="https://mobilesg.org/apps/sudoku/" />
+  <meta property="og:image" content="https://mobilesg.org/assets/apps/sudoku.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Sudoku Mix" />
+  <meta name="twitter:description" content="Colorful Sudoku with numbers, ABC, symbols &amp; Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints &amp; stats." />
+  <meta name="twitter:image" content="https://mobilesg.org/assets/apps/sudoku.png" />
+  <meta name="theme-color" content="#0f1419" />
+  <link rel="icon" href="/assets/brand/mobileatsg-logo.png" type="image/png" />
+  <style>
+    :root {
+      --bg: #0f1419;
+      --surface: #1a2332;
+      --text: #e7ecf3;
+      --muted: #9aa8b8;
+      --accent: #5b9fd4;
+      --border: #2a3648;
+      --link: #7ec8ff;
+      --radius: 20px;
+      --shadow: 0 16px 48px rgba(0,0,0,.35);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.55;
+      color: var(--text);
+      background:
+        radial-gradient(900px 480px at 15% -10%, rgba(91,159,212,.16), transparent 55%),
+        radial-gradient(700px 400px at 100% 0%, rgba(123,108,240,.1), transparent 50%),
+        var(--bg);
+    }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap {
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-size: .9rem;
+    }
+    .brand {
+      display: flex; align-items: center; gap: .55rem;
+      color: inherit; font-weight: 600;
+    }
+    .brand img { width: 28px; height: 28px; border-radius: 8px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.4rem 1.5rem;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .icon {
+      width: 96px; height: 96px; border-radius: 22px;
+      object-fit: cover; background: #fff;
+      box-shadow: var(--shadow);
+      margin: 0 auto 1.1rem;
+      display: block;
+    }
+    .chip {
+      display: inline-block;
+      font-size: .75rem;
+      color: var(--muted);
+      background: #243044;
+      border-radius: 999px;
+      padding: .2rem .65rem;
+      margin-bottom: .65rem;
+    }
+    h1 {
+      margin: 0 0 .35rem;
+      font-size: 1.55rem;
+      letter-spacing: -.02em;
+    }
+    .tagline {
+      margin: 0 0 1.25rem;
+      color: var(--muted);
+      font-size: .98rem;
+    }
+    .btns {
+      display: flex; flex-direction: column; gap: .65rem;
+      margin: 1.25rem 0 1rem;
+    }
+    .btn {
+      display: block;
+      padding: .85rem 1rem;
+      border-radius: 12px;
+      font-weight: 650;
+      text-decoration: none !important;
+      color: #fff !important;
+    }
+    .btn-ios { background: #0a84ff; }
+    .btn-play { background: #3ddc84; color: #0b1a10 !important; }
+    .btn-stay {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted) !important;
+      font-weight: 500;
+      font-size: .9rem;
+    }
+    .meta {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-top: 1rem;
+    }
+    .meta a { margin: 0 .35rem; }
+    .hint {
+      margin-top: 1rem;
+      font-size: .8rem;
+      color: var(--muted);
+      min-height: 1.2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <a class="brand" href="/">
+        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="28" height="28" />
+        Mobile@SG
+      </a>
+      <a href="/?lang=zh" id="lang-link" data-en="/apps/sudoku/?lang=en" data-zh="/apps/sudoku/?lang=zh">中文</a>
+    </div>
+    <article class="card">
+      <img class="icon" src="https://mobilesg.org/assets/apps/sudoku.png" alt="Sudoku Mix icon" width="96" height="96" />
+      <div class="chip" id="el-category">Games · Puzzle</div>
+      <h1 id="el-name">Sudoku Mix</h1>
+      <p class="tagline" id="el-tagline">Colorful Sudoku with numbers, ABC, symbols &amp; Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints &amp; stats.</p>
+      <div class="btns">
+        <a class="btn btn-ios" id="btn-ios" href="https://apps.apple.com/sg/app/id6795599852">App Store</a>
+        <a class="btn btn-play" id="btn-android" href="https://play.google.com/store/apps/details?id=com.mobilesg.sudoku">Google Play</a>
+        <a class="btn btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
+      </div>
+      <p class="meta">
+        <a href="https://mobilesg.org/sudoku/">Privacy</a>
+        ·
+        <a href="/">All apps</a>
+        ·
+        <a href="mailto:mobileatsg@gmail.com">Support</a>
+      </p>
+      <p class="hint" id="hint"></p>
+    </article>
+  </div>
+  <script type="application/json" id="app-data">{"id": "sudoku", "en": {"name": "Sudoku Mix", "blurb": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.", "category": "Games · Puzzle", "tagline": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats."}, "zh-Hans": {"name": "数独混合", "blurb": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。", "category": "游戏 · 益智", "tagline": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。"}, "iosUrl": "https://apps.apple.com/sg/app/id6795599852", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.sudoku", "privacyUrl": "https://mobilesg.org/sudoku/", "shareUrl": "https://mobilesg.org/apps/sudoku/"}</script>
+  <script>
+(function () {
+  var data = JSON.parse(document.getElementById("app-data").textContent);
+  var params = new URLSearchParams(location.search);
+  var stay = params.get("stay") === "1";
+  var go = (params.get("go") || "").toLowerCase();
+  var langParam = (params.get("lang") || "").toLowerCase();
+  var locale = (langParam === "zh" || langParam.indexOf("zh") === 0) ? "zh-Hans" : "en";
+  if (!langParam && /zh/i.test(navigator.language || "")) locale = "zh-Hans";
+
+  function applyLocale(loc) {
+    var L = data[loc] || data.en;
+    document.getElementById("el-name").textContent = L.name;
+    document.getElementById("el-tagline").textContent = L.tagline || L.blurb;
+    document.getElementById("el-category").textContent = L.category;
+    document.title = L.name + " — Mobile@SG";
+    var link = document.getElementById("lang-link");
+    if (loc === "zh-Hans") {
+      link.textContent = "EN";
+      link.href = link.getAttribute("data-en");
+    } else {
+      link.textContent = "中文";
+      link.href = link.getAttribute("data-zh");
+    }
+  }
+  applyLocale(locale);
+
+  function isIOS() {
+    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  }
+  function isAndroid() { return /Android/i.test(navigator.userAgent); }
+
+  function targetUrl() {
+    if (go === "ios" || go === "apple") return data.iosUrl;
+    if (go === "android" || go === "play") return data.androidUrl;
+    if (go === "1" || go === "store") {
+      if (isIOS() && data.iosUrl) return data.iosUrl;
+      if (isAndroid() && data.androidUrl) return data.androidUrl;
+      return data.iosUrl || data.androidUrl;
+    }
+    if (isIOS() && data.iosUrl) return data.iosUrl;
+    if (isAndroid() && data.androidUrl) return data.androidUrl;
+    return null;
+  }
+
+  // Soft redirect on mobile (OG crawlers rarely look like phones; ?stay=1 disables).
+  var url = targetUrl();
+  var mobile = isIOS() || isAndroid();
+  var force = go === "1" || go === "store" || go === "ios" || go === "android" || go === "apple" || go === "play";
+  if (url && !stay && (mobile || force)) {
+    var hint = document.getElementById("hint");
+    hint.textContent = locale === "zh-Hans" ? "正在打开商店…" : "Opening the store…";
+    setTimeout(function () { location.replace(url); }, force ? 200 : 1200);
+  }
+})();
+  </script>
+</body>
+</html>
