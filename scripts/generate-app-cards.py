@@ -453,9 +453,7 @@ def render_card(app: dict, publisher: dict) -> str:
         <div class="btns">
           {ios_btn}
           {and_btn}
-          <a class="btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
         </div>
-        <p class="hint" id="hint"></p>
       </div>
     </section>
 
@@ -479,8 +477,6 @@ def render_card(app: dict, publisher: dict) -> str:
 (function () {{
   var data = JSON.parse(document.getElementById("app-data").textContent);
   var params = new URLSearchParams(location.search);
-  var stay = params.get("stay") === "1";
-  var go = (params.get("go") || "").toLowerCase();
   var langParam = (params.get("lang") || "").toLowerCase();
   var locale = (langParam === "zh" || langParam.indexOf("zh") === 0) ? "zh-Hans" : "en";
   if (!langParam && /zh/i.test(navigator.language || "")) locale = "zh-Hans";
@@ -526,37 +522,7 @@ def render_card(app: dict, publisher: dict) -> str:
   }}
   applyLocale(locale);
 
-  function isIOS() {{
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  }}
-  function isAndroid() {{ return /Android/i.test(navigator.userAgent); }}
-
-  function targetUrl() {{
-    // Soft-redirect only to Published stores.
-    if ((go === "ios" || go === "apple") && data.iosStatus === "Published") return data.iosUrl;
-    if ((go === "android" || go === "play") && data.androidStatus === "Published") return data.androidUrl;
-    if (go === "1" || go === "store") {{
-      if (isIOS() && data.iosStatus === "Published" && data.iosUrl) return data.iosUrl;
-      if (isAndroid() && data.androidStatus === "Published" && data.androidUrl) return data.androidUrl;
-      if (data.iosStatus === "Published") return data.iosUrl;
-      if (data.androidStatus === "Published") return data.androidUrl;
-      return null;
-    }}
-    if (isIOS() && data.iosStatus === "Published" && data.iosUrl) return data.iosUrl;
-    if (isAndroid() && data.androidStatus === "Published" && data.androidUrl) return data.androidUrl;
-    return null;
-  }}
-
-  var url = targetUrl();
-  var mobile = isIOS() || isAndroid();
-  var force = go === "1" || go === "store" || go === "ios" || go === "android" || go === "apple" || go === "play";
-  if (url && !stay && (mobile || force)) {{
-    var hint = document.getElementById("hint");
-    var L = data[locale] || data.en;
-    hint.textContent = L.opening || "Opening the store…";
-    setTimeout(function () {{ location.replace(url); }}, force ? 200 : 1200);
-  }}
+  // No auto-redirect — user taps App Store / Google Play.
 }})();
   </script>
 </body>

@@ -288,9 +288,7 @@
         <div class="btns">
           <span class="store-btn store-ios is-soon" id="btn-ios" aria-disabled="true"><svg class="store-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.29c-.03-2.34 1.91-3.46 2-3.51-1.09-1.59-2.78-1.81-3.38-1.83-1.44-.15-2.81.85-3.54.85-.73 0-1.86-.83-3.06-.81-1.57.02-3.02.92-3.83 2.33-1.64 2.84-.42 7.04 1.17 9.35.78 1.13 1.71 2.4 2.93 2.35 1.18-.05 1.62-.76 3.04-.76 1.41 0 1.81.76 3.05.74 1.26-.02 2.06-1.15 2.83-2.29.89-1.3 1.26-2.56 1.28-2.62-.03-.01-2.45-.94-2.49-3.8zM14.2 5.48c.65-.79 1.09-1.88.97-2.97-0.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.82-.99 2.89 1.05.08 2.12-.53 2.77-1.34z"/></svg><span class="store-text"><span class="store-top">App Store</span><span class="store-name" data-i18n-soon>Coming soon</span></span></span>
           <a class="store-btn store-play" id="btn-android" href="https://play.google.com/store/apps/details?id=com.mobilesg.totomatch" rel="noopener noreferrer"><svg class="store-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M3.6 2.2 13.3 12 3.6 21.8A2.1 2.1 0 0 1 3 20.1V3.9c0-.7.2-1.3.6-1.7z"/><path fill="#FBBC04" d="m13.3 12 2.7-2.7 4.2 2.4c.7.4.7 1.5 0 1.9l-4.2 2.4L13.3 12z"/><path fill="#4285F4" d="M13.3 12 3.6 2.2A2.3 2.3 0 0 1 5.1 2l11.2 6.5L13.3 12z"/><path fill="#34A853" d="M13.3 12 16.3 15.5 5.1 22a2.3 2.3 0 0 1-1.5-.2L13.3 12z"/></svg><span class="store-text"><span class="store-top" data-i18n-top>Get it on</span><span class="store-name">Google Play</span></span></a>
-          <a class="btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
         </div>
-        <p class="hint" id="hint"></p>
       </div>
     </section>
 
@@ -314,8 +312,6 @@
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
   var params = new URLSearchParams(location.search);
-  var stay = params.get("stay") === "1";
-  var go = (params.get("go") || "").toLowerCase();
   var langParam = (params.get("lang") || "").toLowerCase();
   var locale = (langParam === "zh" || langParam.indexOf("zh") === 0) ? "zh-Hans" : "en";
   if (!langParam && /zh/i.test(navigator.language || "")) locale = "zh-Hans";
@@ -361,37 +357,7 @@
   }
   applyLocale(locale);
 
-  function isIOS() {
-    return /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-  }
-  function isAndroid() { return /Android/i.test(navigator.userAgent); }
-
-  function targetUrl() {
-    // Soft-redirect only to Published stores.
-    if ((go === "ios" || go === "apple") && data.iosStatus === "Published") return data.iosUrl;
-    if ((go === "android" || go === "play") && data.androidStatus === "Published") return data.androidUrl;
-    if (go === "1" || go === "store") {
-      if (isIOS() && data.iosStatus === "Published" && data.iosUrl) return data.iosUrl;
-      if (isAndroid() && data.androidStatus === "Published" && data.androidUrl) return data.androidUrl;
-      if (data.iosStatus === "Published") return data.iosUrl;
-      if (data.androidStatus === "Published") return data.androidUrl;
-      return null;
-    }
-    if (isIOS() && data.iosStatus === "Published" && data.iosUrl) return data.iosUrl;
-    if (isAndroid() && data.androidStatus === "Published" && data.androidUrl) return data.androidUrl;
-    return null;
-  }
-
-  var url = targetUrl();
-  var mobile = isIOS() || isAndroid();
-  var force = go === "1" || go === "store" || go === "ios" || go === "android" || go === "apple" || go === "play";
-  if (url && !stay && (mobile || force)) {
-    var hint = document.getElementById("hint");
-    var L = data[locale] || data.en;
-    hint.textContent = L.opening || "Opening the store…";
-    setTimeout(function () { location.replace(url); }, force ? 200 : 1200);
-  }
+  // No auto-redirect — user taps App Store / Google Play.
 })();
   </script>
 </body>
