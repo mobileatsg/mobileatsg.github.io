@@ -392,17 +392,21 @@ def render_card(app: dict, publisher: dict) -> str:
       margin: 0;
       padding: 0;
       list-style: none;
-      display: grid;
-      gap: 0;
-    }}
-    @media (min-width: 800px) {{
-      .features {{ grid-template-columns: 1fr 1fr; gap: 0 1.25rem; }}
     }}
     .features li {{
       position: relative;
-      padding: .5rem 0 .5rem 1.25rem;
+      padding: .55rem 0 .55rem 1.25rem;
       border-bottom: 1px solid rgba(42,54,72,.55);
       font-size: .92rem;
+      /* One highlight per row (no multi-column wrap). */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }}
+    @media (max-width: 640px) {{
+      .features li {{
+        white-space: normal;
+      }}
     }}
     .features li::before {{
       content: "";
