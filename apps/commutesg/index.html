@@ -296,17 +296,17 @@
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.</p>
-      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>Mobile@SG</strong>.</p>
       <p class="links">
-        <a href="https://mobilesg.org/commutesg/">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
+        <a id="el-privacy" href="https://mobilesg.org/commutesg/">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:mobileatsg@gmail.com">Support</a>
       </p>
     </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "commutesg", "en": {"name": "Board SG", "blurb": "Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.", "category": "Navigation", "tagline": "Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.", "highlights": ["Board: favourite bus service + stop with up to three DataMall arrival times", "Seat, standing, crowded, and wheelchair (WAB) icons for that arriving bus", "Remaining-ride rain (NEA 2-hour forecast) — fair weather stays hidden", "Remaining-ride Heavy Traffic and Accident only — not roadworks", "Route map from your stop through the terminus when official geometry is stored", "Buses tab: search services, hours, and recents", "Map: nearby stops and place Directions (Google Maps or Apple Maps, transit)"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "看板 SG", "blurb": "新加坡巴士看板 — 收藏线路与车站、实时到站、沿线事故，以及锁屏 Live 看板。", "category": "导航", "tagline": "新加坡巴士看板 — 收藏线路与车站、实时到站、沿线事故，以及锁屏 Live 看板。", "highlights": ["Board: favourite bus service + stop with up to three DataMall arrival times", "Seat, standing, crowded, and wheelchair (WAB) icons for that arriving bus", "Remaining-ride rain (NEA 2-hour forecast) — fair weather stays hidden", "Remaining-ride Heavy Traffic and Accident only — not roadworks", "Route map from your stop through the terminus when official geometry is stored", "Buses tab: search services, hours, and recents", "Map: nearby stops and place Directions (Google Maps or Apple Maps, transit)"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6804225628", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.commutesg", "privacyUrl": "https://mobilesg.org/commutesg/", "shareUrl": "https://mobilesg.org/apps/commutesg/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
+  <script type="application/json" id="app-data">{"id": "commutesg", "en": {"name": "Board SG", "blurb": "Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.", "category": "Navigation", "tagline": "Singapore bus board — favourite service + stop, live arrivals, route incidents, and lock-screen Live board.", "highlights": ["Board: favourite bus service + stop with up to three DataMall arrival times", "Seat, standing, crowded, and wheelchair (WAB) icons for that arriving bus", "Remaining-ride rain (NEA 2-hour forecast) — fair weather stays hidden", "Remaining-ride Heavy Traffic and Accident only — not roadworks", "Route map from your stop through the terminus when official geometry is stored", "Buses tab: search services, hours, and recents", "Map: nearby stops and place Directions (Google Maps or Apple Maps, transit)"], "featuresTitle": "Highlights", "aboutTitle": "About", "publishedBy": "Published by", "privacy": "Privacy policy", "allApps": "All apps", "support": "Support", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "看板 SG", "blurb": "新加坡巴士看板 — 收藏线路与车站、实时到站、沿线事故，以及锁屏 Live 看板。", "category": "导航", "tagline": "新加坡巴士看板 — 收藏线路与车站、实时到站、沿线事故，以及锁屏 Live 看板。", "highlights": ["看板：收藏巴士线路 + 车站，最多三个 DataMall 到站时间", "该班车的座位、站立、拥挤与无障碍（WAB）图标", "余程降雨（NEA 两小时预报）— 好天气不打扰", "余程仅显示严重拥堵与事故 — 不含施工", "有官方线路几何时，从本站到终点的路线图", "巴士页：搜索线路、营运时间与最近使用", "地图：附近车站与地点导航（Google / Apple 地图，公交）"], "featuresTitle": "亮点", "aboutTitle": "关于", "publishedBy": "出品方", "privacy": "隐私政策", "allApps": "全部应用", "support": "支持", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6804225628", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.commutesg", "privacyUrl": "https://mobilesg.org/commutesg/", "shareUrl": "https://mobilesg.org/apps/commutesg/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -326,6 +326,14 @@
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {

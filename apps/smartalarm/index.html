@@ -296,17 +296,17 @@
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.</p>
-      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>Mobile@SG</strong>.</p>
       <p class="links">
-        <a href="https://mobilesg.org/smartalarm/">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
+        <a id="el-privacy" href="https://mobilesg.org/smartalarm/">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:mobileatsg@gmail.com">Support</a>
       </p>
     </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "smartalarm", "en": {"name": "Smart Alarm No Ads", "blurb": "Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.", "category": "Utilities", "tagline": "Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.", "highlights": ["Real system alarms — reliable rings, not background hacks", "Pre-alarm countdown — Live Activity heads-up on Lock Screen or Dynamic Island", "Optional pre-wake notices — time-sensitive reminders before the ring", "Skip once — silence only the next ring; repeating alarms keep going", "Pause dates — don’t ring between two dates (travel, sick days, holidays)", "Snooze — on by default (10 minutes; adjustable 1–15 per alarm)", "Sounds — museum clocks, classic tones, and import your own audio"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "智能闹钟（无广告）", "blurb": "本地优先的闹钟，依托系统可靠响铃；可选预响 Live Activity、贪睡、跳过一次与日期暂停 — 无广告。", "category": "工具", "tagline": "本地优先的闹钟，依托系统可靠响铃；可选预响 Live Activity、贪睡、跳过一次与日期暂停 — 无广告。", "highlights": ["Real system alarms — reliable rings, not background hacks", "Pre-alarm countdown — Live Activity heads-up on Lock Screen or Dynamic Island", "Optional pre-wake notices — time-sensitive reminders before the ring", "Skip once — silence only the next ring; repeating alarms keep going", "Pause dates — don’t ring between two dates (travel, sick days, holidays)", "Snooze — on by default (10 minutes; adjustable 1–15 per alarm)", "Sounds — museum clocks, classic tones, and import your own audio"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6796323409", "androidUrl": null, "privacyUrl": "https://mobilesg.org/smartalarm/", "shareUrl": "https://mobilesg.org/apps/smartalarm/", "iosStatus": "Published", "androidStatus": null}</script>
+  <script type="application/json" id="app-data">{"id": "smartalarm", "en": {"name": "Smart Alarm No Ads", "blurb": "Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.", "category": "Utilities", "tagline": "Local-first alarms with system reliability, optional pre-alarm Live Activity, snooze, skip once, and pause dates — no ads.", "highlights": ["Real system alarms — reliable rings, not background hacks", "Pre-alarm countdown — Live Activity heads-up on Lock Screen or Dynamic Island", "Optional pre-wake notices — time-sensitive reminders before the ring", "Skip once — silence only the next ring; repeating alarms keep going", "Pause dates — don’t ring between two dates (travel, sick days, holidays)", "Snooze — on by default (10 minutes; adjustable 1–15 per alarm)", "Sounds — museum clocks, classic tones, and import your own audio"], "featuresTitle": "Highlights", "aboutTitle": "About", "publishedBy": "Published by", "privacy": "Privacy policy", "allApps": "All apps", "support": "Support", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "智能闹钟（无广告）", "blurb": "本地优先的闹钟，依托系统可靠响铃；可选预响 Live Activity、贪睡、跳过一次与日期暂停 — 无广告。", "category": "工具", "tagline": "本地优先的闹钟，依托系统可靠响铃；可选预响 Live Activity、贪睡、跳过一次与日期暂停 — 无广告。", "highlights": ["真正的系统闹钟 — 可靠响铃，非后台取巧", "预响倒计时 — 锁屏 / 灵动岛 Live Activity 提醒", "可选醒前提醒 — 响铃前的时效通知", "跳过一次 — 只静音下一次；重复闹钟继续", "暂停日期 — 旅行、病假、假期区间不响", "贪睡 — 默认 10 分钟（可调 1–15）", "铃声 — 博物馆钟、经典音，也可导入音频"], "featuresTitle": "亮点", "aboutTitle": "关于", "publishedBy": "出品方", "privacy": "隐私政策", "allApps": "全部应用", "support": "支持", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6796323409", "androidUrl": null, "privacyUrl": "https://mobilesg.org/smartalarm/", "shareUrl": "https://mobilesg.org/apps/smartalarm/", "iosStatus": "Published", "androidStatus": null}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -326,6 +326,14 @@
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {

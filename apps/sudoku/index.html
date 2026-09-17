@@ -296,17 +296,17 @@
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">Colorful Sudoku with numbers, ABC, symbols &amp; Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints &amp; stats.</p>
-      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>Mobile@SG</strong>.</p>
       <p class="links">
-        <a href="https://mobilesg.org/sudoku/">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
+        <a id="el-privacy" href="https://mobilesg.org/sudoku/">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:mobileatsg@gmail.com">Support</a>
       </p>
     </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "sudoku", "en": {"name": "Sudoku Mix", "blurb": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.", "category": "Games · Puzzle", "tagline": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.", "highlights": ["Numbers, ABC, Symbols & Mix modes", "4×4, 9×9, 16×16 with unlock progression", "Daily challenge and optional leaderboard", "Smart hints, notes, undo, and resume", "English & Simplified Chinese", "Free with ads"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "数独混合", "blurb": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。", "category": "游戏 · 益智", "tagline": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。", "highlights": ["Numbers, ABC, Symbols & Mix modes", "4×4, 9×9, 16×16 with unlock progression", "Daily challenge and optional leaderboard", "Smart hints, notes, undo, and resume", "English & Simplified Chinese", "Free with ads"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6795599852", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.sudoku", "privacyUrl": "https://mobilesg.org/sudoku/", "shareUrl": "https://mobilesg.org/apps/sudoku/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
+  <script type="application/json" id="app-data">{"id": "sudoku", "en": {"name": "Sudoku Mix", "blurb": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.", "category": "Games · Puzzle", "tagline": "Colorful Sudoku with numbers, ABC, symbols & Mix modes. 4×4 → 9×9 → 16×16, daily challenge, hints & stats.", "highlights": ["Numbers, ABC, Symbols & Mix modes", "4×4, 9×9, 16×16 with unlock progression", "Daily challenge and optional leaderboard", "Smart hints, notes, undo, and resume", "English & Simplified Chinese", "Free with ads"], "featuresTitle": "Highlights", "aboutTitle": "About", "publishedBy": "Published by", "privacy": "Privacy policy", "allApps": "All apps", "support": "Support", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "数独混合", "blurb": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。", "category": "游戏 · 益智", "tagline": "多彩数独：数字、ABC、符号与混合模式。4×4 → 9×9 → 16×16，每日挑战、提示与成就统计。", "highlights": ["数字、ABC、符号与混合模式", "4×4、9×9、16×16，逐步解锁", "每日挑战与可选排行榜", "智能提示、笔记、撤销与续玩", "英文与简体中文", "免费（含广告）"], "featuresTitle": "亮点", "aboutTitle": "关于", "publishedBy": "出品方", "privacy": "隐私政策", "allApps": "全部应用", "support": "支持", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6795599852", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.sudoku", "privacyUrl": "https://mobilesg.org/sudoku/", "shareUrl": "https://mobilesg.org/apps/sudoku/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -326,6 +326,14 @@
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {

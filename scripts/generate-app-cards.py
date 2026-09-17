@@ -89,6 +89,10 @@ def render_card(app: dict, publisher: dict) -> str:
             "highlights": highlights,
             "featuresTitle": "Highlights",
             "aboutTitle": "About",
+            "publishedBy": "Published by",
+            "privacy": "Privacy policy",
+            "allApps": "All apps",
+            "support": "Support",
             "comingSoon": "Coming soon",
             "downloadOn": "Download on the",
             "getItOn": "Get it on",
@@ -102,6 +106,10 @@ def render_card(app: dict, publisher: dict) -> str:
             "highlights": zh_highlights,
             "featuresTitle": "亮点",
             "aboutTitle": "关于",
+            "publishedBy": "出品方",
+            "privacy": "隐私政策",
+            "allApps": "全部应用",
+            "support": "支持",
             "comingSoon": "即将推出",
             "downloadOn": "下载自",
             "getItOn": "获取于",
@@ -461,11 +469,11 @@ def render_card(app: dict, publisher: dict) -> str:
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">{esc(blurb)}</p>
-      <p>Published by <strong>{esc(pub_name)}</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>{esc(pub_name)}</strong>.</p>
       <p class="links">
-        <a href="{esc(privacy)}">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:{esc(support)}">Support</a>
+        <a id="el-privacy" href="{esc(privacy)}">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:{esc(support)}">Support</a>
       </p>
     </section>
 
@@ -491,6 +499,14 @@ def render_card(app: dict, publisher: dict) -> str:
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {{

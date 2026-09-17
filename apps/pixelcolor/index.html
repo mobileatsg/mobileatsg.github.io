@@ -296,17 +296,17 @@
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.</p>
-      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>Mobile@SG</strong>.</p>
       <p class="links">
-        <a href="https://mobilesg.org/pixelcolor/">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
+        <a id="el-privacy" href="https://mobilesg.org/pixelcolor/">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:mobileatsg@gmail.com">Support</a>
       </p>
     </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "pixelcolor", "en": {"name": "Pixel Color", "blurb": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.", "category": "Entertainment", "tagline": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.", "highlights": ["Relaxing color-by-number painting for kids and families", "Fill numbered pixels to reveal colorful artwork", "Unlock new scenes as you paint", "Simple controls — tap a number, fill matching pixels", "Kid-friendly gallery of pictures to complete", "English & Simplified Chinese"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "像素填色", "blurb": "轻松数字填色，适合儿童与家庭 — 按编号填色、解锁画作，创作缤纷场景。", "category": "娱乐", "tagline": "轻松数字填色，适合儿童与家庭 — 按编号填色、解锁画作，创作缤纷场景。", "highlights": ["Relaxing color-by-number painting for kids and families", "Fill numbered pixels to reveal colorful artwork", "Unlock new scenes as you paint", "Simple controls — tap a number, fill matching pixels", "Kid-friendly gallery of pictures to complete", "English & Simplified Chinese"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6795452132", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.pixelcolor", "privacyUrl": "https://mobilesg.org/pixelcolor/", "shareUrl": "https://mobilesg.org/apps/pixelcolor/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
+  <script type="application/json" id="app-data">{"id": "pixelcolor", "en": {"name": "Pixel Color", "blurb": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.", "category": "Entertainment", "tagline": "Relaxing color-by-number painting for kids and families — fill numbered pixels, unlock art, and create colorful scenes.", "highlights": ["Relaxing color-by-number painting for kids and families", "Fill numbered pixels to reveal colorful artwork", "Unlock new scenes as you paint", "Simple controls — tap a number, fill matching pixels", "Kid-friendly gallery of pictures to complete", "English & Simplified Chinese"], "featuresTitle": "Highlights", "aboutTitle": "About", "publishedBy": "Published by", "privacy": "Privacy policy", "allApps": "All apps", "support": "Support", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "像素填色", "blurb": "轻松数字填色，适合儿童与家庭 — 按编号填色、解锁画作，创作缤纷场景。", "category": "娱乐", "tagline": "轻松数字填色，适合儿童与家庭 — 按编号填色、解锁画作，创作缤纷场景。", "highlights": ["适合亲子的轻松数字填色", "按编号填色，拼出彩色画作", "边画边解锁新场景", "操作简单 — 点选编号，填对应像素", "儿童友好的图画库", "英文与简体中文"], "featuresTitle": "亮点", "aboutTitle": "关于", "publishedBy": "出品方", "privacy": "隐私政策", "allApps": "全部应用", "support": "支持", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6795452132", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.pixelcolor", "privacyUrl": "https://mobilesg.org/pixelcolor/", "shareUrl": "https://mobilesg.org/apps/pixelcolor/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -326,6 +326,14 @@
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {

@@ -296,17 +296,17 @@
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English &amp; 中文.</p>
-      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>Mobile@SG</strong>.</p>
       <p class="links">
-        <a href="https://mobilesg.org/mathbuddy/">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
+        <a id="el-privacy" href="https://mobilesg.org/mathbuddy/">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:mobileatsg@gmail.com">Support</a>
       </p>
     </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "mathbuddy", "en": {"name": "Math Buddy Kids", "blurb": "Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English & 中文.", "category": "Education", "tagline": "Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English & 中文.", "highlights": ["Daily math tasks for ages 5–9 (K1–P3)", "Teaching videos and step-by-step guides", "Cute questions with shapes, stars, and more", "Mini games with a play-time bank (+minutes per finished task)", "Snake, Critter Match, Jump Run, Pixel Color, Tic Tac Toe, Sudoku, Chess & Chinese Chess", "English & Simplified Chinese"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "数学小伙伴", "blurb": "面向 5–9 岁（新加坡 K1–P3）的每日趣味数学练习。课程、教学视频、小游戏，支持英文与中文。", "category": "教育", "tagline": "面向 5–9 岁（新加坡 K1–P3）的每日趣味数学练习。课程、教学视频、小游戏，支持英文与中文。", "highlights": ["Daily math tasks for ages 5–9 (K1–P3)", "Teaching videos and step-by-step guides", "Cute questions with shapes, stars, and more", "Mini games with a play-time bank (+minutes per finished task)", "Snake, Critter Match, Jump Run, Pixel Color, Tic Tac Toe, Sudoku, Chess & Chinese Chess", "English & Simplified Chinese"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": null, "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.mathbuddy", "privacyUrl": "https://mobilesg.org/mathbuddy/", "shareUrl": "https://mobilesg.org/apps/mathbuddy/", "iosStatus": "InProcess", "androidStatus": "InProcess"}</script>
+  <script type="application/json" id="app-data">{"id": "mathbuddy", "en": {"name": "Math Buddy Kids", "blurb": "Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English & 中文.", "category": "Education", "tagline": "Friendly daily math practice for ages 5–9 (Singapore K1–P3). Lessons, teaching videos, mini games, English & 中文.", "highlights": ["Daily math tasks for ages 5–9 (K1–P3)", "Teaching videos and step-by-step guides", "Cute questions with shapes, stars, and more", "Mini games with a play-time bank (+minutes per finished task)", "Snake, Critter Match, Jump Run, Pixel Color, Tic Tac Toe, Sudoku, Chess & Chinese Chess", "English & Simplified Chinese"], "featuresTitle": "Highlights", "aboutTitle": "About", "publishedBy": "Published by", "privacy": "Privacy policy", "allApps": "All apps", "support": "Support", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "数学小伙伴", "blurb": "面向 5–9 岁（新加坡 K1–P3）的每日趣味数学练习。课程、教学视频、小游戏，支持英文与中文。", "category": "教育", "tagline": "面向 5–9 岁（新加坡 K1–P3）的每日趣味数学练习。课程、教学视频、小游戏，支持英文与中文。", "highlights": ["适合 5–9 岁（K1–P3）的每日数学任务", "教学视频与分步讲解", "可爱题目：形状、星星等", "小游戏玩时银行（完成任务加分钟）", "贪吃蛇、小动物配对、跳跃跑、填色、井字棋、数独、国际象棋与中国象棋", "英文与简体中文"], "featuresTitle": "亮点", "aboutTitle": "关于", "publishedBy": "出品方", "privacy": "隐私政策", "allApps": "全部应用", "support": "支持", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": null, "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.mathbuddy", "privacyUrl": "https://mobilesg.org/mathbuddy/", "shareUrl": "https://mobilesg.org/apps/mathbuddy/", "iosStatus": "InProcess", "androidStatus": "InProcess"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -326,6 +326,14 @@
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {

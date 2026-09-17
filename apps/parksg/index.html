@@ -296,17 +296,17 @@
     <section class="panel about" aria-labelledby="about-title">
       <h2 id="about-title">About</h2>
       <p id="el-blurb">Singapore parking &amp; EV chargers on a map — live lots, plug status &amp; prices, mall rates, search, and directions.</p>
-      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p><span id="el-published-by">Published by</span> <strong>Mobile@SG</strong>.</p>
       <p class="links">
-        <a href="https://mobilesg.org/parksg/">Privacy policy</a>
-        <a href="/">All apps</a>
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
+        <a id="el-privacy" href="https://mobilesg.org/parksg/">Privacy policy</a>
+        <a id="el-all-apps" href="/">All apps</a>
+        <a id="el-support" href="mailto:mobileatsg@gmail.com">Support</a>
       </p>
     </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "parksg", "en": {"name": "Park & Charge SG", "blurb": "Singapore parking & EV chargers on a map — live lots, plug status & prices, mall rates, search, and directions.", "category": "Navigation", "tagline": "Singapore parking & EV chargers on a map — live lots, plug status & prices, mall rates, search, and directions.", "highlights": ["Live carpark free lots — HDB, URA, and other published lots on the map", "EV chargers — free plug counts, connector types, power, and prices when available", "Filters — Shop, HDB, Public, Hotel, and more; EV Normal / Fast tiers", "Search — postal, mall, charger, or address (OneMap-style results)", "Nearby list — browse places by distance with clear free-lot and EV badges", "Parking rates guide — weekdays, Saturday, and Sun/PH rates when published (guide only; confirm on site)", "Saved places — keep favourite lots and chargers on the map"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "泊车充电 SG", "blurb": "新加坡停车与电动车充电地图 — 实时车位、充电状态与价格、商场费率、搜索与导航。", "category": "导航", "tagline": "新加坡停车与电动车充电地图 — 实时车位、充电状态与价格、商场费率、搜索与导航。", "highlights": ["Live carpark free lots — HDB, URA, and other published lots on the map", "EV chargers — free plug counts, connector types, power, and prices when available", "Filters — Shop, HDB, Public, Hotel, and more; EV Normal / Fast tiers", "Search — postal, mall, charger, or address (OneMap-style results)", "Nearby list — browse places by distance with clear free-lot and EV badges", "Parking rates guide — weekdays, Saturday, and Sun/PH rates when published (guide only; confirm on site)", "Saved places — keep favourite lots and chargers on the map"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6801415528", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.parksg", "privacyUrl": "https://mobilesg.org/parksg/", "shareUrl": "https://mobilesg.org/apps/parksg/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
+  <script type="application/json" id="app-data">{"id": "parksg", "en": {"name": "Park & Charge SG", "blurb": "Singapore parking & EV chargers on a map — live lots, plug status & prices, mall rates, search, and directions.", "category": "Navigation", "tagline": "Singapore parking & EV chargers on a map — live lots, plug status & prices, mall rates, search, and directions.", "highlights": ["Live carpark free lots — HDB, URA, and other published lots on the map", "EV chargers — free plug counts, connector types, power, and prices when available", "Filters — Shop, HDB, Public, Hotel, and more; EV Normal / Fast tiers", "Search — postal, mall, charger, or address (OneMap-style results)", "Nearby list — browse places by distance with clear free-lot and EV badges", "Parking rates guide — weekdays, Saturday, and Sun/PH rates when published (guide only; confirm on site)", "Saved places — keep favourite lots and chargers on the map"], "featuresTitle": "Highlights", "aboutTitle": "About", "publishedBy": "Published by", "privacy": "Privacy policy", "allApps": "All apps", "support": "Support", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "泊车充电 SG", "blurb": "新加坡停车与电动车充电地图 — 实时车位、充电状态与价格、商场费率、搜索与导航。", "category": "导航", "tagline": "新加坡停车与电动车充电地图 — 实时车位、充电状态与价格、商场费率、搜索与导航。", "highlights": ["实时停车场空位 — 地图上的 HDB、URA 等公开数据", "EV 充电 — 空闲枪数、接口、功率与价格（如有）", "筛选 — 商场、HDB、公共、酒店等；EV 普通 / 快充", "搜索 — 邮区、商场、充电桩或地址（类似 OneMap）", "附近列表 — 按距离浏览，清晰空位与 EV 标识", "停车费率指南 — 平日、周六、周日 / 公休日（仅供参考，以现场为准）", "收藏地点 — 在地图上保存常用车场与充电桩"], "featuresTitle": "亮点", "aboutTitle": "关于", "publishedBy": "出品方", "privacy": "隐私政策", "allApps": "全部应用", "support": "支持", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6801415528", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.parksg", "privacyUrl": "https://mobilesg.org/parksg/", "shareUrl": "https://mobilesg.org/apps/parksg/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -326,6 +326,14 @@
     if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
     var at = document.getElementById("about-title");
     if (at && L.aboutTitle) at.textContent = L.aboutTitle;
+    var pub = document.getElementById("el-published-by");
+    if (pub) pub.textContent = L.publishedBy || "Published by";
+    var priv = document.getElementById("el-privacy");
+    if (priv) priv.textContent = L.privacy || "Privacy policy";
+    var all = document.getElementById("el-all-apps");
+    if (all) all.textContent = L.allApps || "All apps";
+    var sup = document.getElementById("el-support");
+    if (sup) sup.textContent = L.support || "Support";
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {
