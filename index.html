@@ -948,9 +948,6 @@
         var hasAndroid = platforms.indexOf("android") !== -1;
         var iosStatus = hasIos ? statusForPlatform(app, "ios") : null;
         var androidStatus = hasAndroid ? statusForPlatform(app, "android") : null;
-        var iosPublished = hasIos && iosStatus === "Published";
-        var androidPublished = hasAndroid && androidStatus === "Published";
-
         var name = appField(app, "name") || app.name || "";
         var blurb = appField(app, "blurb") || "";
         var category = appField(app, "category");
@@ -969,6 +966,10 @@
         }
 
         var play = playHref(app);
+        var appStore = appStoreHref(app);
+        // Store links stay clickable whenever a URL exists (even InProcess / Coming soon).
+        var iosClickable = !!(hasIos && appStore);
+        var androidClickable = !!(hasAndroid && play);
         var shareHref = app.shareUrl
           ? resolveUrl(app.shareUrl)
           : (app.id ? resolveUrl("/apps/" + app.id + "/") : "");
@@ -976,8 +977,8 @@
           (shareHref
             ? '<a class="btn" href="' + esc(shareHref) + '">' + esc(t("appPage")) + "</a>"
             : "") +
-          storeBtn(t("appStore"), appStoreHref(app), iosPublished, false) +
-          storeBtn(t("googlePlay"), play, !!(androidPublished && play), true) +
+          storeBtn(t("appStore"), appStore, iosClickable, false) +
+          storeBtn(t("googlePlay"), play, androidClickable, true) +
           (app.privacyUrl
             ? '<a class="btn ghost" href="' + esc(resolveUrl(app.privacyUrl)) + '">' + esc(t("privacy")) + "</a>"
             : '<span class="btn ghost disabled" aria-disabled="true">' + esc(t("privacy")) + "</span>");

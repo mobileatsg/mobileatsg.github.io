@@ -3,14 +3,13 @@
 
 Usage (from website/):
   python3 scripts/generate-app-cards.py
-  python3 scripts/generate-app-cards.py --write-share-urls   # also set shareUrl on each app
+  python3 scripts/generate-app-cards.py --write-share-urls
 """
 from __future__ import annotations
 
 import argparse
 import html
 import json
-import re
 from datetime import date
 from pathlib import Path
 
@@ -48,6 +47,14 @@ def store_urls(app: dict) -> tuple[str | None, str | None]:
     return ios, android
 
 
+def status_label(st: str | None) -> str:
+    if st == "Published":
+        return "Published"
+    if st == "InProcess":
+        return "Coming soon"
+    return "—"
+
+
 def render_card(app: dict, publisher: dict) -> str:
     app_id = app["id"]
     name = app.get("name") or app_id
@@ -61,32 +68,79 @@ def render_card(app: dict, publisher: dict) -> str:
     support = publisher.get("supportEmail") or "mobileatsg@gmail.com"
     pub_name = publisher.get("name") or "Mobile@SG"
     zh = (app.get("locales") or {}).get("zh-Hans") or {}
+    status = app.get("status") or {}
+    platforms = app.get("platforms") or []
+    highlights = app.get("highlights") or []
+    zh_highlights = zh.get("highlights") or highlights
 
-    # Embed locale strings for client switcher
+    ios_st = status.get("ios") if "ios" in platforms else None
+    and_st = status.get("android") if "android" in platforms else None
+
     payload = {
         "id": app_id,
-        "en": {"name": name, "blurb": blurb, "category": category, "tagline": tagline},
+        "en": {
+            "name": name,
+            "blurb": blurb,
+            "category": category,
+            "tagline": tagline,
+            "highlights": highlights,
+        },
         "zh-Hans": {
             "name": zh.get("name") or name,
             "blurb": zh.get("blurb") or blurb,
             "category": zh.get("category") or category,
             "tagline": zh.get("tagline") or zh.get("blurb") or tagline,
+            "highlights": zh_highlights,
         },
         "iosUrl": ios,
         "androidUrl": android,
         "privacyUrl": privacy,
         "shareUrl": share,
+        "iosStatus": ios_st,
+        "androidStatus": and_st,
     }
     payload_json = json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
 
-    ios_btn = (
-        f'<a class="btn btn-ios" id="btn-ios" href="{esc(ios)}">App Store</a>'
-        if ios
-        else ""
-    )
-    and_btn = (
-        f'<a class="btn btn-play" id="btn-android" href="{esc(android)}">Google Play</a>'
-        if android
+    def store_btn(kind: str, url: str | None, st: str | None) -> str:
+        if not url:
+            return ""
+        label = "App Store" if kind == "ios" else "Google Play"
+        cls = "btn btn-ios" if kind == "ios" else "btn btn-play"
+        bid = "btn-ios" if kind == "ios" else "btn-android"
+        badge = ""
+        if st == "InProcess":
+            badge = '<span class="btn-badge">Coming soon</span>'
+        elif st == "Published":
+            badge = '<span class="btn-badge on">Get</span>'
+        # Always clickable when URL exists (even InProcess).
+        return (
+            f'<a class="{cls}" id="{bid}" href="{esc(url)}" rel="noopener noreferrer">'
+            f"<span>{label}</span>{badge}</a>"
+        )
+
+    ios_btn = store_btn("ios", ios, ios_st)
+    and_btn = store_btn("android", android, and_st)
+
+    status_chips = []
+    if ios_st:
+        cls = "ok" if ios_st == "Published" else "soon"
+        status_chips.append(
+            f'<span class="status-chip {cls}">iOS · {esc(status_label(ios_st))}</span>'
+        )
+    if and_st:
+        cls = "ok" if and_st == "Published" else "soon"
+        status_chips.append(
+            f'<span class="status-chip {cls}">Android · {esc(status_label(and_st))}</span>'
+        )
+    status_html = "".join(status_chips)
+
+    hi_items = "".join(f"<li>{esc(h)}</li>" for h in highlights)
+    highlights_block = (
+        f'<section class="panel" aria-labelledby="features-title">'
+        f'<h2 id="features-title">Highlights</h2>'
+        f'<ul class="features" id="el-features">{hi_items}</ul>'
+        f"</section>"
+        if highlights
         else ""
     )
 
@@ -105,7 +159,7 @@ def render_card(app: dict, publisher: dict) -> str:
   <meta property="og:description" content="{esc(blurb)}" />
   <meta property="og:url" content="{esc(share)}" />
   <meta property="og:image" content="{esc(icon)}" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(name)}" />
   <meta name="twitter:description" content="{esc(blurb)}" />
   <meta name="twitter:image" content="{esc(icon)}" />
@@ -115,13 +169,16 @@ def render_card(app: dict, publisher: dict) -> str:
     :root {{
       --bg: #0f1419;
       --surface: #1a2332;
+      --surface-2: #213044;
       --text: #e7ecf3;
       --muted: #9aa8b8;
       --accent: #5b9fd4;
       --border: #2a3648;
       --link: #7ec8ff;
-      --radius: 20px;
-      --shadow: 0 16px 48px rgba(0,0,0,.35);
+      --ok: #6bcf8e;
+      --soon: #e0b35c;
+      --radius: 22px;
+      --shadow: 0 18px 50px rgba(0,0,0,.38);
     }}
     * {{ box-sizing: border-box; }}
     body {{
@@ -131,95 +188,191 @@ def render_card(app: dict, publisher: dict) -> str:
       line-height: 1.55;
       color: var(--text);
       background:
-        radial-gradient(900px 480px at 15% -10%, rgba(91,159,212,.16), transparent 55%),
-        radial-gradient(700px 400px at 100% 0%, rgba(123,108,240,.1), transparent 50%),
+        radial-gradient(1100px 560px at 12% -12%, rgba(91,159,212,.18), transparent 55%),
+        radial-gradient(900px 480px at 100% 0%, rgba(123,108,240,.12), transparent 52%),
         var(--bg);
     }}
     a {{ color: var(--link); text-decoration: none; }}
     a:hover {{ text-decoration: underline; }}
     .wrap {{
-      max-width: 440px;
+      width: min(960px, 100%);
       margin: 0 auto;
-      padding: 2rem 1.25rem 3rem;
+      padding: 1.5rem 1.25rem 3.5rem;
     }}
     .top {{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       margin-bottom: 1.5rem;
-      font-size: .9rem;
+      font-size: .92rem;
     }}
     .brand {{
-      display: flex; align-items: center; gap: .55rem;
-      color: inherit; font-weight: 600;
+      display: flex; align-items: center; gap: .6rem;
+      color: inherit; font-weight: 650;
     }}
-    .brand img {{ width: 28px; height: 28px; border-radius: 8px; }}
-    .card {{
-      background: var(--surface);
+    .brand img {{ width: 30px; height: 30px; border-radius: 8px; }}
+    .hero {{
+      display: grid;
+      gap: 1.5rem;
+      background: linear-gradient(180deg, rgba(33,48,68,.92), rgba(26,35,50,.98));
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.75rem 1.4rem 1.5rem;
+      padding: 1.5rem;
       box-shadow: var(--shadow);
-      text-align: center;
     }}
+    @media (min-width: 800px) {{
+      .hero {{
+        grid-template-columns: 160px 1fr;
+        align-items: start;
+        gap: 2rem;
+        padding: 2rem 2.1rem;
+      }}
+    }}
+    .icon-wrap {{ text-align: center; }}
+    @media (min-width: 800px) {{ .icon-wrap {{ text-align: left; }} }}
     .icon {{
-      width: 96px; height: 96px; border-radius: 22px;
+      width: 112px; height: 112px; border-radius: 26px;
       object-fit: cover; background: #fff;
       box-shadow: var(--shadow);
-      margin: 0 auto 1.1rem;
-      display: block;
+    }}
+    @media (min-width: 800px) {{
+      .icon {{ width: 144px; height: 144px; border-radius: 32px; }}
     }}
     .chip {{
       display: inline-block;
-      font-size: .75rem;
+      font-size: .78rem;
       color: var(--muted);
       background: #243044;
       border-radius: 999px;
-      padding: .2rem .65rem;
-      margin-bottom: .65rem;
+      padding: .22rem .7rem;
+      margin: 0 .35rem .55rem 0;
     }}
+    .status-chip {{
+      display: inline-block;
+      font-size: .75rem;
+      border-radius: 999px;
+      padding: .22rem .7rem;
+      margin: 0 .35rem .55rem 0;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }}
+    .status-chip.ok {{ color: var(--ok); border-color: rgba(107,207,142,.35); }}
+    .status-chip.soon {{ color: var(--soon); border-color: rgba(224,179,92,.35); }}
     h1 {{
-      margin: 0 0 .35rem;
-      font-size: 1.55rem;
+      margin: .15rem 0 .45rem;
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
       letter-spacing: -.02em;
+      line-height: 1.15;
     }}
     .tagline {{
-      margin: 0 0 1.25rem;
+      margin: 0 0 1.1rem;
       color: var(--muted);
-      font-size: .98rem;
+      font-size: 1.02rem;
+      max-width: 38rem;
     }}
     .btns {{
-      display: flex; flex-direction: column; gap: .65rem;
-      margin: 1.25rem 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin: 1rem 0 .35rem;
     }}
     .btn {{
-      display: block;
-      padding: .85rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      min-width: 148px;
+      padding: .85rem 1.1rem;
       border-radius: 12px;
       font-weight: 650;
       text-decoration: none !important;
       color: #fff !important;
+      transition: transform .12s ease, filter .12s ease;
     }}
+    .btn:hover {{ filter: brightness(1.06); text-decoration: none !important; }}
+    .btn:active {{ transform: translateY(1px); }}
     .btn-ios {{ background: #0a84ff; }}
     .btn-play {{ background: #3ddc84; color: #0b1a10 !important; }}
+    .btn-badge {{
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: .15rem .45rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      color: inherit;
+    }}
+    .btn-badge.on {{ background: rgba(255,255,255,.22); }}
     .btn-stay {{
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted) !important;
       font-weight: 500;
       font-size: .9rem;
+      min-width: auto;
     }}
-    .meta {{
-      font-size: .85rem;
+    .grid {{
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }}
+    @media (min-width: 800px) {{
+      .grid {{ grid-template-columns: 1.4fr .9fr; align-items: start; }}
+    }}
+    .panel {{
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.25rem 1.3rem 1.35rem;
+    }}
+    .panel h2 {{
+      margin: 0 0 .85rem;
+      font-size: 1.05rem;
+      letter-spacing: -.01em;
+    }}
+    .features {{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }}
+    .features li {{
+      position: relative;
+      padding: .45rem 0 .45rem 1.35rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(42,54,72,.65);
+      font-size: .95rem;
+    }}
+    .features li:last-child {{ border-bottom: 0; }}
+    .features li::before {{
+      content: "";
+      position: absolute;
+      left: 0; top: .85rem;
+      width: .55rem; height: .55rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,159,212,.18);
+    }}
+    .side p {{
+      margin: 0 0 .75rem;
       color: var(--muted);
-      margin-top: 1rem;
+      font-size: .92rem;
     }}
-    .meta a {{ margin: 0 .35rem; }}
+    .side .links a {{
+      display: inline-block;
+      margin: .15rem .75rem .15rem 0;
+    }}
     .hint {{
-      margin-top: 1rem;
-      font-size: .8rem;
+      margin: .75rem 0 0;
+      font-size: .82rem;
       color: var(--muted);
       min-height: 1.2em;
+    }}
+    footer.note {{
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
     }}
   </style>
 </head>
@@ -227,30 +380,49 @@ def render_card(app: dict, publisher: dict) -> str:
   <div class="wrap">
     <div class="top">
       <a class="brand" href="/">
-        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="28" height="28" />
+        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="30" height="30" />
         {esc(pub_name)}
       </a>
-      <a href="/?lang=zh" id="lang-link" data-en="/apps/{esc(app_id)}/?lang=en" data-zh="/apps/{esc(app_id)}/?lang=zh">中文</a>
+      <a href="/apps/{esc(app_id)}/?lang=zh" id="lang-link"
+         data-en="/apps/{esc(app_id)}/?lang=en"
+         data-zh="/apps/{esc(app_id)}/?lang=zh">中文</a>
     </div>
-    <article class="card">
-      <img class="icon" src="{esc(icon)}" alt="{esc(name)} icon" width="96" height="96" />
-      <div class="chip" id="el-category">{esc(category)}</div>
-      <h1 id="el-name">{esc(name)}</h1>
-      <p class="tagline" id="el-tagline">{esc(tagline)}</p>
-      <div class="btns">
-        {ios_btn}
-        {and_btn}
-        <a class="btn btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
+
+    <section class="hero">
+      <div class="icon-wrap">
+        <img class="icon" src="{esc(icon)}" alt="{esc(name)} icon" width="144" height="144" />
       </div>
-      <p class="meta">
-        <a href="{esc(privacy)}">Privacy</a>
-        ·
-        <a href="/">All apps</a>
-        ·
-        <a href="mailto:{esc(support)}">Support</a>
-      </p>
-      <p class="hint" id="hint"></p>
-    </article>
+      <div>
+        <div>
+          <span class="chip" id="el-category">{esc(category)}</span>
+          {status_html}
+        </div>
+        <h1 id="el-name">{esc(name)}</h1>
+        <p class="tagline" id="el-tagline">{esc(tagline)}</p>
+        <div class="btns">
+          {ios_btn}
+          {and_btn}
+          <a class="btn btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
+        </div>
+        <p class="hint" id="hint"></p>
+      </div>
+    </section>
+
+    <div class="grid">
+      {highlights_block}
+      <aside class="panel side">
+        <h2>About</h2>
+        <p id="el-blurb">{esc(blurb)}</p>
+        <p>Published by <strong style="color:var(--text)">{esc(pub_name)}</strong>.</p>
+        <div class="links">
+          <a href="{esc(privacy)}">Privacy policy</a>
+          <a href="/">All apps</a>
+          <a href="mailto:{esc(support)}">Support</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
   <script type="application/json" id="app-data">{payload_json}</script>
   <script>
@@ -268,7 +440,17 @@ def render_card(app: dict, publisher: dict) -> str:
     document.getElementById("el-name").textContent = L.name;
     document.getElementById("el-tagline").textContent = L.tagline || L.blurb;
     document.getElementById("el-category").textContent = L.category;
+    var blurb = document.getElementById("el-blurb");
+    if (blurb) blurb.textContent = L.blurb;
     document.title = L.name + " — Mobile@SG";
+    var ul = document.getElementById("el-features");
+    if (ul && L.highlights && L.highlights.length) {{
+      ul.innerHTML = L.highlights.map(function (h) {{
+        return "<li>" + h.replace(/[&<>\"']/g, function (c) {{
+          return ({{"&":"&amp;","<":"&lt;",">":"&gt;","\\"":"&quot;","'":"&#39;"}})[c];
+        }}) + "</li>";
+      }}).join("");
+    }}
     var link = document.getElementById("lang-link");
     if (loc === "zh-Hans") {{
       link.textContent = "EN";
@@ -299,10 +481,10 @@ def render_card(app: dict, publisher: dict) -> str:
     return null;
   }}
 
-  // Soft redirect on mobile (OG crawlers rarely look like phones; ?stay=1 disables).
   var url = targetUrl();
   var mobile = isIOS() || isAndroid();
   var force = go === "1" || go === "store" || go === "ios" || go === "android" || go === "apple" || go === "play";
+  // Soft redirect on phones only (desktop stays on the responsive page).
   if (url && !stay && (mobile || force)) {{
     var hint = document.getElementById("hint");
     hint.textContent = locale === "zh-Hans" ? "正在打开商店…" : "Opening the store…";

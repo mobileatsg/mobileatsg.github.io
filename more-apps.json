@@ -64,7 +64,16 @@
       "hideInAppIds": [
         "mathbuddy"
       ],
-      "shareUrl": "/apps/stocksg/"
+      "shareUrl": "/apps/stocksg/",
+      "highlights": [
+        "Watchlist — favourite SGX stocks with quotes and pull-to-refresh",
+        "Market movers — top volume, gainers, % gainers, losers, % losers",
+        "News — today’s and financial announcements with document links",
+        "Dividends — dividend information for stocks you open",
+        "Charts — candlestick charts with multi-period views",
+        "Price alerts — create alerts and receive push when conditions hit",
+        "Share — share a stock quote card or an announcement/dividend link"
+      ]
     },
     {
       "id": "sudoku",
@@ -100,7 +109,15 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": true,
-      "shareUrl": "/apps/sudoku/"
+      "shareUrl": "/apps/sudoku/",
+      "highlights": [
+        "Numbers, ABC, Symbols & Mix modes",
+        "4×4, 9×9, 16×16 with unlock progression",
+        "Daily challenge and optional leaderboard",
+        "Smart hints, notes, undo, and resume",
+        "English & Simplified Chinese",
+        "Free with ads"
+      ]
     },
     {
       "id": "pixelcolor",
@@ -136,7 +153,15 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/pixelcolor/"
+      "shareUrl": "/apps/pixelcolor/",
+      "highlights": [
+        "Relaxing color-by-number painting for kids and families",
+        "Fill numbered pixels to reveal colorful artwork",
+        "Unlock new scenes as you paint",
+        "Simple controls — tap a number, fill matching pixels",
+        "Kid-friendly gallery of pictures to complete",
+        "English & Simplified Chinese"
+      ]
     },
     {
       "id": "smartalarm",
@@ -174,7 +199,16 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/smartalarm/"
+      "shareUrl": "/apps/smartalarm/",
+      "highlights": [
+        "Real system alarms — reliable rings, not background hacks",
+        "Pre-alarm countdown — Live Activity heads-up on Lock Screen or Dynamic Island",
+        "Optional pre-wake notices — time-sensitive reminders before the ring",
+        "Skip once — silence only the next ring; repeating alarms keep going",
+        "Pause dates — don’t ring between two dates (travel, sick days, holidays)",
+        "Snooze — on by default (10 minutes; adjustable 1–15 per alarm)",
+        "Sounds — museum clocks, classic tones, and import your own audio"
+      ]
     },
     {
       "id": "mathbuddy",
@@ -217,7 +251,15 @@
       "moreAppsExcludeIds": [
         "stocksg"
       ],
-      "shareUrl": "/apps/mathbuddy/"
+      "shareUrl": "/apps/mathbuddy/",
+      "highlights": [
+        "Daily math tasks for ages 5–9 (K1–P3)",
+        "Teaching videos and step-by-step guides",
+        "Cute questions with shapes, stars, and more",
+        "Mini games with a play-time bank (+minutes per finished task)",
+        "Snake, Critter Match, Jump Run, Pixel Color, Tic Tac Toe, Sudoku, Chess & Chinese Chess",
+        "English & Simplified Chinese"
+      ]
     },
     {
       "id": "parksg",
@@ -253,7 +295,16 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/parksg/"
+      "shareUrl": "/apps/parksg/",
+      "highlights": [
+        "Live carpark free lots — HDB, URA, and other published lots on the map",
+        "EV chargers — free plug counts, connector types, power, and prices when available",
+        "Filters — Shop, HDB, Public, Hotel, and more; EV Normal / Fast tiers",
+        "Search — postal, mall, charger, or address (OneMap-style results)",
+        "Nearby list — browse places by distance with clear free-lot and EV badges",
+        "Parking rates guide — weekdays, Saturday, and Sun/PH rates when published (guide only; confirm on site)",
+        "Saved places — keep favourite lots and chargers on the map"
+      ]
     },
     {
       "id": "totomatch",
@@ -289,7 +340,16 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/totomatch/"
+      "shareUrl": "/apps/totomatch/",
+      "highlights": [
+        "Upload or scan ticket photos (up to 4 tickets per photo)",
+        "Cloud AI extracts boards and the printed draw",
+        "Singapore: match prize Groups 1–7",
+        "Malaysia: match Star, Power, and Supreme for the ticket’s draw number",
+        "Free starter AI matches; earn more with optional rewarded ads",
+        "Photos with tickets use 1 match; every 3 no-ticket photos also use 1 match",
+        "Pending tickets update when official results are published"
+      ]
     },
     {
       "id": "fourdmatch",
@@ -325,7 +385,16 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/fourdmatch/"
+      "shareUrl": "/apps/fourdmatch/",
+      "highlights": [
+        "Upload or scan ticket photos (up to 4 tickets per photo)",
+        "Cloud AI extracts numbers and bet types",
+        "Official final results for matching; live boards are preview only",
+        "Number bank (up to 10 picks) via Settings; auto-match after finals",
+        "Free starter AI credits; earn more with optional rewarded ads (daily limit)",
+        "My matches history with pending rematch when results publish",
+        "Optional notifications for match-ready and bank hits"
+      ]
     },
     {
       "id": "commutesg",
@@ -361,7 +430,16 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/commutesg/"
+      "shareUrl": "/apps/commutesg/",
+      "highlights": [
+        "Board: favourite bus service + stop with up to three DataMall arrival times",
+        "Seat, standing, crowded, and wheelchair (WAB) icons for that arriving bus",
+        "Remaining-ride rain (NEA 2-hour forecast) — fair weather stays hidden",
+        "Remaining-ride Heavy Traffic and Accident only — not roadworks",
+        "Route map from your stop through the terminus when official geometry is stored",
+        "Buses tab: search services, hours, and recents",
+        "Map: nearby stops and place Directions (Google Maps or Apple Maps, transit)"
+      ]
     },
     {
       "id": "rainpause",
@@ -397,7 +475,16 @@
       "enabled": true,
       "showInMobileApp": true,
       "featured": false,
-      "shareUrl": "/apps/rainpause/"
+      "shareUrl": "/apps/rainpause/",
+      "highlights": [
+        "Cold open into a rainy window",
+        "Live rain overlay, frost, and tappable drops",
+        "Optional rain sound, haptics, and a breathing ring",
+        "Session lengths: 1 min, 2 min, 5 min, or Stay",
+        "Gentle end card: “That's enough.” Then Another 2 min, Change window, or Done",
+        "Three free windows: Night rain, Morning, Forest",
+        "Optional one-time Quiet Windows unlocks 22 extra scenes"
+      ]
     }
   ]
 }

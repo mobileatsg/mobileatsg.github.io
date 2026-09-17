@@ -13,7 +13,7 @@
   <meta property="og:description" content="Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank." />
   <meta property="og:url" content="https://mobilesg.org/apps/fourdmatch/" />
   <meta property="og:image" content="https://mobilesg.org/assets/apps/fourdmatch.png" />
-  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="4D Match" />
   <meta name="twitter:description" content="Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank." />
   <meta name="twitter:image" content="https://mobilesg.org/assets/apps/fourdmatch.png" />
@@ -23,13 +23,16 @@
     :root {
       --bg: #0f1419;
       --surface: #1a2332;
+      --surface-2: #213044;
       --text: #e7ecf3;
       --muted: #9aa8b8;
       --accent: #5b9fd4;
       --border: #2a3648;
       --link: #7ec8ff;
-      --radius: 20px;
-      --shadow: 0 16px 48px rgba(0,0,0,.35);
+      --ok: #6bcf8e;
+      --soon: #e0b35c;
+      --radius: 22px;
+      --shadow: 0 18px 50px rgba(0,0,0,.38);
     }
     * { box-sizing: border-box; }
     body {
@@ -39,95 +42,191 @@
       line-height: 1.55;
       color: var(--text);
       background:
-        radial-gradient(900px 480px at 15% -10%, rgba(91,159,212,.16), transparent 55%),
-        radial-gradient(700px 400px at 100% 0%, rgba(123,108,240,.1), transparent 50%),
+        radial-gradient(1100px 560px at 12% -12%, rgba(91,159,212,.18), transparent 55%),
+        radial-gradient(900px 480px at 100% 0%, rgba(123,108,240,.12), transparent 52%),
         var(--bg);
     }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
     .wrap {
-      max-width: 440px;
+      width: min(960px, 100%);
       margin: 0 auto;
-      padding: 2rem 1.25rem 3rem;
+      padding: 1.5rem 1.25rem 3.5rem;
     }
     .top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 1rem;
       margin-bottom: 1.5rem;
-      font-size: .9rem;
+      font-size: .92rem;
     }
     .brand {
-      display: flex; align-items: center; gap: .55rem;
-      color: inherit; font-weight: 600;
+      display: flex; align-items: center; gap: .6rem;
+      color: inherit; font-weight: 650;
     }
-    .brand img { width: 28px; height: 28px; border-radius: 8px; }
-    .card {
-      background: var(--surface);
+    .brand img { width: 30px; height: 30px; border-radius: 8px; }
+    .hero {
+      display: grid;
+      gap: 1.5rem;
+      background: linear-gradient(180deg, rgba(33,48,68,.92), rgba(26,35,50,.98));
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.75rem 1.4rem 1.5rem;
+      padding: 1.5rem;
       box-shadow: var(--shadow);
-      text-align: center;
     }
+    @media (min-width: 800px) {
+      .hero {
+        grid-template-columns: 160px 1fr;
+        align-items: start;
+        gap: 2rem;
+        padding: 2rem 2.1rem;
+      }
+    }
+    .icon-wrap { text-align: center; }
+    @media (min-width: 800px) { .icon-wrap { text-align: left; } }
     .icon {
-      width: 96px; height: 96px; border-radius: 22px;
+      width: 112px; height: 112px; border-radius: 26px;
       object-fit: cover; background: #fff;
       box-shadow: var(--shadow);
-      margin: 0 auto 1.1rem;
-      display: block;
+    }
+    @media (min-width: 800px) {
+      .icon { width: 144px; height: 144px; border-radius: 32px; }
     }
     .chip {
       display: inline-block;
-      font-size: .75rem;
+      font-size: .78rem;
       color: var(--muted);
       background: #243044;
       border-radius: 999px;
-      padding: .2rem .65rem;
-      margin-bottom: .65rem;
+      padding: .22rem .7rem;
+      margin: 0 .35rem .55rem 0;
     }
+    .status-chip {
+      display: inline-block;
+      font-size: .75rem;
+      border-radius: 999px;
+      padding: .22rem .7rem;
+      margin: 0 .35rem .55rem 0;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .status-chip.ok { color: var(--ok); border-color: rgba(107,207,142,.35); }
+    .status-chip.soon { color: var(--soon); border-color: rgba(224,179,92,.35); }
     h1 {
-      margin: 0 0 .35rem;
-      font-size: 1.55rem;
+      margin: .15rem 0 .45rem;
+      font-size: clamp(1.6rem, 3vw, 2.15rem);
       letter-spacing: -.02em;
+      line-height: 1.15;
     }
     .tagline {
-      margin: 0 0 1.25rem;
+      margin: 0 0 1.1rem;
       color: var(--muted);
-      font-size: .98rem;
+      font-size: 1.02rem;
+      max-width: 38rem;
     }
     .btns {
-      display: flex; flex-direction: column; gap: .65rem;
-      margin: 1.25rem 0 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .7rem;
+      margin: 1rem 0 .35rem;
     }
     .btn {
-      display: block;
-      padding: .85rem 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .55rem;
+      min-width: 148px;
+      padding: .85rem 1.1rem;
       border-radius: 12px;
       font-weight: 650;
       text-decoration: none !important;
       color: #fff !important;
+      transition: transform .12s ease, filter .12s ease;
     }
+    .btn:hover { filter: brightness(1.06); text-decoration: none !important; }
+    .btn:active { transform: translateY(1px); }
     .btn-ios { background: #0a84ff; }
     .btn-play { background: #3ddc84; color: #0b1a10 !important; }
+    .btn-badge {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .02em;
+      padding: .15rem .45rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,.18);
+      color: inherit;
+    }
+    .btn-badge.on { background: rgba(255,255,255,.22); }
     .btn-stay {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--muted) !important;
       font-weight: 500;
       font-size: .9rem;
+      min-width: auto;
     }
-    .meta {
-      font-size: .85rem;
+    .grid {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    @media (min-width: 800px) {
+      .grid { grid-template-columns: 1.4fr .9fr; align-items: start; }
+    }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.25rem 1.3rem 1.35rem;
+    }
+    .panel h2 {
+      margin: 0 0 .85rem;
+      font-size: 1.05rem;
+      letter-spacing: -.01em;
+    }
+    .features {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .features li {
+      position: relative;
+      padding: .45rem 0 .45rem 1.35rem;
+      color: var(--text);
+      border-bottom: 1px solid rgba(42,54,72,.65);
+      font-size: .95rem;
+    }
+    .features li:last-child { border-bottom: 0; }
+    .features li::before {
+      content: "";
+      position: absolute;
+      left: 0; top: .85rem;
+      width: .55rem; height: .55rem;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,159,212,.18);
+    }
+    .side p {
+      margin: 0 0 .75rem;
       color: var(--muted);
-      margin-top: 1rem;
+      font-size: .92rem;
     }
-    .meta a { margin: 0 .35rem; }
+    .side .links a {
+      display: inline-block;
+      margin: .15rem .75rem .15rem 0;
+    }
     .hint {
-      margin-top: 1rem;
-      font-size: .8rem;
+      margin: .75rem 0 0;
+      font-size: .82rem;
       color: var(--muted);
       min-height: 1.2em;
+    }
+    footer.note {
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
     }
   </style>
 </head>
@@ -135,32 +234,51 @@
   <div class="wrap">
     <div class="top">
       <a class="brand" href="/">
-        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="28" height="28" />
+        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="30" height="30" />
         Mobile@SG
       </a>
-      <a href="/?lang=zh" id="lang-link" data-en="/apps/fourdmatch/?lang=en" data-zh="/apps/fourdmatch/?lang=zh">中文</a>
+      <a href="/apps/fourdmatch/?lang=zh" id="lang-link"
+         data-en="/apps/fourdmatch/?lang=en"
+         data-zh="/apps/fourdmatch/?lang=zh">中文</a>
     </div>
-    <article class="card">
-      <img class="icon" src="https://mobilesg.org/assets/apps/fourdmatch.png" alt="4D Match icon" width="96" height="96" />
-      <div class="chip" id="el-category">Utilities</div>
-      <h1 id="el-name">4D Match</h1>
-      <p class="tagline" id="el-tagline">Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.</p>
-      <div class="btns">
-        <a class="btn btn-ios" id="btn-ios" href="https://apps.apple.com/sg/app/id6812391729">App Store</a>
-        <a class="btn btn-play" id="btn-android" href="https://play.google.com/store/apps/details?id=com.mobilesg.fourdmatch">Google Play</a>
-        <a class="btn btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
+
+    <section class="hero">
+      <div class="icon-wrap">
+        <img class="icon" src="https://mobilesg.org/assets/apps/fourdmatch.png" alt="4D Match icon" width="144" height="144" />
       </div>
-      <p class="meta">
-        <a href="https://mobilesg.org/fourdmatch/">Privacy</a>
-        ·
-        <a href="/">All apps</a>
-        ·
-        <a href="mailto:mobileatsg@gmail.com">Support</a>
-      </p>
-      <p class="hint" id="hint"></p>
-    </article>
+      <div>
+        <div>
+          <span class="chip" id="el-category">Utilities</span>
+          <span class="status-chip soon">iOS · Coming soon</span><span class="status-chip soon">Android · Coming soon</span>
+        </div>
+        <h1 id="el-name">4D Match</h1>
+        <p class="tagline" id="el-tagline">Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.</p>
+        <div class="btns">
+          <a class="btn btn-ios" id="btn-ios" href="https://apps.apple.com/sg/app/id6812391729" rel="noopener noreferrer"><span>App Store</span><span class="btn-badge">Coming soon</span></a>
+          <a class="btn btn-play" id="btn-android" href="https://play.google.com/store/apps/details?id=com.mobilesg.fourdmatch" rel="noopener noreferrer"><span>Google Play</span><span class="btn-badge">Coming soon</span></a>
+          <a class="btn btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
+        </div>
+        <p class="hint" id="hint"></p>
+      </div>
+    </section>
+
+    <div class="grid">
+      <section class="panel" aria-labelledby="features-title"><h2 id="features-title">Highlights</h2><ul class="features" id="el-features"><li>Upload or scan ticket photos (up to 4 tickets per photo)</li><li>Cloud AI extracts numbers and bet types</li><li>Official final results for matching; live boards are preview only</li><li>Number bank (up to 10 picks) via Settings; auto-match after finals</li><li>Free starter AI credits; earn more with optional rewarded ads (daily limit)</li><li>My matches history with pending rematch when results publish</li><li>Optional notifications for match-ready and bank hits</li></ul></section>
+      <aside class="panel side">
+        <h2>About</h2>
+        <p id="el-blurb">Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.</p>
+        <p>Published by <strong style="color:var(--text)">Mobile@SG</strong>.</p>
+        <div class="links">
+          <a href="https://mobilesg.org/fourdmatch/">Privacy policy</a>
+          <a href="/">All apps</a>
+          <a href="mailto:mobileatsg@gmail.com">Support</a>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "fourdmatch", "en": {"name": "4D Match", "blurb": "Scan Singapore & Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.", "category": "Utilities", "tagline": "Scan Singapore & Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank."}, "zh-Hans": {"name": "4D 对奖", "blurb": "拍照扫描新加坡与马来西亚 4D 彩票，对照官方开奖（中奖类别），并管理全系统号码库。", "category": "工具", "tagline": "拍照扫描新加坡与马来西亚 4D 彩票，对照官方开奖（中奖类别），并管理全系统号码库。"}, "iosUrl": "https://apps.apple.com/sg/app/id6812391729", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.fourdmatch", "privacyUrl": "https://mobilesg.org/fourdmatch/", "shareUrl": "https://mobilesg.org/apps/fourdmatch/"}</script>
+  <script type="application/json" id="app-data">{"id": "fourdmatch", "en": {"name": "4D Match", "blurb": "Scan Singapore & Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.", "category": "Utilities", "tagline": "Scan Singapore & Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank.", "highlights": ["Upload or scan ticket photos (up to 4 tickets per photo)", "Cloud AI extracts numbers and bet types", "Official final results for matching; live boards are preview only", "Number bank (up to 10 picks) via Settings; auto-match after finals", "Free starter AI credits; earn more with optional rewarded ads (daily limit)", "My matches history with pending rematch when results publish", "Optional notifications for match-ready and bank hits"]}, "zh-Hans": {"name": "4D 对奖", "blurb": "拍照扫描新加坡与马来西亚 4D 彩票，对照官方开奖（中奖类别），并管理全系统号码库。", "category": "工具", "tagline": "拍照扫描新加坡与马来西亚 4D 彩票，对照官方开奖（中奖类别），并管理全系统号码库。", "highlights": ["Upload or scan ticket photos (up to 4 tickets per photo)", "Cloud AI extracts numbers and bet types", "Official final results for matching; live boards are preview only", "Number bank (up to 10 picks) via Settings; auto-match after finals", "Free starter AI credits; earn more with optional rewarded ads (daily limit)", "My matches history with pending rematch when results publish", "Optional notifications for match-ready and bank hits"]}, "iosUrl": "https://apps.apple.com/sg/app/id6812391729", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.fourdmatch", "privacyUrl": "https://mobilesg.org/fourdmatch/", "shareUrl": "https://mobilesg.org/apps/fourdmatch/", "iosStatus": "InProcess", "androidStatus": "InProcess"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -176,7 +294,17 @@
     document.getElementById("el-name").textContent = L.name;
     document.getElementById("el-tagline").textContent = L.tagline || L.blurb;
     document.getElementById("el-category").textContent = L.category;
+    var blurb = document.getElementById("el-blurb");
+    if (blurb) blurb.textContent = L.blurb;
     document.title = L.name + " — Mobile@SG";
+    var ul = document.getElementById("el-features");
+    if (ul && L.highlights && L.highlights.length) {
+      ul.innerHTML = L.highlights.map(function (h) {
+        return "<li>" + h.replace(/[&<>"']/g, function (c) {
+          return ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c];
+        }) + "</li>";
+      }).join("");
+    }
     var link = document.getElementById("lang-link");
     if (loc === "zh-Hans") {
       link.textContent = "EN";
@@ -207,10 +335,10 @@
     return null;
   }
 
-  // Soft redirect on mobile (OG crawlers rarely look like phones; ?stay=1 disables).
   var url = targetUrl();
   var mobile = isIOS() || isAndroid();
   var force = go === "1" || go === "store" || go === "ios" || go === "android" || go === "apple" || go === "play";
+  // Soft redirect on phones only (desktop stays on the responsive page).
   if (url && !stay && (mobile || force)) {
     var hint = document.getElementById("hint");
     hint.textContent = locale === "zh-Hans" ? "正在打开商店…" : "Opening the store…";
