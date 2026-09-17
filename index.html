@@ -973,10 +973,8 @@
         var shareHref = app.shareUrl
           ? resolveUrl(app.shareUrl)
           : (app.id ? resolveUrl("/apps/" + app.id + "/") : "");
+        // No separate "App page" button (keeps actions on one row). Icon + title open the share card.
         var actions =
-          (shareHref
-            ? '<a class="btn" href="' + esc(shareHref) + '">' + esc(t("appPage")) + "</a>"
-            : "") +
           storeBtn(t("appStore"), appStore, iosClickable, false) +
           storeBtn(t("googlePlay"), play, androidClickable, true) +
           (app.privacyUrl
@@ -989,7 +987,7 @@
         ].join(";");
 
         var titleBlock = shareHref
-          ? ('<a class="card-title-link" href="' + esc(shareHref) + '">' +
+          ? ('<a class="card-title-link" href="' + esc(shareHref) + '" title="' + esc(t("appPage")) + '">' +
               '<img class="icon" src="' + esc(iconSrc(app)) + '" width="64" height="64" alt="' + esc(name) + ' icon" loading="lazy" />' +
               '<h3 class="card-title">' + esc(name) + "</h3>" +
             "</a>")
