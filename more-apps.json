@@ -596,6 +596,50 @@
       "featureGraphicPath": "assets/apps/feature/rainpause.png",
       "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/rainpause.png",
       "ogImageUrl": "https://mobilesg.org/assets/apps/feature/rainpause.png"
+    },
+    {
+      "id": "axiom",
+      "name": "Axiom",
+      "blurb": "Logic puzzles and challenges by Mobile@SG.",
+      "category": "Games",
+      "status": {
+        "android": "Published",
+        "ios": "InProcess"
+      },
+      "platforms": [
+        "android",
+        "ios"
+      ],
+      "enabled": true,
+      "showInMobileApp": false,
+      "featured": false,
+      "sortOrder": 90,
+      "androidPackage": "com.mobilesg.axiom",
+      "playStoreUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.axiom",
+      "bundleId": "com.mobilesg.axiom",
+      "iosAppStoreId": null,
+      "appStoreUrl": null,
+      "privacyUrl": "/axiom/",
+      "iconUrl": "https://mobilesg.org/assets/apps/axiom.png",
+      "iconPath": "assets/apps/axiom.png",
+      "shareUrl": "/apps/axiom/",
+      "highlights": [
+        "Clear paths and helpers in clever puzzle boards",
+        "Challenge modes and shareable clears",
+        "Built by Mobile@SG"
+      ],
+      "locales": {
+        "zh-Hans": {
+          "name": "Axiom",
+          "blurb": "Mobile@SG 出品的逻辑解谜与挑战。",
+          "category": "游戏",
+          "highlights": [
+            "巧妙棋盘上的清关与辅助",
+            "挑战模式与可分享通关",
+            "由 Mobile@SG 出品"
+          ]
+        }
+      }
     }
   ]
 }
