@@ -61,7 +61,14 @@ def render_card(app: dict, publisher: dict) -> str:
     blurb = app.get("blurb") or ""
     category = app.get("category") or ""
     tagline = app.get("tagline") or blurb
-    icon = abs_url(app.get("ogImageUrl") or app.get("iconUrl") or "")
+    icon = abs_url(app.get("iconUrl") or "")
+    feature = abs_url(
+        app.get("featureGraphicUrl")
+        or (f"/assets/apps/feature/{app_id}.png" if (ROOT / "assets" / "apps" / "feature" / f"{app_id}.png").exists() else None)
+        or app.get("ogImageUrl")
+    )
+    # Prefer Play feature graphic (1024×500) for OG; fall back to app icon.
+    og_image = feature if feature and feature != SITE + "/" else icon
     share = abs_url(app.get("shareUrl") or f"/apps/{app_id}/")
     privacy = abs_url(app.get("privacyUrl") or f"/{app_id}/")
     ios, android = store_urls(app)
@@ -158,11 +165,13 @@ def render_card(app: dict, publisher: dict) -> str:
   <meta property="og:title" content="{esc(name)}" />
   <meta property="og:description" content="{esc(blurb)}" />
   <meta property="og:url" content="{esc(share)}" />
-  <meta property="og:image" content="{esc(icon)}" />
+  <meta property="og:image" content="{esc(og_image)}" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="{esc(name)}" />
   <meta name="twitter:description" content="{esc(blurb)}" />
-  <meta name="twitter:image" content="{esc(icon)}" />
+  <meta name="twitter:image" content="{esc(og_image)}" />
   <meta name="theme-color" content="#0f1419" />
   <link rel="icon" href="/assets/brand/mobileatsg-logo.png" type="image/png" />
   <style>
@@ -212,6 +221,17 @@ def render_card(app: dict, publisher: dict) -> str:
       color: inherit; font-weight: 650;
     }}
     .brand img {{ width: 30px; height: 30px; border-radius: 8px; }}
+    .banner {{
+      display: block;
+      width: 100%;
+      aspect-ratio: 1024 / 500;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      margin-bottom: 1.15rem;
+    }}
     .hero {{
       display: grid;
       gap: 1.5rem;
@@ -388,6 +408,7 @@ def render_card(app: dict, publisher: dict) -> str:
          data-zh="/apps/{esc(app_id)}/?lang=zh">中文</a>
     </div>
 
+    {f'<img class="banner" src="{esc(feature)}" alt="{esc(name)} feature graphic" width="1024" height="500" />' if feature and feature != SITE + "/" and feature != icon else ""}
     <section class="hero">
       <div class="icon-wrap">
         <img class="icon" src="{esc(icon)}" alt="{esc(name)} icon" width="144" height="144" />

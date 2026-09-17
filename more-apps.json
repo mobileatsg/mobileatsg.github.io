@@ -73,7 +73,10 @@
         "Charts — candlestick charts with multi-period views",
         "Price alerts — create alerts and receive push when conditions hit",
         "Share — share a stock quote card or an announcement/dividend link"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/stocksg.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/stocksg.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/stocksg.png"
     },
     {
       "id": "sudoku",
@@ -117,7 +120,10 @@
         "Smart hints, notes, undo, and resume",
         "English & Simplified Chinese",
         "Free with ads"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/sudoku.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/sudoku.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/sudoku.png"
     },
     {
       "id": "pixelcolor",
@@ -161,7 +167,10 @@
         "Simple controls — tap a number, fill matching pixels",
         "Kid-friendly gallery of pictures to complete",
         "English & Simplified Chinese"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/pixelcolor.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/pixelcolor.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/pixelcolor.png"
     },
     {
       "id": "smartalarm",
@@ -304,7 +313,10 @@
         "Nearby list — browse places by distance with clear free-lot and EV badges",
         "Parking rates guide — weekdays, Saturday, and Sun/PH rates when published (guide only; confirm on site)",
         "Saved places — keep favourite lots and chargers on the map"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/parksg.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/parksg.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/parksg.png"
     },
     {
       "id": "totomatch",
@@ -349,7 +361,10 @@
         "Free starter AI matches; earn more with optional rewarded ads",
         "Photos with tickets use 1 match; every 3 no-ticket photos also use 1 match",
         "Pending tickets update when official results are published"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/totomatch.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/totomatch.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/totomatch.png"
     },
     {
       "id": "fourdmatch",
@@ -394,7 +409,10 @@
         "Free starter AI credits; earn more with optional rewarded ads (daily limit)",
         "My matches history with pending rematch when results publish",
         "Optional notifications for match-ready and bank hits"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/fourdmatch.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/fourdmatch.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/fourdmatch.png"
     },
     {
       "id": "commutesg",
@@ -439,7 +457,10 @@
         "Route map from your stop through the terminus when official geometry is stored",
         "Buses tab: search services, hours, and recents",
         "Map: nearby stops and place Directions (Google Maps or Apple Maps, transit)"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/commutesg.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/commutesg.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/commutesg.png"
     },
     {
       "id": "rainpause",
@@ -484,7 +505,10 @@
         "Gentle end card: “That's enough.” Then Another 2 min, Change window, or Done",
         "Three free windows: Night rain, Morning, Forest",
         "Optional one-time Quiet Windows unlocks 22 extra scenes"
-      ]
+      ],
+      "featureGraphicPath": "assets/apps/feature/rainpause.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/rainpause.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/rainpause.png"
     }
   ]
 }

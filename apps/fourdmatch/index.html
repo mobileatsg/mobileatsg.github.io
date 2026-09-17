@@ -12,11 +12,13 @@
   <meta property="og:title" content="4D Match" />
   <meta property="og:description" content="Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank." />
   <meta property="og:url" content="https://mobilesg.org/apps/fourdmatch/" />
-  <meta property="og:image" content="https://mobilesg.org/assets/apps/fourdmatch.png" />
+  <meta property="og:image" content="https://mobilesg.org/assets/apps/feature/fourdmatch.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="4D Match" />
   <meta name="twitter:description" content="Scan Singapore &amp; Malaysia 4D tickets from photos, match official draws (hit category), and manage a system-wide number bank." />
-  <meta name="twitter:image" content="https://mobilesg.org/assets/apps/fourdmatch.png" />
+  <meta name="twitter:image" content="https://mobilesg.org/assets/apps/feature/fourdmatch.png" />
   <meta name="theme-color" content="#0f1419" />
   <link rel="icon" href="/assets/brand/mobileatsg-logo.png" type="image/png" />
   <style>
@@ -66,6 +68,17 @@
       color: inherit; font-weight: 650;
     }
     .brand img { width: 30px; height: 30px; border-radius: 8px; }
+    .banner {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1024 / 500;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      margin-bottom: 1.15rem;
+    }
     .hero {
       display: grid;
       gap: 1.5rem;
@@ -242,6 +255,7 @@
          data-zh="/apps/fourdmatch/?lang=zh">中文</a>
     </div>
 
+    <img class="banner" src="https://mobilesg.org/assets/apps/feature/fourdmatch.png" alt="4D Match feature graphic" width="1024" height="500" />
     <section class="hero">
       <div class="icon-wrap">
         <img class="icon" src="https://mobilesg.org/assets/apps/fourdmatch.png" alt="4D Match icon" width="144" height="144" />

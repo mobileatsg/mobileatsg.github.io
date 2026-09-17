@@ -120,7 +120,8 @@ In-app: use the app’s UI language (`en` / `zh-Hans` only for this catalog).
 | `category` | string | Chip label (**English**) |
 | `shareUrl` | string | Canonical share page, e.g. `/apps/stocksg/` (not raw store links) |
 | `tagline` | string? | Optional shorter line on the share card (defaults to `blurb`) |
-| `ogImageUrl` | string? | Optional OG image (defaults to `iconUrl`) |
+| `ogImageUrl` | string? | Open Graph image (defaults to feature graphic, then icon) |
+| `featureGraphicUrl` / `featureGraphicPath` | string? | Play Store feature graphic 1024×500 — used as share-card banner + OG |
 | `highlights` | string[]? | Feature bullets on `/apps/{id}/` (from store metadata / docs) |
 | `locales` | object | Optional `zh-Hans` overrides for `name`, `blurb`, `category`, `tags` |
 | `status` | object or string | **Per platform** (preferred) or legacy single string (see below) |

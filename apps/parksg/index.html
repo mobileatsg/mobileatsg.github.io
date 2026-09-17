@@ -12,11 +12,13 @@
   <meta property="og:title" content="Park &amp; Charge SG" />
   <meta property="og:description" content="Singapore parking &amp; EV chargers on a map — live lots, plug status &amp; prices, mall rates, search, and directions." />
   <meta property="og:url" content="https://mobilesg.org/apps/parksg/" />
-  <meta property="og:image" content="https://mobilesg.org/assets/apps/parksg.png" />
+  <meta property="og:image" content="https://mobilesg.org/assets/apps/feature/parksg.png" />
+  <meta property="og:image:width" content="1024" />
+  <meta property="og:image:height" content="500" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Park &amp; Charge SG" />
   <meta name="twitter:description" content="Singapore parking &amp; EV chargers on a map — live lots, plug status &amp; prices, mall rates, search, and directions." />
-  <meta name="twitter:image" content="https://mobilesg.org/assets/apps/parksg.png" />
+  <meta name="twitter:image" content="https://mobilesg.org/assets/apps/feature/parksg.png" />
   <meta name="theme-color" content="#0f1419" />
   <link rel="icon" href="/assets/brand/mobileatsg-logo.png" type="image/png" />
   <style>
@@ -66,6 +68,17 @@
       color: inherit; font-weight: 650;
     }
     .brand img { width: 30px; height: 30px; border-radius: 8px; }
+    .banner {
+      display: block;
+      width: 100%;
+      aspect-ratio: 1024 / 500;
+      object-fit: cover;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background: var(--surface);
+      margin-bottom: 1.15rem;
+    }
     .hero {
       display: grid;
       gap: 1.5rem;
@@ -242,6 +255,7 @@
          data-zh="/apps/parksg/?lang=zh">中文</a>
     </div>
 
+    <img class="banner" src="https://mobilesg.org/assets/apps/feature/parksg.png" alt="Park &amp; Charge SG feature graphic" width="1024" height="500" />
     <section class="hero">
       <div class="icon-wrap">
         <img class="icon" src="https://mobilesg.org/assets/apps/parksg.png" alt="Park &amp; Charge SG icon" width="144" height="144" />
