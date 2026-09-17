@@ -667,6 +667,7 @@
           appStore: "App Store",
           googlePlay: "Google Play",
           appPage: "App page",
+          comingSoon: "Coming soon",
           privacy: "Privacy",
           platformStatus: "Platform status",
           loadErrorPrefix: "Could not load the app catalog. Open this site via a local server (e.g. python3 -m http.server) or deploy to GitHub Pages. Catalog URL:",
@@ -708,6 +709,7 @@
           appStore: "App Store",
           googlePlay: "Google Play",
           appPage: "应用页",
+          comingSoon: "即将推出",
           privacy: "隐私",
           platformStatus: "平台状态",
           loadErrorPrefix: "无法加载应用目录。请通过本地服务器打开本站（例如 python3 -m http.server）或部署到 GitHub Pages。目录地址：",
@@ -926,7 +928,10 @@
         );
       }
 
-      function storeBtn(label, href, enabled, primary) {
+      function storeBtn(label, href, enabled, primary, opts) {
+        opts = opts || {};
+        // Platform not in catalog → hide button entirely.
+        if (opts.hide) return "";
         var classes = "btn" + (primary ? " primary" : "") + (enabled ? "" : " disabled");
         if (enabled && href) {
           return (
@@ -935,9 +940,10 @@
             "</a>"
           );
         }
+        var text = opts.comingSoon ? t("comingSoon") : label;
         return (
-          '<span class="' + classes + '" aria-disabled="true" title="' + esc(t("notAvailable")) + '">' +
-            esc(label) +
+          '<span class="' + classes + '" aria-disabled="true" title="' + esc(text) + '">' +
+            esc(text) +
           "</span>"
         );
       }
@@ -967,16 +973,25 @@
 
         var play = playHref(app);
         var appStore = appStoreHref(app);
-        // Store links stay clickable whenever a URL exists (even InProcess / Coming soon).
-        var iosClickable = !!(hasIos && appStore);
-        var androidClickable = !!(hasAndroid && play);
+        var iosPublished = hasIos && iosStatus === "Published";
+        var androidPublished = hasAndroid && androidStatus === "Published";
+        // Published → store link. InProcess → still show button but disabled "Coming soon".
+        // Platform absent → hide (storeBtn gets enabled=false and no href → we need hide).
+        var iosClickable = !!(iosPublished && appStore);
+        var androidClickable = !!(androidPublished && play);
         var shareHref = app.shareUrl
           ? resolveUrl(app.shareUrl)
           : (app.id ? resolveUrl("/apps/" + app.id + "/") : "");
         // No separate "App page" button (keeps actions on one row). Icon + title open the share card.
         var actions =
-          storeBtn(t("appStore"), appStore, iosClickable, false) +
-          storeBtn(t("googlePlay"), play, androidClickable, true) +
+          storeBtn(t("appStore"), appStore, iosClickable, false, {
+            hide: !hasIos,
+            comingSoon: hasIos && iosStatus === "InProcess"
+          }) +
+          storeBtn(t("googlePlay"), play, androidClickable, true, {
+            hide: !hasAndroid,
+            comingSoon: hasAndroid && androidStatus === "InProcess"
+          }) +
           (app.privacyUrl
             ? '<a class="btn ghost" href="' + esc(resolveUrl(app.privacyUrl)) + '">' + esc(t("privacy")) + "</a>"
             : '<span class="btn ghost disabled" aria-disabled="true">' + esc(t("privacy")) + "</span>");

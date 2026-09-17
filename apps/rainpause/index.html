@@ -25,16 +25,13 @@
     :root {
       --bg: #0f1419;
       --surface: #1a2332;
-      --surface-2: #213044;
       --text: #e7ecf3;
       --muted: #9aa8b8;
       --accent: #5b9fd4;
       --border: #2a3648;
       --link: #7ec8ff;
-      --ok: #6bcf8e;
-      --soon: #e0b35c;
-      --radius: 22px;
-      --shadow: 0 18px 50px rgba(0,0,0,.38);
+      --radius: 20px;
+      --shadow: 0 14px 40px rgba(0,0,0,.35);
     }
     * { box-sizing: border-box; }
     body {
@@ -44,202 +41,225 @@
       line-height: 1.55;
       color: var(--text);
       background:
-        radial-gradient(1100px 560px at 12% -12%, rgba(91,159,212,.18), transparent 55%),
-        radial-gradient(900px 480px at 100% 0%, rgba(123,108,240,.12), transparent 52%),
+        radial-gradient(1000px 520px at 12% -12%, rgba(91,159,212,.16), transparent 55%),
+        radial-gradient(800px 420px at 100% 0%, rgba(123,108,240,.1), transparent 50%),
         var(--bg);
     }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
     .wrap {
-      width: min(960px, 100%);
+      width: min(880px, 100%);
       margin: 0 auto;
-      padding: 1.5rem 1.25rem 3.5rem;
+      padding: 1.35rem 1.2rem 3rem;
     }
     .top {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
-      margin-bottom: 1.5rem;
-      font-size: .92rem;
+      margin-bottom: 1.15rem;
+      font-size: .9rem;
     }
     .brand {
-      display: flex; align-items: center; gap: .6rem;
+      display: flex; align-items: center; gap: .55rem;
       color: inherit; font-weight: 650;
     }
-    .brand img { width: 30px; height: 30px; border-radius: 8px; }
+    .brand img { width: 28px; height: 28px; border-radius: 8px; }
+
+    /* Compact feature strip — not a huge poster */
+    .banner-wrap {
+      margin-bottom: 1.1rem;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      max-height: 140px;
+      box-shadow: var(--shadow);
+    }
+    @media (min-width: 800px) {
+      .banner-wrap { max-height: 168px; }
+    }
     .banner {
       display: block;
       width: 100%;
-      aspect-ratio: 1024 / 500;
+      height: 140px;
       object-fit: cover;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow);
-      background: var(--surface);
-      margin-bottom: 1.15rem;
+      object-position: center;
+      filter: saturate(1.05) contrast(1.02);
     }
+    @media (min-width: 800px) {
+      .banner { height: 168px; }
+    }
+
     .hero {
       display: grid;
-      gap: 1.5rem;
+      gap: 1.15rem;
       background: linear-gradient(180deg, rgba(33,48,68,.92), rgba(26,35,50,.98));
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.5rem;
+      padding: 1.25rem 1.25rem 1.35rem;
       box-shadow: var(--shadow);
     }
     @media (min-width: 800px) {
       .hero {
-        grid-template-columns: 160px 1fr;
-        align-items: start;
-        gap: 2rem;
-        padding: 2rem 2.1rem;
+        grid-template-columns: 120px 1fr;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem 1.75rem;
       }
     }
     .icon-wrap { text-align: center; }
     @media (min-width: 800px) { .icon-wrap { text-align: left; } }
     .icon {
-      width: 112px; height: 112px; border-radius: 26px;
+      width: 96px; height: 96px; border-radius: 22px;
       object-fit: cover; background: #fff;
       box-shadow: var(--shadow);
     }
     @media (min-width: 800px) {
-      .icon { width: 144px; height: 144px; border-radius: 32px; }
+      .icon { width: 112px; height: 112px; border-radius: 26px; }
     }
     .chip {
       display: inline-block;
-      font-size: .78rem;
+      font-size: .75rem;
       color: var(--muted);
       background: #243044;
       border-radius: 999px;
-      padding: .22rem .7rem;
-      margin: 0 .35rem .55rem 0;
+      padding: .2rem .65rem;
+      margin: 0 .3rem .5rem 0;
     }
-    .status-chip {
-      display: inline-block;
-      font-size: .75rem;
-      border-radius: 999px;
-      padding: .22rem .7rem;
-      margin: 0 .35rem .55rem 0;
-      border: 1px solid var(--border);
-      color: var(--muted);
-    }
-    .status-chip.ok { color: var(--ok); border-color: rgba(107,207,142,.35); }
-    .status-chip.soon { color: var(--soon); border-color: rgba(224,179,92,.35); }
     h1 {
-      margin: .15rem 0 .45rem;
-      font-size: clamp(1.6rem, 3vw, 2.15rem);
+      margin: .1rem 0 .4rem;
+      font-size: clamp(1.45rem, 2.6vw, 1.95rem);
       letter-spacing: -.02em;
       line-height: 1.15;
     }
     .tagline {
-      margin: 0 0 1.1rem;
+      margin: 0 0 1rem;
       color: var(--muted);
-      font-size: 1.02rem;
-      max-width: 38rem;
+      font-size: .98rem;
+      max-width: 36rem;
     }
+
+    /* Binance-like store pills */
     .btns {
       display: flex;
       flex-wrap: wrap;
-      gap: .7rem;
-      margin: 1rem 0 .35rem;
+      gap: .65rem;
     }
-    .btn {
+    .store-btn {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      gap: .55rem;
-      min-width: 148px;
-      padding: .85rem 1.1rem;
-      border-radius: 12px;
-      font-weight: 650;
-      text-decoration: none !important;
+      gap: .7rem;
+      min-width: 168px;
+      padding: .55rem 1rem .55rem .85rem;
+      border-radius: 10px;
+      background: #0b0e11;
+      border: 1px solid #2b3139;
       color: #fff !important;
-      transition: transform .12s ease, filter .12s ease;
+      text-decoration: none !important;
+      transition: background .15s ease, border-color .15s ease, transform .1s ease;
     }
-    .btn:hover { filter: brightness(1.06); text-decoration: none !important; }
-    .btn:active { transform: translateY(1px); }
-    .btn-ios { background: #0a84ff; }
-    .btn-play { background: #3ddc84; color: #0b1a10 !important; }
-    .btn-badge {
-      font-size: .7rem;
+    a.store-btn:hover {
+      background: #141920;
+      border-color: #3a424d;
+      text-decoration: none !important;
+    }
+    a.store-btn:active { transform: translateY(1px); }
+    .store-btn.is-soon {
+      opacity: .72;
+      cursor: default;
+      background: #151a21;
+    }
+    .store-ico {
+      width: 26px;
+      height: 26px;
+      flex: 0 0 auto;
+    }
+    .store-text {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1.15;
+    }
+    .store-top {
+      font-size: .68rem;
+      color: #b7bdc6;
+      font-weight: 500;
+    }
+    .store-name {
+      font-size: 1.02rem;
       font-weight: 700;
-      letter-spacing: .02em;
-      padding: .15rem .45rem;
-      border-radius: 999px;
-      background: rgba(0,0,0,.18);
-      color: inherit;
+      letter-spacing: -.01em;
     }
-    .btn-badge.on { background: rgba(255,255,255,.22); }
     .btn-stay {
-      background: transparent;
+      display: inline-flex;
+      align-items: center;
+      padding: .65rem .9rem;
+      border-radius: 10px;
       border: 1px solid var(--border);
       color: var(--muted) !important;
+      font-size: .88rem;
       font-weight: 500;
-      font-size: .9rem;
-      min-width: auto;
+      text-decoration: none !important;
     }
-    .grid {
-      display: grid;
-      gap: 1rem;
-      margin-top: 1.25rem;
+    .hint {
+      margin: .7rem 0 0;
+      font-size: .8rem;
+      color: var(--muted);
+      min-height: 1.1em;
     }
-    @media (min-width: 800px) {
-      .grid { grid-template-columns: 1.4fr .9fr; align-items: start; }
+
+    /* Highlights directly under hero */
+    .highlights {
+      margin-top: 1.1rem;
     }
     .panel {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 1.25rem 1.3rem 1.35rem;
+      border-radius: 16px;
+      padding: 1.15rem 1.2rem 1.25rem;
     }
     .panel h2 {
-      margin: 0 0 .85rem;
-      font-size: 1.05rem;
+      margin: 0 0 .75rem;
+      font-size: 1rem;
       letter-spacing: -.01em;
     }
     .features {
       margin: 0;
       padding: 0;
       list-style: none;
+      display: grid;
+      gap: 0;
+    }
+    @media (min-width: 800px) {
+      .features { grid-template-columns: 1fr 1fr; gap: 0 1.25rem; }
     }
     .features li {
       position: relative;
-      padding: .45rem 0 .45rem 1.35rem;
-      color: var(--text);
-      border-bottom: 1px solid rgba(42,54,72,.65);
-      font-size: .95rem;
+      padding: .5rem 0 .5rem 1.25rem;
+      border-bottom: 1px solid rgba(42,54,72,.55);
+      font-size: .92rem;
     }
-    .features li:last-child { border-bottom: 0; }
     .features li::before {
       content: "";
       position: absolute;
-      left: 0; top: .85rem;
-      width: .55rem; height: .55rem;
+      left: 0; top: .9rem;
+      width: .45rem; height: .45rem;
       border-radius: 50%;
       background: var(--accent);
-      box-shadow: 0 0 0 3px rgba(91,159,212,.18);
     }
-    .side p {
-      margin: 0 0 .75rem;
+
+    .about {
+      margin-top: 1rem;
       color: var(--muted);
-      font-size: .92rem;
+      font-size: .9rem;
     }
-    .side .links a {
-      display: inline-block;
-      margin: .15rem .75rem .15rem 0;
-    }
-    .hint {
-      margin: .75rem 0 0;
-      font-size: .82rem;
-      color: var(--muted);
-      min-height: 1.2em;
-    }
+    .about strong { color: var(--text); }
+    .about .links a { margin-right: .85rem; }
     footer.note {
       margin-top: 1.5rem;
       text-align: center;
       color: var(--muted);
-      font-size: .8rem;
+      font-size: .78rem;
     }
   </style>
 </head>
@@ -247,7 +267,7 @@
   <div class="wrap">
     <div class="top">
       <a class="brand" href="/">
-        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="30" height="30" />
+        <img src="/assets/brand/mobileatsg-logo.png" alt="" width="28" height="28" />
         Mobile@SG
       </a>
       <a href="/apps/rainpause/?lang=zh" id="lang-link"
@@ -255,44 +275,41 @@
          data-zh="/apps/rainpause/?lang=zh">中文</a>
     </div>
 
-    <img class="banner" src="https://mobilesg.org/assets/apps/feature/rainpause.png" alt="Rain Pause feature graphic" width="1024" height="500" />
+    <div class="banner-wrap"><img class="banner" src="https://mobilesg.org/assets/apps/feature/rainpause.png" alt="" width="1024" height="500" /></div>
+
     <section class="hero">
       <div class="icon-wrap">
-        <img class="icon" src="https://mobilesg.org/assets/apps/rainpause.png" alt="Rain Pause icon" width="144" height="144" />
+        <img class="icon" src="https://mobilesg.org/assets/apps/rainpause.png" alt="Rain Pause icon" width="112" height="112" />
       </div>
       <div>
-        <div>
-          <span class="chip" id="el-category">Games · Casual</span>
-          <span class="status-chip soon">iOS · Coming soon</span><span class="status-chip ok">Android · Published</span>
-        </div>
+        <span class="chip" id="el-category">Games · Casual</span>
         <h1 id="el-name">Rain Pause</h1>
         <p class="tagline" id="el-tagline">A quiet rainy window. Two minutes. No streaks.</p>
         <div class="btns">
-          <a class="btn btn-ios" id="btn-ios" href="https://apps.apple.com/sg/app/id6807859767" rel="noopener noreferrer"><span>App Store</span><span class="btn-badge">Coming soon</span></a>
-          <a class="btn btn-play" id="btn-android" href="https://play.google.com/store/apps/details?id=com.mobilesg.rainpause" rel="noopener noreferrer"><span>Google Play</span><span class="btn-badge on">Get</span></a>
-          <a class="btn btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
+          <span class="store-btn store-ios is-soon" id="btn-ios" aria-disabled="true"><svg class="store-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.37 12.29c-.03-2.34 1.91-3.46 2-3.51-1.09-1.59-2.78-1.81-3.38-1.83-1.44-.15-2.81.85-3.54.85-.73 0-1.86-.83-3.06-.81-1.57.02-3.02.92-3.83 2.33-1.64 2.84-.42 7.04 1.17 9.35.78 1.13 1.71 2.4 2.93 2.35 1.18-.05 1.62-.76 3.04-.76 1.41 0 1.81.76 3.05.74 1.26-.02 2.06-1.15 2.83-2.29.89-1.3 1.26-2.56 1.28-2.62-.03-.01-2.45-.94-2.49-3.8zM14.2 5.48c.65-.79 1.09-1.88.97-2.97-0.94.04-2.08.63-2.75 1.42-.6.7-1.13 1.82-.99 2.89 1.05.08 2.12-.53 2.77-1.34z"/></svg><span class="store-text"><span class="store-top">App Store</span><span class="store-name" data-i18n-soon>Coming soon</span></span></span>
+          <a class="store-btn store-play" id="btn-android" href="https://play.google.com/store/apps/details?id=com.mobilesg.rainpause" rel="noopener noreferrer"><svg class="store-ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="#EA4335" d="M3.6 2.2 13.3 12 3.6 21.8A2.1 2.1 0 0 1 3 20.1V3.9c0-.7.2-1.3.6-1.7z"/><path fill="#FBBC04" d="m13.3 12 2.7-2.7 4.2 2.4c.7.4.7 1.5 0 1.9l-4.2 2.4L13.3 12z"/><path fill="#4285F4" d="M13.3 12 3.6 2.2A2.3 2.3 0 0 1 5.1 2l11.2 6.5L13.3 12z"/><path fill="#34A853" d="M13.3 12 16.3 15.5 5.1 22a2.3 2.3 0 0 1-1.5-.2L13.3 12z"/></svg><span class="store-text"><span class="store-top" data-i18n-top>Get it on</span><span class="store-name">Google Play</span></span></a>
+          <a class="btn-stay" href="?stay=1" id="btn-stay">Stay on this page</a>
         </div>
         <p class="hint" id="hint"></p>
       </div>
     </section>
 
-    <div class="grid">
-      <section class="panel" aria-labelledby="features-title"><h2 id="features-title">Highlights</h2><ul class="features" id="el-features"><li>Cold open into a rainy window</li><li>Live rain overlay, frost, and tappable drops</li><li>Optional rain sound, haptics, and a breathing ring</li><li>Session lengths: 1 min, 2 min, 5 min, or Stay</li><li>Gentle end card: “That&#x27;s enough.” Then Another 2 min, Change window, or Done</li><li>Three free windows: Night rain, Morning, Forest</li><li>Optional one-time Quiet Windows unlocks 22 extra scenes</li></ul></section>
-      <aside class="panel side">
-        <h2>About</h2>
-        <p id="el-blurb">A quiet rainy window. Two minutes. No streaks.</p>
-        <p>Published by <strong style="color:var(--text)">Mobile@SG</strong>.</p>
-        <div class="links">
-          <a href="https://mobilesg.org/rainpause/">Privacy policy</a>
-          <a href="/">All apps</a>
-          <a href="mailto:mobileatsg@gmail.com">Support</a>
-        </div>
-      </aside>
-    </div>
+    <section class="panel highlights" aria-labelledby="features-title"><h2 id="features-title">Highlights</h2><ul class="features" id="el-features"><li>Cold open into a rainy window</li><li>Live rain overlay, frost, and tappable drops</li><li>Optional rain sound, haptics, and a breathing ring</li><li>Session lengths: 1 min, 2 min, 5 min, or Stay</li><li>Gentle end card: “That&#x27;s enough.” Then Another 2 min, Change window, or Done</li><li>Three free windows: Night rain, Morning, Forest</li><li>Optional one-time Quiet Windows unlocks 22 extra scenes</li></ul></section>
+
+    <section class="panel about" aria-labelledby="about-title">
+      <h2 id="about-title">About</h2>
+      <p id="el-blurb">A quiet rainy window. Two minutes. No streaks.</p>
+      <p>Published by <strong>Mobile@SG</strong>.</p>
+      <p class="links">
+        <a href="https://mobilesg.org/rainpause/">Privacy policy</a>
+        <a href="/">All apps</a>
+        <a href="mailto:mobileatsg@gmail.com">Support</a>
+      </p>
+    </section>
 
     <footer class="note">App Store &amp; Google Play are trademarks of their respective owners.</footer>
   </div>
-  <script type="application/json" id="app-data">{"id": "rainpause", "en": {"name": "Rain Pause", "blurb": "A quiet rainy window. Two minutes. No streaks.", "category": "Games · Casual", "tagline": "A quiet rainy window. Two minutes. No streaks.", "highlights": ["Cold open into a rainy window", "Live rain overlay, frost, and tappable drops", "Optional rain sound, haptics, and a breathing ring", "Session lengths: 1 min, 2 min, 5 min, or Stay", "Gentle end card: “That's enough.” Then Another 2 min, Change window, or Done", "Three free windows: Night rain, Morning, Forest", "Optional one-time Quiet Windows unlocks 22 extra scenes"]}, "zh-Hans": {"name": "雨歇", "blurb": "一扇安静的雨窗。两分钟。没有打卡。", "category": "游戏 · 休闲", "tagline": "一扇安静的雨窗。两分钟。没有打卡。", "highlights": ["Cold open into a rainy window", "Live rain overlay, frost, and tappable drops", "Optional rain sound, haptics, and a breathing ring", "Session lengths: 1 min, 2 min, 5 min, or Stay", "Gentle end card: “That's enough.” Then Another 2 min, Change window, or Done", "Three free windows: Night rain, Morning, Forest", "Optional one-time Quiet Windows unlocks 22 extra scenes"]}, "iosUrl": "https://apps.apple.com/sg/app/id6807859767", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.rainpause", "privacyUrl": "https://mobilesg.org/rainpause/", "shareUrl": "https://mobilesg.org/apps/rainpause/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
+  <script type="application/json" id="app-data">{"id": "rainpause", "en": {"name": "Rain Pause", "blurb": "A quiet rainy window. Two minutes. No streaks.", "category": "Games · Casual", "tagline": "A quiet rainy window. Two minutes. No streaks.", "highlights": ["Cold open into a rainy window", "Live rain overlay, frost, and tappable drops", "Optional rain sound, haptics, and a breathing ring", "Session lengths: 1 min, 2 min, 5 min, or Stay", "Gentle end card: “That's enough.” Then Another 2 min, Change window, or Done", "Three free windows: Night rain, Morning, Forest", "Optional one-time Quiet Windows unlocks 22 extra scenes"], "featuresTitle": "Highlights", "aboutTitle": "About", "comingSoon": "Coming soon", "downloadOn": "Download on the", "getItOn": "Get it on", "opening": "Opening the store…"}, "zh-Hans": {"name": "雨歇", "blurb": "一扇安静的雨窗。两分钟。没有打卡。", "category": "游戏 · 休闲", "tagline": "一扇安静的雨窗。两分钟。没有打卡。", "highlights": ["Cold open into a rainy window", "Live rain overlay, frost, and tappable drops", "Optional rain sound, haptics, and a breathing ring", "Session lengths: 1 min, 2 min, 5 min, or Stay", "Gentle end card: “That's enough.” Then Another 2 min, Change window, or Done", "Three free windows: Night rain, Morning, Forest", "Optional one-time Quiet Windows unlocks 22 extra scenes"], "featuresTitle": "亮点", "aboutTitle": "关于", "comingSoon": "即将推出", "downloadOn": "下载自", "getItOn": "获取于", "opening": "正在打开商店…"}, "iosUrl": "https://apps.apple.com/sg/app/id6807859767", "androidUrl": "https://play.google.com/store/apps/details?id=com.mobilesg.rainpause", "privacyUrl": "https://mobilesg.org/rainpause/", "shareUrl": "https://mobilesg.org/apps/rainpause/", "iosStatus": "InProcess", "androidStatus": "Published"}</script>
   <script>
 (function () {
   var data = JSON.parse(document.getElementById("app-data").textContent);
@@ -310,15 +327,29 @@
     document.getElementById("el-category").textContent = L.category;
     var blurb = document.getElementById("el-blurb");
     if (blurb) blurb.textContent = L.blurb;
+    var ft = document.getElementById("features-title");
+    if (ft && L.featuresTitle) ft.textContent = L.featuresTitle;
+    var at = document.getElementById("about-title");
+    if (at && L.aboutTitle) at.textContent = L.aboutTitle;
     document.title = L.name + " — Mobile@SG";
     var ul = document.getElementById("el-features");
     if (ul && L.highlights && L.highlights.length) {
       ul.innerHTML = L.highlights.map(function (h) {
-        return "<li>" + h.replace(/[&<>"']/g, function (c) {
+        return "<li>" + String(h).replace(/[&<>"']/g, function (c) {
           return ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"})[c];
         }) + "</li>";
       }).join("");
     }
+    document.querySelectorAll("[data-i18n-soon]").forEach(function (el) {
+      el.textContent = L.comingSoon || "Coming soon";
+    });
+    document.querySelectorAll("[data-i18n-top]").forEach(function (el) {
+      var btn = el.closest(".store-btn");
+      if (!btn || btn.classList.contains("is-soon")) return;
+      el.textContent = btn.classList.contains("store-ios")
+        ? (L.downloadOn || "Download on the")
+        : (L.getItOn || "Get it on");
+    });
     var link = document.getElementById("lang-link");
     if (loc === "zh-Hans") {
       link.textContent = "EN";
@@ -337,25 +368,28 @@
   function isAndroid() { return /Android/i.test(navigator.userAgent); }
 
   function targetUrl() {
-    if (go === "ios" || go === "apple") return data.iosUrl;
-    if (go === "android" || go === "play") return data.androidUrl;
+    // Soft-redirect only to Published stores.
+    if ((go === "ios" || go === "apple") && data.iosStatus === "Published") return data.iosUrl;
+    if ((go === "android" || go === "play") && data.androidStatus === "Published") return data.androidUrl;
     if (go === "1" || go === "store") {
-      if (isIOS() && data.iosUrl) return data.iosUrl;
-      if (isAndroid() && data.androidUrl) return data.androidUrl;
-      return data.iosUrl || data.androidUrl;
+      if (isIOS() && data.iosStatus === "Published" && data.iosUrl) return data.iosUrl;
+      if (isAndroid() && data.androidStatus === "Published" && data.androidUrl) return data.androidUrl;
+      if (data.iosStatus === "Published") return data.iosUrl;
+      if (data.androidStatus === "Published") return data.androidUrl;
+      return null;
     }
-    if (isIOS() && data.iosUrl) return data.iosUrl;
-    if (isAndroid() && data.androidUrl) return data.androidUrl;
+    if (isIOS() && data.iosStatus === "Published" && data.iosUrl) return data.iosUrl;
+    if (isAndroid() && data.androidStatus === "Published" && data.androidUrl) return data.androidUrl;
     return null;
   }
 
   var url = targetUrl();
   var mobile = isIOS() || isAndroid();
   var force = go === "1" || go === "store" || go === "ios" || go === "android" || go === "apple" || go === "play";
-  // Soft redirect on phones only (desktop stays on the responsive page).
   if (url && !stay && (mobile || force)) {
     var hint = document.getElementById("hint");
-    hint.textContent = locale === "zh-Hans" ? "正在打开商店…" : "Opening the store…";
+    var L = data[locale] || data.en;
+    hint.textContent = L.opening || "Opening the store…";
     setTimeout(function () { location.replace(url); }, force ? 200 : 1200);
   }
 })();
