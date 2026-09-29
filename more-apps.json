@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-29",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -603,7 +603,7 @@
       "blurb": "Logic puzzles and challenges by Mobile@SG.",
       "category": "Games",
       "status": {
-        "android": "Published",
+        "android": "InProcess",
         "ios": "InProcess"
       },
       "platforms": [
