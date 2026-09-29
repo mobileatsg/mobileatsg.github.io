@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-29",
+  "updatedAt": "2026-09-30",
   "defaultLocale": "en",
   "supportedLocales": [
     "en",
@@ -600,8 +600,8 @@
     {
       "id": "axiom",
       "name": "Axiom",
-      "blurb": "Logic puzzles and challenges by Mobile@SG.",
-      "category": "Games",
+      "blurb": "Number-path puzzle — clear numbered pieces and cores in order. Chapters, Beginner path, weekly Challenge ranking.",
+      "category": "Games · Puzzle",
       "status": {
         "android": "InProcess",
         "ios": "InProcess"
@@ -624,22 +624,33 @@
       "iconPath": "assets/apps/axiom.png",
       "shareUrl": "/apps/axiom/",
       "highlights": [
-        "Clear paths and helpers in clever puzzle boards",
-        "Challenge modes and shareable clears",
-        "Built by Mobile@SG"
+        "Clear numbered pieces and cores in order on tight boards",
+        "Normal chapters — stars record your best clear",
+        "New rules as you go: springs, one-way arrows, gaps, growing cores",
+        "Beginner path — same moves, unlimited helpers",
+        "Weekly Challenge — ten harder boards and a ranking",
+        "English & Simplified Chinese",
+        "Free with ads — no account, no in-app purchases"
       ],
       "locales": {
         "zh-Hans": {
           "name": "Axiom",
-          "blurb": "Mobile@SG 出品的逻辑解谜与挑战。",
-          "category": "游戏",
+          "blurb": "数字路径谜题 — 按顺序清空数字棋子与核心。章节闯关、入门路线、每周挑战排行。",
+          "category": "游戏 · 益智",
           "highlights": [
-            "巧妙棋盘上的清关与辅助",
-            "挑战模式与可分享通关",
-            "由 Mobile@SG 出品"
+            "按顺序清空数字棋子与核心，格子很紧",
+            "普通模式章节闯关，星星记录最佳通关",
+            "新规则逐步出现：弹簧、单向箭头、空隙、变大核心",
+            "入门路线 — 同样走法，道具不限",
+            "每周挑战 — 十关与排行榜",
+            "英文与简体中文",
+            "免费含广告 — 无需账号，无内购"
           ]
         }
-      }
+      },
+      "featureGraphicPath": "assets/apps/feature/axiom.png",
+      "featureGraphicUrl": "https://mobilesg.org/assets/apps/feature/axiom.png",
+      "ogImageUrl": "https://mobilesg.org/assets/apps/feature/axiom.png"
     }
   ]
 }
