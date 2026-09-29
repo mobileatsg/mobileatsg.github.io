@@ -109,7 +109,7 @@
       <h1>Privacy Policy</h1>
       <p class="meta">
         <strong>Axiom</strong><br />
-        Effective date: September 29, 2026 · Last updated: September 29, 2026
+        Effective date: September 29, 2026 · Last updated: September 30, 2026
       </p>
     </header>
 
@@ -150,8 +150,10 @@
       The App creates a random install identifier and sends it to our servers so helper balances
       and weekly Challenge results stay with that install. If you type a display name for the
       Challenge ranking, we store that name with your result. Google AdMob may process advertising
-      and device data to show and measure ads. If you email us for support, we receive whatever
-      you include in that message, including the diagnostics the App puts in the draft.
+      and device data to show and measure ads. Google Firebase Analytics and Crashlytics record
+      app use (screens, board clears) and crash reports so we can keep the App stable. If you email
+      us for support, we receive whatever you include in that message, including the diagnostics
+      the App puts in the draft.
     </p>
 
     <table>
@@ -183,6 +185,12 @@
           <td>May be linked by Google under its own policy if you allow personalized ads</td>
         </tr>
         <tr>
+          <td>Analytics and crashes</td>
+          <td>Screen names, board-clear events (level id, stars, mode), crash stack traces, and a Firebase install id. We do not send your Challenge display name or email through Firebase</td>
+          <td>Understand how the App is used and fix crashes</td>
+          <td>Linked to the install identifier, not to your name or email</td>
+        </tr>
+        <tr>
           <td>Support mail</td>
           <td>What you write, plus app version, build number, OS, device model, and install identifier in the draft</td>
           <td>Reply to bug reports and feedback you choose to send</td>
@@ -207,11 +215,12 @@
       <li>Showing and measuring advertisements that keep the App free</li>
       <li>Responding to support messages you send us</li>
       <li>Protecting the service from abuse of helper rewards</li>
+      <li>Measuring app use and diagnosing crashes (Firebase Analytics and Crashlytics)</li>
     </ul>
 
     <h2>6. Third-party services</h2>
     <p>
-      The App uses our own API and Google AdMob. We do not ship a separate analytics or crash-reporting SDK.
+      The App uses our own API, Google AdMob, Google Firebase Analytics, and Firebase Crashlytics.
     </p>
     <table>
       <thead>
@@ -231,6 +240,16 @@
           <td>Google AdMob</td>
           <td>Banner, interstitial, and rewarded advertisements</td>
           <td><a href="https://policies.google.com/privacy">Google Privacy Policy</a> · <a href="https://policies.google.com/technologies/ads">How Google uses ads</a></td>
+        </tr>
+        <tr>
+          <td>Google Firebase Analytics</td>
+          <td>App screens and board-clear events</td>
+          <td><a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a></td>
+        </tr>
+        <tr>
+          <td>Google Firebase Crashlytics</td>
+          <td>Crash reports and diagnostic logs</td>
+          <td><a href="https://firebase.google.com/support/privacy">Firebase Privacy and Security</a></td>
         </tr>
       </tbody>
     </table>
