@@ -151,7 +151,10 @@
       and weekly Challenge results stay with that install. If you type a display name for the
       Challenge ranking, we store that name with your result. Google AdMob may process advertising
       and device data to show and measure ads. Google Firebase Analytics and Crashlytics record
-      app use (screens, board clears) and crash reports so we can keep the App stable. If you email
+      app use (screens, board clears) and crash reports so we can keep the App stable.
+      On Android, Settings may load a public list of other Mobile@SG apps from our website so you
+      can open them on Google Play; that list does not include your Challenge name.
+      If you email
       us for support, we receive whatever you include in that message, including the diagnostics
       the App puts in the draft.
     </p>
@@ -263,7 +266,7 @@
       You can deny or revoke permissions in your device settings; some features may not work without them.
     </p>
     <ul>
-      <li><strong>Network</strong> — to load levels, sync helpers, submit Challenge results, and load ads.</li>
+      <li><strong>Network</strong> — to load levels, sync helpers, submit Challenge results, load ads, and (Android) load the More apps catalog.</li>
       <li><strong>App Tracking Transparency (iOS)</strong> — optional. If you allow tracking, AdMob may use the advertising identifier to measure and personalize ads. If you ask the app not to track, the App still works and ads can still appear without that identifier.</li>
       <li><strong>Advertising ID (Android)</strong> — used by AdMob to show and measure ads. You can reset or limit it in Android settings.</li>
     </ul>
@@ -287,8 +290,8 @@
     <p>
       Puzzle progress stored only on your device remains until you reset it in the App or uninstall the App.
       We keep the install identifier, helper balance, and Challenge ranking data on our servers for as long
-      as those features are offered and we need them to run the service. Advertising data is retained by
-      Google under its own schedule. Support emails are kept as long as needed to handle your request
+      as those features are offered and we need them to run the service. Advertising, analytics, and crash
+      data are retained by Google under its own schedule. Support emails are kept as long as needed to handle your request
       and any follow-up.
     </p>
 
@@ -300,7 +303,8 @@
     </p>
     <p>
       Our servers receive the install identifier and, when you submit a Challenge result, the result
-      and any display name you entered. Google receives ad-related data when an ad is requested or shown.
+      and any display name you entered. Google receives ad-related data when an ad is requested or shown,
+      and analytics events and crash reports through Firebase.
     </p>
 
     <h2>12. Security</h2>
